@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>www.yandex.com - 俄语区搜索与内容入口导航</title>
+<meta name="description" content="www.yandex.com 汇聚俄罗斯及俄语区搜索入口、Yandex 各项服务、内容频道与使用指南，梳理搜索引擎、地图、翻译、音乐、新闻等具体条目，供跨境从业者、俄语学习者与信息检索用户参考。">
+<meta name="keywords" content="俄语搜索, 俄罗斯搜索引擎, 跨境信息检索, 俄语区服务, 东欧互联网">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23c8102e'/%3E%3Ctext x='32' y='44' font-size='34' font-family='Georgia,serif' font-weight='700' fill='%23fff' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --red:#c8102e;
+  --red-deep:#9a0c23;
+  --ink:#16181d;
+  --ink-2:#3d424c;
+  --ink-3:#6b7280;
+  --line:#e2e5ea;
+  --line-soft:#eef0f4;
+  --bg:#f6f7f9;
+  --panel:#ffffff;
+  --panel-2:#fbfbfc;
+  --amber:#b8791a;
+  --amber-bg:#fdf5e6;
+  --blue:#1d4ed8;
+  --blue-bg:#eef2fe;
+  --green:#0f7b52;
+  --green-bg:#e9f6f0;
+  --radius:10px;
+  --radius-s:6px;
+  --shadow:0 1px 2px rgba(16,18,23,.05),0 6px 18px -10px rgba(16,18,23,.18);
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:Georgia,"Songti SC","Noto Serif SC",serif;
+  --bar-h:38px;
+  --head-h:64px;
+  --container:1320px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);
+  line-height:1.7;font-size:15px;
+  scroll-padding-top:calc(var(--bar-h) + var(--head-h) + 16px);
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:700}
+p{margin:0 0 .85em}
+ul,ol{margin:0;padding-left:1.15em}
+ul li,ol li{margin-bottom:.35em}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:4px}
+
+/* ---------- 吸顶公告条 + 页头 ---------- */
+.sticky-wrap{position:sticky;top:0;z-index:60}
+.notice-bar{
+  height:var(--bar-h);display:flex;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(90deg,var(--red-deep),var(--red) 55%,#e0344c);
+  color:#fff;font-size:13px;padding:0 14px;overflow:hidden;
+}
+.notice-bar b{font-weight:700}
+.notice-bar .dot{width:5px;height:5px;border-radius:50%;background:#ffd9df;flex:none}
+.notice-bar a{text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.notice-bar .nb-move{display:flex;align-items:center;gap:10px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.site-head{
+  height:var(--head-h);background:rgba(255,255,255,.96);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;
+}
+.head-inner{
+  width:100%;max-width:var(--container);margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;gap:22px;
+}
+.brand{display:flex;align-items:center;gap:10px;flex:none}
+.brand-mark{width:34px;height:34px;flex:none}
+.brand-text{font-family:var(--serif);font-size:19px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.head-nav{display:flex;gap:2px;flex-wrap:wrap;min-width:0}
+.head-nav a{
+  font-size:14px;color:var(--ink-2);padding:7px 11px;border-radius:var(--radius-s);
+  transition:.15s;white-space:nowrap;
+}
+.head-nav a:hover{background:var(--line-soft);color:var(--red)}
+.head-tools{margin-left:auto;display:flex;align-items:center;gap:10px;flex:none}
+.search-box{display:flex;align-items:center;background:var(--panel-2);border:1px solid var(--line);border-radius:20px;padding:3px 4px 3px 12px;}
+.search-box input{
+  border:0;background:transparent;outline:0;font-size:13.5px;width:150px;color:var(--ink);
+  font-family:inherit;padding:4px 0;
+}
+.search-box button{
+  border:0;background:var(--red);color:#fff;border-radius:16px;font-size:12.5px;
+  padding:5px 12px;cursor:pointer;transition:.15s;
+}
+.search-box button:hover{background:var(--red-deep)}
+.menu-btn{display:none;border:1px solid var(--line);background:#fff;border-radius:var(--radius-s);padding:6px 10px;font-size:13px;cursor:pointer}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  background:
+    radial-gradient(1100px 380px at 88% -10%,rgba(200,16,46,.10),transparent 62%),
+    radial-gradient(700px 320px at 4% 110%,rgba(29,78,216,.07),transparent 60%),
+    #fff;
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.hero-inner{
+  max-width:var(--container);margin:0 auto;padding:44px 20px 40px;
+  display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:44px;align-items:center;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;font-size:12.5px;letter-spacing:.6px;
+  color:var(--red);background:#fdeef1;border:1px solid #f6d5db;border-radius:20px;
+  padding:4px 12px;margin-bottom:16px;font-weight:600;
+}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(30px,4.2vw,46px);letter-spacing:-.5px;
+  color:var(--ink);margin-bottom:14px;word-break:break-word;
+}
+.hero-lead{font-size:15.5px;color:var(--ink-2);max-width:600px;margin-bottom:22px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;
+  padding:10px 18px;border-radius:22px;border:1px solid transparent;transition:.16s;cursor:pointer;
+}
+.btn-primary{background:var(--red);color:#fff;box-shadow:0 6px 16px -8px rgba(200,16,46,.7)}
+.btn-primary:hover{background:var(--red-deep)}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink-2)}
+.btn-ghost:hover{border-color:#c9ced7;color:var(--ink)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:26px;padding-top:4px;border-top:1px dashed var(--line);padding-top:18px}
+.hero-stats div{min-width:86px}
+.hero-stats strong{display:block;font-family:var(--serif);font-size:21px;color:var(--ink);line-height:1.2}
+.hero-stats span{font-size:12.5px;color:var(--ink-3)}
+
+.hero-visual{position:relative}
+.hero-visual svg{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 34px rgba(16,18,23,.13))}
+
+/* ---------- 布局：三栏门户 ---------- */
+.layout{
+  max-width:var(--container);margin:0 auto;padding:26px 20px 10px;
+  display:grid;grid-template-columns:184px minmax(0,1fr) 268px;gap:26px;align-items:start;
+}
+.rail{position:sticky;top:calc(var(--bar-h) + var(--head-h) + 18px);}
+.channel-rail{display:flex;flex-direction:column;gap:6px}
+.rail-title{
+  font-size:12px;letter-spacing:1.2px;color:var(--ink-3);font-weight:700;
+  padding:0 4px 6px;
+}
+.channel-rail a{
+  display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2);
+  padding:8px 10px;border-radius:var(--radius-s);border:1px solid transparent;transition:.15s;
+}
+.channel-rail a:hover{background:#fff;border-color:var(--line);color:var(--red);box-shadow:var(--shadow)}
+.channel-rail a i{
+  width:6px;height:6px;border-radius:2px;background:var(--line);flex:none;transition:.15s;
+}
+.channel-rail a:hover i{background:var(--red)}
+.channel-rail .rail-sep{height:1px;background:var(--line);margin:8px 4px}
+
+/* ---------- 主内容通用 ---------- */
+.main-col{min-width:0;display:flex;flex-direction:column;gap:26px}
+.card-panel{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px;box-shadow:var(--shadow);
+}
+.panel-head{
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+  padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line-soft);
+}
+.panel-head h2{font-size:19px;letter-spacing:-.2px}
+.panel-head .ph-sub{font-size:12.5px;color:var(--ink-3)}
+.panel-head .ph-more{margin-left:auto;font-size:13px;color:var(--red);font-weight:600}
+.panel-head .ph-more:hover{text-decoration:underline}
+.section-lead{font-size:14px;color:var(--ink-3);margin-bottom:16px}
+
+/* 概览正文 */
+.overview p{color:var(--ink-2);font-size:14.5px;text-align:justify}
+.overview .kw-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.overview .kw-list span{
+  font-size:12.5px;background:var(--panel-2);border:1px solid var(--line);
+  border-radius:16px;padding:4px 11px;color:var(--ink-2);
+}
+
+/* 精选卡片 */
+.feat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.feat-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;display:flex;flex-direction:column;transition:.18s;
+}
+.feat-card:hover{border-color:#cfd4dc;box-shadow:var(--shadow);transform:translateY(-2px)}
+.feat-card figure{margin:0;position:relative;aspect-ratio:4/3;background:var(--line-soft);overflow:hidden}
+.feat-card img{width:100%;height:100%;object-fit:cover}
+.feat-card .fc-type{
+  position:absolute;left:10px;top:10px;font-size:11.5px;font-weight:700;
+  background:rgba(255,255,255,.94);color:var(--red);border-radius:4px;padding:3px 8px;
+}
+.feat-body{padding:14px 15px 15px;display:flex;flex-direction:column;gap:8px;flex:1}
+.feat-body h3{font-size:15px;line-height:1.45}
+.feat-body .fc-desc{font-size:13px;color:var(--ink-3);line-height:1.62;margin:0;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11.5px;background:var(--line-soft);color:var(--ink-2);border-radius:4px;padding:2px 7px;white-space:nowrap}
+.tag-hot{background:#fdeef1;color:var(--red-deep)}
+.fc-meta{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:9px}
+.fc-meta .score{color:var(--amber);font-weight:700}
+
+/* 最新更新列表 */
+.update-list{display:flex;flex-direction:column;gap:0}
+.update-item{
+  display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:14px;align-items:center;
+  padding:12px 0;border-bottom:1px dashed var(--line-soft);
+}
+.update-item:last-child{border-bottom:0}
+.update-item time{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.update-item h3{font-size:14.5px;margin-bottom:2px}
+.update-item p{font-size:13px;color:var(--ink-3);margin:0;line-height:1.55}
+.update-item .badge{font-size:11.5px;padding:2px 9px;border-radius:4px;white-space:nowrap;font-weight:600}
+.b-new{background:var(--green-bg);color:var(--green)}
+.b-live{background:#fdeef1;color:var(--red-deep)}
+.b-rule{background:var(--blue-bg);color:var(--blue)}
+.b-up{background:var(--amber-bg);color:var(--amber)}
+
+/* 分类入口 */
+.cat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cat-item{
+  border:1px solid var(--line);border-radius:var(--radius);padding:14px 13px;
+  background:var(--panel-2);transition:.16s;display:flex;flex-direction:column;gap:4px;
+}
+.cat-item:hover{background:#fff;border-color:#cfd4dc;box-shadow:var(--shadow)}
+.cat-item strong{font-size:14.5px}
+.cat-item span{font-size:12px;color:var(--ink-3);line-height:1.5}
+.cat-item em{font-style:normal;font-size:11.5px;color:var(--red);margin-top:3px}
+
+/* 深度解析 */
+.deep h3{font-size:16px;margin:20px 0 8px;padding-left:11px;border-left:3px solid var(--red);line-height:1.3}
+.deep h3:first-of-type{margin-top:6px}
+.deep p{font-size:14.5px;color:var(--ink-2);text-align:justify}
+.deep ul{font-size:14.5px;color:var(--ink-2)}
+.deep li strong{color:var(--ink)}
+.cmp-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0 6px}
+.cmp-table th,.cmp-table td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+.cmp-table th{background:var(--panel-2);font-size:13px;color:var(--ink)}
+.cmp-table td{color:var(--ink-2)}
+.cmp-table tr:hover td{background:#fcfcfd}
+
+/* 体验指南 - 编号步骤 */
+.steps{counter-reset:st;display:flex;flex-direction:column;gap:14px}
+.step{
+  display:grid;grid-template-columns:36px minmax(0,1fr);gap:14px;align-items:start;
+  padding:14px 16px;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
+}
+.step::before{
+  counter-increment:st;content:counter(st,decimal-leading-zero);
+  font-family:var(--serif);font-size:15px;font-weight:700;color:var(--red);
+  background:#fff;border:1px solid #f3d3d9;border-radius:8px;height:32px;
+  display:flex;align-items:center;justify-content:center;
+}
+.step h3{font-size:14.5px;margin-bottom:4px}
+.step p{font-size:13.5px;color:var(--ink-3);margin:0;line-height:1.65}
+
+/* FAQ */
+.faq details{
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);
+  padding:0;margin-bottom:10px;overflow:hidden;
+}
+.faq details[open]{background:#fff;border-color:#d5dae2;box-shadow:var(--shadow)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:13px 16px;font-size:14.5px;font-weight:600;
+  display:flex;align-items:center;gap:10px;color:var(--ink);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{
+  content:"问";font-size:11px;font-weight:700;color:var(--red);background:#fdeef1;
+  border-radius:4px;padding:2px 6px;flex:none;
+}
+.faq summary::after{content:"+";margin-left:auto;color:var(--ink-3);font-size:17px;font-weight:400}
+.faq details[open] summary::after{content:"−"}
+.faq .ans{padding:0 16px 15px 44px;font-size:13.8px;color:var(--ink-2);line-height:1.72}
+.faq .ans p:last-child{margin-bottom:0}
+
+/* 评论 */
+.cmt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cmt{
+  border:1px solid var(--line);border-radius:var(--radius);padding:13px 15px;background:var(--panel-2);
+}
+.cmt-top{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.avatar{
+  width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+  font-size:11.5px;font-weight:700;color:#fff;letter-spacing:.5px;
+}
+.cmt-top .nick{font-size:13px;font-weight:600}
+.cmt-top .when{font-size:11.5px;color:var(--ink-3);margin-left:auto;font-variant-numeric:tabular-nums}
+.cmt p{font-size:13.3px;color:var(--ink-2);margin:0;line-height:1.66}
+
+/* 资讯 */
+.news-list{display:flex;flex-direction:column;gap:14px}
+.news-item{
+  display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;align-items:start;
+  padding-bottom:14px;border-bottom:1px dashed var(--line-soft);
+}
+.news-item:last-child{border-bottom:0;padding-bottom:0}
+.news-item figure{margin:0;border-radius:var(--radius-s);overflow:hidden;aspect-ratio:3/2;background:var(--line-soft)}
+.news-item img{width:100%;height:100%;object-fit:cover}
+.news-item h3{font-size:14.5px;margin-bottom:4px}
+.news-item .nd{font-size:11.8px;color:var(--ink-3);margin-bottom:5px;font-variant-numeric:tabular-nums}
+.news-item p{font-size:13.2px;color:var(--ink-3);margin:0;line-height:1.62}
+
+/* 相关推荐 标签索引 */
+.reco-tags{display:flex;flex-wrap:wrap;gap:9px}
+.reco-tags a{
+  display:inline-flex;align-items:center;gap:6px;font-size:13px;
+  border:1px solid var(--line);background:var(--panel-2);border-radius:18px;padding:6px 13px;
+  color:var(--ink-2);transition:.15s;
+}
+.reco-tags a:hover{border-color:var(--red);color:var(--red);background:#fff}
+.reco-tags a small{color:var(--ink-3);font-size:11.5px}
+
+/* 榜单 */
+.rank-list{display:flex;flex-direction:column;counter-reset:rk}
+.rank-item{
+  display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:12px;align-items:center;
+  padding:11px 0;border-bottom:1px dashed var(--line-soft);counter-increment:rk;
+}
+.rank-item:last-child{border-bottom:0}
+.rank-item::before{
+  content:counter(rk);font-family:var(--serif);font-size:15px;font-weight:700;
+  color:var(--ink-3);text-align:center;
+}
+.rank-item:nth-child(-n+3)::before{color:var(--red)}
+.rank-item h3{font-size:14px;margin-bottom:1px}
+.rank-item p{font-size:12.3px;color:var(--ink-3);margin:0}
+.rank-item .rq{font-size:12px;color:var(--amber);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* 右侧辅助栏 */
+.side-col{display:flex;flex-direction:column;gap:20px;min-width:0}
+.side-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 17px;box-shadow:var(--shadow);
+}
+.side-card h2{font-size:14.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.side-card h2::before{content:"";width:3px;height:13px;border-radius:2px;background:var(--red)}
+.side-list{display:flex;flex-direction:column;gap:0}
+.side-list a{
+  display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line-soft);
+  font-size:13.2px;color:var(--ink-2);line-height:1.55;transition:.15s;
+}
+.side-list a:last-child{border-bottom:0}
+.side-list a:hover{color:var(--red)}
+.side-list a b{color:var(--ink-3);font-weight:700;font-size:12px;font-variant-numeric:tabular-nums;flex:none;width:16px}
+.side-list a span{min-width:0}
+.side-note{font-size:12.3px;color:var(--ink-3);line-height:1.65;margin:0}
+.timeline{display:flex;flex-direction:column;gap:0;position:relative;padding-left:14px}
+.timeline::before{content:"";position:absolute;left:3px;top:5px;bottom:5px;width:1px;background:var(--line)}
+.tl-item{position:relative;padding:0 0 14px 0}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:"";position:absolute;left:-14px;top:6px;width:7px;height:7px;border-radius:50%;
+  background:#fff;border:2px solid var(--red);
+}
+.tl-item time{font-size:11.5px;color:var(--red-deep);font-weight:600;font-variant-numeric:tabular-nums}
+.tl-item p{font-size:12.8px;color:var(--ink-2);margin:2px 0 0;line-height:1.6}
+.tl-item p strong{color:var(--ink)}
+
+/* ---------- 页尾 ---------- */
+.site-foot{
+  margin-top:34px;background:#15171c;color:#c3c8d2;border-top:3px solid var(--red);
+}
+.foot-inner{max-width:var(--container);margin:0 auto;padding:38px 20px 20px}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px;padding-bottom:28px;border-bottom:1px solid #2a2d35}
+.foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.foot-brand .brand-text{color:#fff;font-size:18px}
+.foot-brand svg{width:30px;height:30px}
+.foot-desc{font-size:13px;line-height:1.72;color:#9aa1ae;max-width:340px;margin:0}
+.foot-col h3{font-size:13px;color:#fff;margin-bottom:11px;letter-spacing:.4px}
+.foot-col a{display:block;font-size:12.8px;color:#9aa1ae;padding:4px 0;transition:.15s}
+.foot-col a:hover{color:#fff}
+.foot-bottom{
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+  padding-top:18px;font-size:12px;color:#757c89;
+}
+.foot-bottom .disclaimer{font-size:11.5px;color:#6b7280}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1180px){
+  .layout{grid-template-columns:180px minmax(0,1fr);}
+  .side-col{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;}
+  .side-col .side-card{flex:1 1 300px;}
+  .hero-inner{grid-template-columns:minmax(0,1fr) 320px;gap:30px}
+}
+@media (max-width:1024px){
+  .head-nav{display:none}
+  .head-nav.open{
+    display:flex;position:absolute;top:calc(var(--bar-h) + var(--head-h));left:0;right:0;
+    background:#fff;border-bottom:1px solid var(--line);padding:10px 20px;flex-wrap:wrap;
+    box-shadow:var(--shadow);z-index:55;
+  }
+  .menu-btn{display:inline-block}
+  .search-box input{width:110px}
+  .feat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hero-inner{grid-template-columns:minmax(0,1fr);}
+  .hero-visual{max-width:440px;margin:0 auto}
+  .news-item{grid-template-columns:130px minmax(0,1fr)}
+}
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr);}
+  .rail{position:static}
+  .channel-rail{
+    flex-direction:row;flex-wrap:wrap;gap:8px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--radius);padding:12px;box-shadow:var(--shadow);
+  }
+  .rail-title{width:100%;padding:0 2px 4px}
+  .channel-rail .rail-sep{display:none}
+  .channel-rail a{border:1px solid var(--line);background:var(--panel-2);font-size:13px;padding:7px 11px}
+  .channel-rail a i{display:none}
+}
+@media (max-width:740px){
+  :root{--head-h:58px}
+  .head-inner{padding:0 14px;gap:12px}
+  .brand-text{font-size:16px}
+  .search-box input{width:88px}
+  .search-box{padding-left:9px}
+  .hero-inner{padding:30px 14px 28px;gap:24px}
+  .hero-stats{gap:18px}
+  .layout{padding:18px 14px 8px;gap:18px}
+  .card-panel{padding:17px 15px}
+  .feat-grid{grid-template-columns:minmax(0,1fr)}
+  .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cmt-grid{grid-template-columns:minmax(0,1fr)}
+  .update-item{grid-template-columns:minmax(0,1fr) auto;gap:8px}
+  .update-item time{grid-column:1 / -1;font-size:11.5px}
+  .news-item{grid-template-columns:minmax(0,1fr);gap:10px}
+  .news-item figure{aspect-ratio:16/9}
+  .faq .ans{padding-left:16px}
+  .foot-top{grid-template-columns:1fr 1fr;gap:22px}
+  .foot-brand span{font-size:16px}
+  .notice-bar{font-size:11.8px;padding:0 10px;justify-content:flex-start}
+  .notice-bar a{display:none}
+  .side-col{flex-direction:column}
+}
+@media (max-width:420px){
+  .hero h1{font-size:26px}
+  .foot-top{grid-template-columns:1fr}
+  .search-box input{width:70px}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="sticky-wrap">
+  <div class="notice-bar" role="region" aria-label="更新公告">
+    <span class="dot" aria-hidden="true"></span>
+    <div class="nb-move">
+      <b>11 月 8 日更新：</b>Yandex 地图新增 14 个俄远东城市街景 &nbsp;·&nbsp; 翻译新增 3 组中俄术语对照 &nbsp;·&nbsp; 本周收录 26 条服务条目
+    </div>
+    <a href="#updates">查看更新</a>
+  </div>
+
+  <header class="site-head">
+    <div class="head-inner">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-label="品牌图形标志">
+          <rect width="64" height="64" rx="14" fill="#c8102e"/>
+          <path d="M20 17h7l6 12 6-12h7L36 36v13h-7V36z" fill="#fff"/>
+          <circle cx="47" cy="20" r="4" fill="#ffd9df"/>
+        </svg>
+        <span class="brand-text">www.yandex.com</span>
+      </a>
+
+      <nav class="head-nav" id="headNav" aria-label="主题频道导航">
+        <a href="#channels">服务频道</a>
+        <a href="#featured">精选条目</a>
+        <a href="#categories">分类索引</a>
+        <a href="#deep">深度解析</a>
+        <a href="#guide">使用路径</a>
+        <a href="#faq">常见问答</a>
+        <a href="#reviews">使用者评论</a>
+        <a href="#news">相关资讯</a>
+      </nav>
+
+      <div class="head-tools">
+        <form class="search-box" id="localSearch" role="search">
+          <label for="q" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">站内查找</label>
+          <input id="q" type="search" placeholder="查找服务条目…" autocomplete="off">
+          <button type="submit">查找</button>
+        </form>
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="headNav">菜单</button>
+      </div>
+    </div>
+  </header>
+</div>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">俄罗斯及俄语区 · 搜索与服务导航</span>
+        <h1 id="heroTitle">www.yandex.com</h1>
+        <p class="hero-lead">
+          围绕 Yandex 生态的搜索入口、地图与导航、翻译、音乐、新闻聚合、广告投放与开发者接口，逐条梳理俄罗斯及俄语区常用的互联网服务，为跨境从业者、俄语学习者和信息检索用户提供可直接查证的条目说明、类型对照与使用路径。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#featured">浏览精选条目</a>
+          <a class="btn btn-ghost" href="#channels">进入服务频道</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>26</strong><span>本周收录条目</span></div>
+          <div><strong>9</strong><span>服务频道</span></div>
+          <div><strong>11-08</strong><span>数据基准日期</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 400 320" role="img" aria-label="搜索框与俄语区地图构图">
+          <defs>
+            <linearGradient id="hg1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3f4f7"/>
+            </linearGradient>
+            <linearGradient id="hg2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#c8102e"/><stop offset="1" stop-color="#9a0c23"/>
+            </linearGradient>
+          </defs>
+          <rect x="10" y="26" width="380" height="268" rx="18" fill="url(#hg1)" stroke="#e2e5ea"/>
+          <rect x="34" y="52" width="332" height="46" rx="23" fill="#fff" stroke="#dfe3e9"/>
+          <circle cx="60" cy="75" r="7" fill="none" stroke="#c8102e" stroke-width="2.6"/>
+          <line x1="65" y1="80" x2="71" y2="86" stroke="#c8102e" stroke-width="2.6" stroke-linecap="round"/>
+          <rect x="84" y="68" width="150" height="7" rx="3.5" fill="#d8dce3"/>
+          <rect x="84" y="80" width="92" height="5" rx="2.5" fill="#e8ebf0"/>
+          <rect x="300" y="60" width="54" height="30" rx="15" fill="url(#hg2)"/>
+          <rect x="312" y="72" width="30" height="5" rx="2.5" fill="#fff" opacity=".85"/>
+
+          <path d="M56 148h132l16 22 20-14 44 10 22 30-20 26-46 8-38-14-26 6-34-20-22-26z" fill="#fdeef1" stroke="#f0c9d0" stroke-width="1.4"/>
+          <path d="M96 176l24-14 20 12-10 22-26 4z" fill="#f6c9d2" opacity=".85"/>
+          <path d="M180 158l26 10 12 22-18 16-24-8-6-22z" fill="#f2b9c5" opacity=".7"/>
+          <circle cx="152" cy="188" r="5" fill="#c8102e"/>
+          <circle cx="152" cy="188" r="10" fill="none" stroke="#c8102e" stroke-width="1.6" opacity=".45"/>
+
+          <g opacity=".95">
+            <rect x="262" y="146" width="112" height="54" rx="10" fill="#fff" stroke="#e2e5ea"/>
+            <rect x="274" y="160" width="58" height="6" rx="3" fill="#c8102e" opacity=".75"/>
+            <rect x="274" y="174" width="86" height="5" rx="2.5" fill="#dadee5"/>
+            <rect x="274" y="185" width="66" height="5" rx="2.5" fill="#e6e9ee"/>
+          </g>
+          <g opacity=".95">
+            <rect x="262" y="214" width="112" height="54" rx="10" fill="#fff" stroke="#e2e5ea"/>
+            <rect x="274" y="228" width="72" height="6" rx="3" fill="#1d4ed8" opacity=".55"/>
+            <rect x="274" y="242" width="86" height="5" rx="2.5" fill="#dadee5"/>
+            <rect x="274" y="253" width="52" height="5" rx="2.5" fill="#e6e9ee"/>
+          </g>
+          <rect x="56" y="242" width="176" height="1.4" fill="#e2e5ea"/>
+          <rect x="56" y="256" width="120" height="5" rx="2.5" fill="#e2e5ea"/>
+          <rect x="56" y="268" width="92" height="5" rx="2.5" fill="#eceff3"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 三栏门户布局 -->
+  <div class="layout">
+
+    <!-- 左：频道索引 -->
+    <aside class="rail" aria-label="频道索引">
+      <nav class="channel-rail" id="channels">
+        <span class="rail-title">服务频道</span>
+        <a href="#featured"><i></i>搜索与智能问答</a>
+        <a href="#featured"><i></i>地图与城市导航</a>
+        <a href="#featured"><i></i>翻译与语料对照</a>
+        <a href="#categories"><i></i>音乐与视频</a>
+        <a href="#categories"><i></i>新闻聚合</a>
+        <a href="#categories"><i></i>广告与投放</a>
+        <a href="#categories"><i></i>开发者接口</a>
+        <a href="#deep"><i></i>跨境物流查询</a>
+        <a href="#updates"><i></i>更新与动态</a>
+        <span class="rail-sep" aria-hidden="true"></span>
+        <span class="rail-title">延伸阅读</span>
+        <a href="#guide"><i></i>首次使用路径</a>
+        <a href="#faq"><i></i>常见问答</a>
+        <a href="#rank"><i></i>条目热度榜</a>
+        <a href="#news"><i></i>相关资讯</a>
+      </nav>
+    </aside>
+
+    <!-- 中：主内容 -->
+    <div class="main-col">
+
+      <!-- 1 主题领域概览 -->
+      <section class="card-panel overview" aria-labelledby="ovTitle">
+        <div class="panel-head">
+          <h2 id="ovTitle">俄语区搜索与综合服务领域概览</h2>
+          <span class="ph-sub">搜索 · 地图 · 翻译 · 内容 · 广告</span>
+        </div>
+        <p>
+          Yandex 在俄语互联网中扮演的角色，大致相当于搜索引擎、地图服务商、门户网站与广告平台的组合体。它的核心产品线围绕“找到信息”和“抵达地点”两条主线展开：搜索侧包含网页检索、图片与视频检索、智能问答、新闻聚合与商品比价；空间侧包含地图、街景、公交与打车；语言侧则有翻译、拼写校正与语料工具。对跨境从业者来说，这套服务常被用于核实俄语区的商户地址、查询本地物流节点、比对商品价格与投放广告。
+        </p>
+        <p>
+          当前值得关注的方向集中在三块。一是搜索结果的本地化程度持续提高，俄语长尾词的召回质量直接影响信息检索效率；二是地图数据对远东与西伯利亚中小城市的覆盖仍在补齐，街景与商户营业时间成为判断信息新鲜度的关键指标；三是翻译与术语库在经贸、法律、医疗等垂直场景中的对照精度差异明显，需要按场景挑选工具而非一概而论。俄语学习者则更常使用词典、例句库与新闻原文对照功能，把搜索结果当作语料来源。
+        </p>
+        <p>
+          从内容消费角度看，这个生态里既有“查一次就走”的工具型服务，也有需要持续订阅的资讯与音乐内容。判断一个条目是否值得长期使用，通常看三件事：数据更新频率是否匹配需求、界面语言是否支持中文或英文、以及是否提供可导出的结构化结果。下面各板块将围绕具体条目、类型差异与选择依据展开。
+        </p>
+        <div class="kw-list" aria-label="相关方向词">
+          <span>俄语网页检索</span>
+          <span>街景与公交时刻</span>
+          <span>中俄术语对照</span>
+          <span>新闻原文语料</span>
+          <span>跨境广告投放</span>
+          <span>开发者搜索接口</span>
+        </div>
+      </section>
+
+      <!-- 2 精选内容推荐 -->
+      <section class="card-panel" id="featured" aria-labelledby="ftTitle">
+        <div class="panel-head">
+          <h2 id="ftTitle">精选服务条目推荐</h2>
+          <span class="ph-sub">9 个高频使用条目</span>
+          <a class="ph-more" href="#categories">按分类查看 →</a>
+        </div>
+        <div class="feat-grid">
+
+          <article class="feat-card">
+            <figure>
+              <img src="https://picsum.photos/seed/yandex-search01/400/300" width="400" height="300" loading="lazy" alt="Yandex 网页搜索结果页面示意">
+              <span class="fc-type">搜索</span>
+            </figure>
+            <div class="feat-body">
+              <h3>Yandex 网页检索与俄语长尾词召回</h3>
+              <p class="fc-desc">面向俄语关键词的网页检索入口，对本地商户、论坛帖与政府公告的收录较完整，适合核实俄语区一手信息。</p>
+              <div class="tags"><span class="tag">俄语检索</span><span class="tag">本地化结果</span><span class="tag tag-hot">高频</span></div>
+              <div class="fc-meta"><span class="score">★ 4.8</span><span>今日检索热度 9.2 万</span></div>
+            </div>
+          </article>
+
+          <article class="feat-card">
+            <figure>
+              <img src="https://picsum.photos/seed/yandex-map02/400/300" width="400" height="300" loading="lazy" alt="Yandex 地图城市街景与路线规划界面">
+              <span class="fc-type">地图</span>
+            </figure>
+            <div class="feat-body">
+              <h3>Yandex 地图街景与公交时刻查询</h3>
+              <p class="fc-desc">覆盖俄罗斯主要城市的路网与街景，可查公交到站时刻、商户营业时间，适合出行前核对地址与路线。</p>
+              <div class="tags"><span class="tag">街景</span><span class="tag">公交时刻</span><span class="tag">商户地址</span></div>
+              <div class="fc-meta"><span class="score">★ 4.7</span><span>11 月 8 日新增 14 城街景</span></div>
+            </div>
+          </article>
+
+          <article class="feat-card">
+            <figure>
+              <img src="https://picsum.photos/seed/yandex-trans03/400/300" width="400" height="300" loading="lazy" alt="Yandex 翻译中俄文本对照界面">
+              <span class="fc-type">翻译</span>
+            </figure>
+            <div class="feat-body">
+              <h3>Yandex 翻译中俄对照与术语库</h3>
+              <p class="fc-desc">支持中俄互译、文档翻译与图片取词，经贸与法律术语有独立词条，适合合同初稿与商品描述的快速对照。</p>
+              <div class="tags"><span class="tag">中俄互译</span><span class="tag">术语对照</span><span class="tag">图片取词</span></div>
+              <div class="fc-meta"><span class="score">★ 4.6</span><span>11 月 6 日新增 3 组术语</span></div>
+            </div>
+          </article>
+
+          <article class="feat-card">
+            <figure>
+              <img src="https://picsum.photos/seed/yandex-music04/400/300" width="400" height="300" loading="lazy" alt="Yandex 音乐俄语歌单推荐页">
+              <span class="fc-type">音乐</span>
+            </figure>
+            <div class="feat-body">
+              <h3>Yandex 音乐俄语歌单与电台</h3>
+              <p class="fc-desc">俄语流行、摇滚与古典的分类歌单，含按情绪与场景生成的电台，适合语言学习者通过歌词积累表达。</p>
+              <div class="tags"><span class="tag">俄语歌单</span><span class="tag">场景电台</span><span class="tag">歌词</span></div>
+              <div class="fc-meta"><span class="score">★ 4.5</span><span>本周新增 12 个歌单</span></div>
+            </div>
+          </article>
+
+          <article class="feat-card">
+            <figure>
+              <img src="https://picsum.photos/seed/yandex-news05/400/300" width="400" height="300" loading="lazy" alt="Yandex 新闻聚合首页多栏目排布">
+              <span class="fc-type">新闻</span>
+            </figure>
+            <div class="feat-body">
+              <h3>Yandex 新闻聚合与多源对照</h3>
+              <p class="fc-desc">把同一事件的多家俄语媒体报道并列呈现，便于比对措辞差异，是观察俄语新闻写作的实用入口。</p>
+              <div class="tags"><span class="tag">多源对照</span><span class="tag">俄语原文</span><span class="tag">事件聚合</span></div>
+              <div class="fc-meta"><span class="score">★ 4.4</span><span>今日聚合 320 条</span></div>
+            </div>
+          </article>
+
+          <article class="feat-card">
+            <figure>
+              <img src="https://picsum.photos/seed/yandex-ads06/400/300" width="400" height="300" loading="lazy" alt="Yandex 广告投放后台关键词规划工具">
+              <span class="fc-type">广告</span>
+            </figure>
+            <div class="feat-body">
+              <h3>Yandex 广告关键词规划与出价</h3>
+              <p class="fc-desc">提供俄语关键词的搜索量估算、竞争度与建议出价，适合跨境卖家在投放前做词表筛选与预算测算。</p>
+              <div class="tags"><span class="tag">关键词规划</span><span class="tag">出价估算</span><span class="tag">跨境投放</span></div>
+              <div class="fc-meta"><span class="score">★ 4.3</span><span>11 月 4 日更新词库</span></div>
+            </div>
+          </article>
+
+          <article class="feat-card">
+            <figure>
+              <img src="https://picsum.photos/seed/yandex-api07/400/300" width="400" height="300" loading="lazy" alt="Yandex 搜索接口开发者文档页面">
+              <span class="fc-type">开发者</span>
+            </figure>
+            <div class="feat-body">
+              <h3>Yandex 搜索接口与结构化数据文档</h3>
+              <p class="fc-desc">面向开发者的检索接口说明，含查询语法、返回字段与配额限制，适合做俄语站点的收录监测。</p>
+              <div class="tags"><span class="tag">检索接口</span><span class="tag">配额限制</span><span class="tag">收录监测</span></div>
+              <div class="fc-meta"><span class="score">★ 4.2</span><span>文档 10 月 30 日修订</span></div>
+            </div>
+          </article>
+
+          <article class="feat-card">
+            <figure>
+              <img src="https://picsum.photos/seed/yandex-taxi08/400/300" width="400" height="300" loading="lazy" alt="Yandex 打车应用叫车与预估价格界面">
+              <span class="fc-type">出行</span>
+            </figure>
+            <div class="feat-body">
+              <h3>Yandex 打车价格预估与路线</h3>
+              <p class="fc-desc">提供起步价、里程计费与高峰溢价的预估区间，可用于差旅预算测算，也能辅助判断城区通勤成本。</p>
+              <div class="tags"><span class="tag">价格预估</span><span class="tag">高峰溢价</span><span class="tag">差旅预算</span></div>
+              <div class="fc-meta"><span class="score">★ 4.4</span><span>11 月 7 日调价生效</span></div>
+            </div>
+          </article>
+
+          <article class="feat-card">
+            <figure>
+              <img src="https://picsum.photos/seed/yandex-market09/400/300" width="400" height="300" loading="lazy" alt="Yandex 商品比价与本地商户价格列表">
+              <span class="fc-type">比价</span>
+            </figure>
+            <div class="feat-body">
+              <h3>Yandex 商品比价与本地商户报价</h3>
+              <p class="fc-desc">聚合俄语区电商与线下商户报价，可按城市筛选，适合核对手配件的本地零售价与促销周期。</p>
+              <div class="tags"><span class="tag">商品比价</span><span class="tag">城市筛选</span><span class="tag">促销周期</span></div>
+              <div class="fc-meta"><span class="score">★ 4.1</span><span>今日收录 1.8 万报价</span></div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- 3 最新更新 / 动态 -->
+      <section class="card-panel" id="updates" aria-labelledby="upTitle">
+        <div class="panel-head">
+          <h2 id="upTitle">最新更新与条目动态</h2>
+          <span class="ph-sub">截至 2026-11-08</span>
+        </div>
+        <div class="update-list">
+          <div class="update-item">
+            <time>今天 09:30</time>
+            <div><h3>Yandex 地图远东街景包</h3><p>新增哈巴罗夫斯克、布拉戈维申斯克等 14 个城市的街景覆盖，商户营业时间同步刷新。</p></div>
+            <span class="badge b-new">新增</span>
+          </div>
+          <div class="update-item">
+            <time>今天 08:10</time>
+            <div><h3>Yandex 翻译经贸术语库</h3><p>新增“报关单”“原产地证”“跨境结算”三组中俄对照词条，并补充例句。</p></div>
+            <span class="badge b-new">新增</span>
+          </div>
+          <div class="update-item">
+            <time>昨天 21:40</time>
+            <div><h3>Yandex 新闻晚间聚合</h3><p>当日 320 条俄语报道完成多源对照分组，其中 46 条提供三家以上媒体并列视图。</p></div>
+            <span class="badge b-up">更新</span>
+          </div>
+          <div class="update-item">
+            <time>昨天 16:05</time>
+            <div><h3>Yandex 广告关键词规划</h3><p>词库完成季度刷新，新增冬季品类相关俄语词约 2100 个，竞争度分级同步调整。</p></div>
+            <span class="badge b-rule">规则</span>
+          </div>
+          <div class="update-item">
+            <time>11 月 6 日</time>
+            <div><h3>Yandex 音乐冬季歌单</h3><p>上线 12 个“冬季通勤”“雪夜阅读”等场景歌单，俄语歌词同步提供逐句对照。</p></div>
+            <span class="badge b-new">新增</span>
+          </div>
+          <div class="update-item">
+            <time>11 月 5 日</time>
+            <div><h3>Yandex 打车高峰溢价区间</h3><p>莫斯科与圣彼得堡的高峰溢价上限调整，预估页面同步显示新的价格区间。</p></div>
+            <span class="badge b-rule">规则</span>
+          </div>
+          <div class="update-item">
+            <time>11 月 4 日</time>
+            <div><h3>Yandex 搜索接口配额说明</h3><p>开发者文档修订了每日调用配额与超出后的降级策略，返回字段新增两项。</p></div>
+            <span class="badge b-up">更新</span>
+          </div>
+          <div class="update-item">
+            <time>11 月 3 日</time>
+            <div><h3>Yandex 商品比价城市筛选</h3><p>新增叶卡捷琳堡、新西伯利亚两个城市的线下商户报价，支持按促销状态过滤。</p></div>
+            <span class="badge b-new">新增</span>
+          </div>
+          <div class="update-item">
+            <time>11 月 1 日</time>
+            <div><h3>Yandex 智能问答俄语长句</h3><p>对含多个从句的俄语提问解析能力提升，回答中开始标注信息来源页面。</p></div>
+            <span class="badge b-up">更新</span>
+          </div>
+          <div class="update-item">
+            <time>10 月 30 日</time>
+            <div><h3>Yandex 图片检索相似度</h3><p>相似图片召回排序调整，商品图与街景图的分类标签更细，支持按颜色筛选。</p></div>
+            <span class="badge b-rule">规则</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 分类入口 -->
+      <section class="card-panel" id="categories" aria-labelledby="catTitle">
+        <div class="panel-head">
+          <h2 id="catTitle">按类别查找服务条目</h2>
+          <span class="ph-sub">8 个垂类入口</span>
+        </div>
+        <div class="cat-grid">
+          <a class="cat-item" href="#featured"><strong>搜索与问答</strong><span>网页检索、图片检索、智能问答、商品比价</span><em>9 条条目</em></a>
+          <a class="cat-item" href="#featured"><strong>地图与导航</strong><span>街景、公交时刻、商户地址、路线规划</span><em>7 条条目</em></a>
+          <a class="cat-item" href="#featured"><strong>翻译与语料</strong><span>中俄互译、术语库、例句对照、图片取词</span><em>6 条条目</em></a>
+          <a class="cat-item" href="#deep"><strong>跨境物流</strong><span>节点查询、时效对照、清关状态、分区配送</span><em>5 条条目</em></a>
+          <a class="cat-item" href="#deep"><strong>广告与投放</strong><span>关键词规划、出价估算、受众定向、素材规范</span><em>6 条条目</em></a>
+          <a class="cat-item" href="#deep"><strong>开发者接口</strong><span>检索接口、配额限制、返回字段、收录监测</span><em>4 条条目</em></a>
+          <a class="cat-item" href="#news"><strong>新闻与语料</strong><span>多源对照、俄语原文、事件聚合、写作观察</span><em>8 条条目</em></a>
+          <a class="cat-item" href="#featured"><strong>音乐与视频</strong><span>俄语歌单、场景电台、歌词对照、短视频检索</span><em>5 条条目</em></a>
+        </div>
+      </section>
+
+      <!-- 5 深度解析正文 -->
+      <section class="card-panel deep" id="deep" aria-labelledby="dpTitle">
+        <div class="panel-head">
+          <h2 id="dpTitle">深度解析：俄语区搜索服务的类型差异与判断维度</h2>
+        </div>
+
+        <h3>搜索类服务：网页检索、图片检索与智能问答的分工</h3>
+        <p>
+          同样是“找信息”，网页检索、图片检索与智能问答回答的问题并不相同。网页检索适合核实具体事实：某家商户的注册地址、某条政策的原文表述、某款商品的本地售价。它的长处是结果可追溯，每条结果都能点回原始页面；短处是俄语长尾词的形态变化多，需要掌握词形还原的规律，否则同一概念换个格位就可能召回差异很大的结果。图片检索更偏向“以图找物”，例如拿到一张俄语标签的包装图，反查商品型号与经销渠道；它对图像清晰度和背景干净程度敏感，商品图与街景图的分类标签已经分开，筛选时按场景勾选即可。
+        </p>
+        <p>
+          智能问答的定位介于两者之间：它能把多个从句的俄语提问拆开理解，并给出带来源标注的概述。适合用来快速建立对一个陌生概念的框架，例如“俄罗斯跨境小包的清关流程大致分几步”。但它不适合作为最终依据——回答里的数字与日期仍需回到来源页面核对。一个务实的顺序是：先用问答搭框架，再用网页检索补细节，最后用图片检索确认实物。
+        </p>
+
+        <h3>地图类服务：街景、公交时刻与商户信息的更新节奏</h3>
+        <p>
+          地图数据的价值高度依赖新鲜度。街景覆盖通常按城市分批推进，远东与西伯利亚的中小城市更新较慢；公交时刻表在冬季与夏季会切换，跨季查询时要留意生效日期；商户营业时间则最不稳定，节假日与临时调整都可能让页面信息滞后。判断一条地图信息是否可信，可以看三个信号：街景拍摄时间是否在一年内、公交时刻是否标注了生效区间、商户页是否有近期用户上传的实拍图。
+        </p>
+        <ul>
+          <li><strong>街景：</strong>用于确认门牌、路口与建筑外观，拍摄时间越近越可靠。</li>
+          <li><strong>公交时刻：</strong>注意冬夏季切换节点，跨季出行前重新查一次。</li>
+          <li><strong>商户信息：</strong>营业时间与电话最易变动，优先看近期实拍与用户更新。</li>
+        </ul>
+
+        <h3>翻译与语料：通用翻译和垂直术语库的边界</h3>
+        <p>
+          通用翻译在口语化句子上的可读性已经不错，但一进入合同、报关单、医疗器械说明这类文本，术语的一致性就成为主要问题。垂直术语库的作用不是“翻得更通顺”，而是“同一个词在全文中保持同一种译法”。做经贸文本时，建议先用术语库锁定核心词，再用通用翻译处理句子结构，最后人工通读一遍语序。俄语的格变化会让机器翻译在长句中丢失主语，遇到超过三行的句子，拆短再译通常更稳。
+        </p>
+        <table class="cmp-table">
+          <thead>
+            <tr><th>场景</th><th>推荐工具</th><th>主要风险</th><th>核对方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>商品描述</td><td>通用翻译 + 图片取词</td><td>尺寸单位与型号误译</td><td>对照原图与规格表</td></tr>
+            <tr><td>经贸合同</td><td>术语库 + 人工通读</td><td>术语前后不一致</td><td>全文检索核心词译法</td></tr>
+            <tr><td>新闻阅读</td><td>新闻原文 + 对照视图</td><td>标题省略导致歧义</td><td>读正文首段补全主语</td></tr>
+            <tr><td>口语学习</td><td>歌单歌词 + 例句库</td><td>俚语与语气词难对应</td><td>看上下文而非单词</td></tr>
+          </tbody>
+        </table>
+
+        <h3>广告与接口：投放前需要先弄清的两组数字</h3>
+        <p>
+          跨境投放最常见的误判，是把中文关键词的搜索量直接套到俄语词上。俄语的词形变化意味着同一个概念会分裂成多个搜索词，关键词规划工具给出的搜索量是分词形统计的，合并同类词之后再估算预算才接近实际。第二组数字是配额：检索接口的每日调用量有上限，超出后会降级返回，做收录监测时要把抓取频率控制在配额内，否则数据会断续。这两组数字都不难查，难的是在投放与开发之前就先查。
+        </p>
+
+        <h3>内容消费：新闻聚合与音乐歌单的不同使用方式</h3>
+        <p>
+          新闻聚合适合“比对”，不适合“速读”。同一事件的多家媒体报道并列时，措辞差异往往比事实差异更有信息量——哪家用了被动语态、哪家省略了消息源，都能反映报道立场。音乐歌单则适合“沉浸”，按场景生成的电台能提供连续语流，配合逐句歌词对照，比逐词背单词更容易形成语感。两者共同点是都需要持续投入时间，区别在于前者要求注意力集中，后者可以伴随式进行。
+        </p>
+      </section>
+
+      <!-- 6 体验指南 -->
+      <section class="card-panel" id="guide" aria-labelledby="gdTitle">
+        <div class="panel-head">
+          <h2 id="gdTitle">使用路径：从第一次检索到稳定工作流</h2>
+          <span class="ph-sub">按需求强度分四步</span>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div>
+              <h3>先用智能问答建立框架</h3>
+              <p>面对完全陌生的俄语区概念，先用一句完整的中文提问拿到概述与来源列表，把不认识的专有名词记下来，作为下一步检索的关键词候选。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>再用网页检索核实具体事实</h3>
+              <p>把候选词逐一放进网页检索，优先看政府站点、行业协会与本地媒体。俄语词形变化多，检索不到时换格位或加引号限定短语，比反复改写整句更有效。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>涉及地点时切到地图核对</h3>
+              <p>商户地址、公交路线、营业时间这三类信息以地图为准。查完街景再确认门牌，查完时刻表再确认生效区间，能避免大部分“到了才发现关门”的情况。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>文本类工作交给术语库兜底</h3>
+              <p>合同、报关、产品说明先锁定核心术语译法，再处理句子。翻完做一次全文检索，确认同一个词没有出现两种译法，这一步比润色更能提升可读性。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7 FAQ -->
+      <section class="card-panel faq" id="faq" aria-labelledby="fqTitle">
+        <div class="panel-head">
+          <h2 id="fqTitle">常见问答</h2>
+          <span class="ph-sub">6 个高频问题</span>
+        </div>
+
+        <details>
+          <summary>俄语关键词检索不到结果，通常是哪里出了问题？</summary>
+          <div class="ans"><p>最常见的原因是词形没有还原。俄语名词有六个格，动词有时态与人称变化，同一个概念换个语法位置拼写就不同。可以先用词典查原形，再用原形检索；或者在短语两端加引号做精确匹配。另一个原因是转写差异，人名与地名在中文、英文、俄文之间的转写不统一，换一种转写方式往往能召回结果。</p></div>
+        </details>
+
+        <details>
+          <summary>Yandex 地图的街景一般多久更新一次？</summary>
+          <div class="ans"><p>没有统一的周期。莫斯科与圣彼得堡等大城市的核心区域更新较快，通常一年内会有新拍摄；远东与西伯利亚的中小城市间隔更长，部分区域可能超过两年。判断一张街景是否够新，可以看画面角落的拍摄时间标注，以及周边商户页是否有近期用户实拍。</p></div>
+        </details>
+
+        <details>
+          <summary>通用翻译和术语库翻译，做经贸文本时该怎么选？</summary>
+          <div class="ans"><p>两者分工不同。通用翻译负责句子结构与语序，术语库负责核心词的一致性。经贸文本的通行做法是先用术语库锁定报关、结算、原产地等关键词的译法，再用通用翻译处理整句，最后人工通读。如果只用通用翻译，同一个术语在长文中出现两种译法是常见问题。</p></div>
+        </details>
+
+        <details>
+          <summary>第一次接触俄语区搜索，从哪个条目开始用比较好？</summary>
+          <div class="ans"><p>建议从网页检索开始，先熟悉俄语结果的排布与来源类型；接着用地图核对一两个具体地址，建立“信息可验证”的习惯；最后再尝试智能问答与翻译工具。音乐歌单和新闻聚合适合作为语料补充，等基本检索熟练之后再切入，理解成本更低。</p></div>
+        </details>
+
+        <details>
+          <summary>新闻聚合里的多源对照，和直接看单家媒体有什么区别？</summary>
+          <div class="ans"><p>多源对照把同一事件的多家报道并列，便于观察措辞差异与消息源取舍；单家媒体则提供更完整的上下文与评论。两者不是替代关系。做事实核实时先看对照视图找出分歧点，再回到单家媒体的正文读完整段落，能兼顾效率与准确。</p></div>
+        </details>
+
+        <details>
+          <summary>检索接口的每日配额超出后会怎样？</summary>
+          <div class="ans"><p>超出配额后接口通常返回降级结果或直接拒绝请求，具体表现取决于文档中写明的策略。做收录监测时，应把抓取频率控制在配额内，并错开高峰时段。若需要更高配额，通常要走申请流程，而不是靠重试绕过限制。</p></div>
+        </details>
+      </section>
+
+      <!-- 8 用户评论 -->
+      <section class="card-panel" id="reviews" aria-labelledby="rvTitle">
+        <div class="panel-head">
+          <h2 id="rvTitle">使用者评论</h2>
+          <span class="ph-sub">16 条来自不同场景的反馈</span>
+        </div>
+        <div class="cmt-grid">
+
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#c8102e">林</span><span class="nick">林间小径</span><span class="when">11-08 10:12</span></div><p>做俄语站点的收录监测，接口配额这块文档写得很清楚，按日切分抓取之后数据终于连续了。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#1d4ed8">周</span><span class="nick">周工读俄语</span><span class="when">11-08 09:40</span></div><p>歌词逐句对照这个功能对学语感真的有用，比背单词表自然多了，就是俚语部分还是得自己查。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#0f7b52">陈</span><span class="nick">陈记跨境</span><span class="when">11-07 22:31</span></div><p>关键词规划的搜索量是分词形统计的，这一点一开始没注意，预算估高了差不多三成，后来合并同类词才正常。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#b8791a">苏</span><span class="nick">苏城夜读</span><span class="when">11-07 20:05</span></div><p>新闻聚合的多源对照挺好用，同一件事三家媒体措辞差得挺明显，比单看一家有意思。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#6b7280">何</span><span class="nick">何工出差</span><span class="when">11-07 18:47</span></div><p>街景帮了大忙，客户给的地址门牌号有误，靠街景比对建筑外观才找到正确入口。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#9a0c23">吴</span><span class="nick">吴下阿蒙</span><span class="when">11-07 15:20</span></div><p>翻译的图片取词有时候会把包装上的小字识别错，大字号基本没问题，扫标签还是得放大再拍。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#1d4ed8">郑</span><span class="nick">郑大钱</span><span class="when">11-06 21:58</span></div><p>公交时刻表冬夏季切换这点提醒得及时，十一月去了一趟，按新时刻走果然对上了。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#0f7b52">孙</span><span class="nick">孙律师看合同</span><span class="when">11-06 19:03</span></div><p>术语库锁定核心词之后，同一份合同里“原产地证”终于只有一个译法了，之前两种混着出现。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#c8102e">马</span><span class="nick">马不停蹄</span><span class="when">11-06 14:26</span></div><p>图片检索反查商品型号挺准，前提是背景干净。背景杂的图召回来一堆不相干的。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#b8791a">黄</span><span class="nick">黄河远上</span><span class="when">11-05 22:10</span></div><p>智能问答搭框架可以，但数字真不能直接用，试过两次日期都是旧的，还得回原文核。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#6b7280">刘</span><span class="nick">刘师傅跑运输</span><span class="when">11-05 17:44</span></div><p>物流节点查询现在能看分区配送范围，接单前先查一下，少跑了两次空趟。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#9a0c23">赵</span><span class="nick">赵小满</span><span class="when">11-05 11:09</span></div><p>比价按城市筛选这个改动实用，同一款配件莫斯科和新西伯利亚差得不少，心里有数了。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#1d4ed8">钱</span><span class="nick">钱塘读书</span><span class="when">11-04 20:33</span></div><p>冬季通勤歌单不错，通勤路上听着练听力，缺点是有几首语速太快跟不上。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#0f7b52">冯</span><span class="nick">冯工写代码</span><span class="when">11-04 16:15</span></div><p>返回字段新增那两项正好是我需要的，文档修订说明也写得直白，不用翻半天。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#c8102e">许</span><span class="nick">许愿顺利</span><span class="when">11-03 21:47</span></div><p>打车价格预估挺接近实际，就是高峰溢价区间有浮动，差旅预算按上限算比较稳。</p></div>
+          <div class="cmt"><div class="cmt-top"><span class="avatar" style="background:#b8791a">杨</span><span class="nick">杨柳岸风</span><span class="when">11-03 09:28</span></div><p>远东城市街景终于补上了，之前查一个哈巴罗夫斯克的仓库地址完全没有画面，现在能看清路口了。</p></div>
+
+        </div>
+      </section>
+
+      <!-- 9 相关资讯 -->
+      <section class="card-panel" id="news" aria-labelledby="nwTitle">
+        <div class="panel-head">
+          <h2 id="nwTitle">相关资讯</h2>
+          <span class="ph-sub">俄语区搜索与内容服务动态</span>
+        </div>
+        <div class="news-list">
+
+          <article class="news-item">
+            <figure><img src="https://picsum.photos/seed/yandex-news-far/600/400" width="600" height="400" loading="lazy" alt="远东城市街景采集车队在城区作业"></figure>
+            <div>
+              <h3>远东 14 城街景上线，中小城市覆盖补齐</h3>
+              <div class="nd">2026-11-08</div>
+              <p>本批街景集中在哈巴罗夫斯克、布拉戈维申斯克等边境城市，商户营业时间与门牌信息同步刷新，跨境物流取件点查找更方便。</p>
+            </div>
+          </article>
+
+          <article class="news-item">
+            <figure><img src="https://picsum.photos/seed/yandex-news-term/600/400" width="600" height="400" loading="lazy" alt="中俄经贸术语对照词条编辑界面"></figure>
+            <div>
+              <h3>经贸术语库新增报关与结算词条</h3>
+              <div class="nd">2026-11-06</div>
+              <p>新增“报关单”“原产地证”“跨境结算”三组中俄对照词条并配例句，合同与报关文本的术语一致性有了更直接的参照。</p>
+            </div>
+          </article>
+
+          <article class="news-item">
+            <figure><img src="https://picsum.photos/seed/yandex-news-ads/600/400" width="600" height="400" loading="lazy" alt="冬季品类俄语关键词搜索量趋势图"></figure>
+            <div>
+              <h3>冬季品类俄语词库刷新，搜索量分级调整</h3>
+              <div class="nd">2026-11-04</div>
+              <p>关键词规划完成季度刷新，新增约 2100 个冬季品类相关俄语词，竞争度分级同步调整，跨境卖家可在投放前重新筛词。</p>
+            </div>
+          </article>
+
+          <article class="news-item">
+            <figure><img src="https://picsum.photos/seed/yandex-news-api/600/400" width="600" height="400" loading="lazy" alt="开发者文档中接口配额与返回字段说明"></figure>
+            <div>
+              <h3>检索接口文档修订，配额与降级策略更新</h3>
+              <div class="nd">2026-11-04</div>
+              <p>每日调用配额与超出后的降级策略说明有调整，返回字段新增两项。做收录监测的开发者需要同步修改抓取频率设置。</p>
+            </div>
+          </article>
+
+          <article class="news-item">
+            <figure><img src="https://picsum.photos/seed/yandex-news-taxi/600/400" width="600" height="400" loading="lazy" alt="城市夜间打车高峰价格区间显示界面"></figure>
+            <div>
+              <h3>两城打车高峰溢价上限调整</h3>
+              <div class="nd">2026-11-05</div>
+              <p>莫斯科与圣彼得堡的高峰溢价上限调整，预估页面同步显示新的价格区间。差旅预算测算时按上限取值更稳妥。</p>
+            </div>
+          </article>
+
+          <article class="news-item">
+            <figure><img src="https://picsum.photos/seed/yandex-news-qa/600/400" width="600" height="400" loading="lazy" alt="俄语长句智能问答结果与来源标注"></figure>
+            <div>
+              <h3>智能问答对俄语长句解析能力提升</h3>
+              <div class="nd">2026-11-01</div>
+              <p>含多个从句的俄语提问解析更准确，回答开始标注信息来源页面。用问答搭框架时，来源标注可用于后续核对。</p>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- 10 相关推荐 -->
+      <section class="card-panel" id="reco" aria-labelledby="rcTitle">
+        <div class="panel-head">
+          <h2 id="rcTitle">延伸方向推荐</h2>
+          <span class="ph-sub">按具体方向词索引</span>
+        </div>
+        <div class="reco-tags">
+          <a href="#deep">俄语商户地址核实 <small>地图</small></a>
+          <a href="#deep">中俄报关术语对照 <small>翻译</small></a>
+          <a href="#updates">远东城市街景更新 <small>地图</small></a>
+          <a href="#deep">俄语长尾词词形还原 <small>搜索</small></a>
+          <a href="#deep">跨境小包清关流程 <small>物流</small></a>
+          <a href="#guide">俄语新闻标题省略现象 <small>语料</small></a>
+          <a href="#deep">检索接口配额规划 <small>开发</small></a>
+          <a href="#categories">俄语商品图片反查 <small>图片检索</small></a>
+        </div>
+      </section>
+
+      <!-- 11 补充榜单 -->
+      <section class="card-panel" id="rank" aria-labelledby="rkTitle">
+        <div class="panel-head">
+          <h2 id="rkTitle">条目热度榜</h2>
+          <span class="ph-sub">截至 2026-11-08 检索热度</span>
+        </div>
+        <div class="rank-list">
+          <div class="rank-item"><div><h3>Yandex 网页检索</h3><p>俄语长尾词召回与本地商户收录</p></div><span class="rq">9.2 万</span></div>
+          <div class="rank-item"><div><h3>Yandex 地图街景</h3><p>远东 14 城新增覆盖</p></div><span class="rq">7.6 万</span></div>
+          <div class="rank-item"><div><h3>Yandex 翻译术语库</h3><p>报关与结算词条新增</p></div><span class="rq">6.4 万</span></div>
+          <div class="rank-item"><div><h3>Yandex 新闻聚合</h3><p>多源对照与晚间接力更新</p></div><span class="rq">5.8 万</span></div>
+          <div class="rank-item"><div><h3>Yandex 广告关键词规划</h3><p>冬季品类词库刷新</p></div><span class="rq">4.9 万</span></div>
+          <div class="rank-item"><div><h3>Yandex 打车价格预估</h3><p>两城高峰溢价区间调整</p></div><span class="rq">4.1 万</span></div>
+          <div class="rank-item"><div><h3>Yandex 商品比价</h3><p>城市筛选与促销状态过滤</p></div><span class="rq">3.5 万</span></div>
+          <div class="rank-item"><div><h3>Yandex 搜索接口</h3><p>配额与返回字段更新</p></div><span class="rq">2.7 万</span></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 右：辅助栏 -->
+    <aside class="side-col" aria-label="辅助信息">
+
+      <section class="side-card" aria-labelledby="sd1">
+        <h2 id="sd1">今日更新速览</h2>
+        <div class="side-list">
+          <a href="#updates"><b>1</b><span>远东 14 城街景上线，商户时间同步刷新</span></a>
+          <a href="#updates"><b>2</b><span>经贸术语库新增 3 组中俄对照词条</span></a>
+          <a href="#updates"><b>3</b><span>晚间新闻聚合完成 320 条多源分组</span></a>
+          <a href="#updates"><b>4</b><span>广告词库季度刷新，新增约 2100 词</span></a>
+          <a href="#news"><b>5</b><span>检索接口文档修订配额与降级策略</span></a>
+        </div>
+      </section>
+
+      <section class="side-card" aria-labelledby="sd2">
+        <h2 id="sd2">条目时间线</h2>
+        <div class="timeline">
+          <div class="tl-item"><time>11-08</time><p><strong>远东街景包</strong>上线，覆盖哈巴罗夫斯克等 14 城</p></div>
+          <div class="tl-item"><time>11-06</time><p><strong>翻译术语库</strong>新增报关、原产地证、跨境结算</p></div>
+          <div class="tl-item"><time>11-05</time><p><strong>打车溢价</strong>上限调整，莫斯科与圣彼得堡生效</p></div>
+          <div class="tl-item"><time>11-04</time><p><strong>检索接口</strong>文档修订，返回字段新增两项</p></div>
+          <div class="tl-item"><time>11-01</time><p><strong>智能问答</strong>俄语长句解析提升，标注信息来源</p></div>
+          <div class="tl-item"><time>10-30</time><p><strong>图片检索</strong>相似度排序调整，支持颜色筛选</p></div>
+        </div>
+      </section>
+
+      <section class="side-card" aria-labelledby="sd3">
+        <h2 id="sd3">信息可信度分层</h2>
+        <div class="side-list">
+          <a href="#deep"><b>A</b><span>政府站点与行业协会公告：可作事实依据</span></a>
+          <a href="#deep"><b>B</b><span>本地媒体正文：需交叉两家以上</span></a>
+          <a href="#deep"><b>C</b><span>商户页与用户实拍：时效性强，需看日期</span></a>
+          <a href="#deep"><b>D</b><span>智能问答概述：仅作框架，须回源核对</span></a>
+        </div>
+        <p class="side-note" style="margin-top:12px">分层依据为信息来源类型与更新日期，不涉及条目本身的重要性排序。</p>
+      </section>
+
+      <section class="side-card" aria-labelledby="sd4">
+        <h2 id="sd4">快速跳转</h2>
+        <div class="side-list">
+          <a href="#faq"><b>→</b><span>俄语关键词检索不到结果怎么办</span></a>
+          <a href="#faq"><b>→</b><span>街景更新周期与判断方法</span></a>
+          <a href="#faq"><b>→</b><span>经贸文本该用哪种翻译方式</span></a>
+          <a href="#guide"><b>→</b><span>第一次接触从哪个条目开始</span></a>
+        </div>
+      </section>
+
+    </aside>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#c8102e"/>
+            <path d="M20 17h7l6 12 6-12h7L36 36v13h-7V36z" fill="#fff"/>
+            <circle cx="47" cy="20" r="4" fill="#ffd9df"/>
+          </svg>
+          <span class="brand-text">www.yandex.com</span>
+        </div>
+        <p class="foot-desc">围绕俄罗斯及俄语区搜索、地图、翻译、新闻、音乐与广告服务的条目导航，提供类型对照、使用路径与信息可信度判断依据。</p>
+      </div>
+      <div class="foot-col">
+        <h3>服务频道</h3>
+        <a href="#featured">搜索与智能问答</a>
+        <a href="#featured">地图与城市导航</a>
+        <a href="#featured">翻译与语料对照</a>
+        <a href="#categories">音乐与视频</a>
+        <a href="#categories">新闻聚合</a>
+      </div>
+      <div class="foot-col">
+        <h3>内容板块</h3>
+        <a href="#deep">深度解析</a>
+        <a href="#guide">使用路径</a>
+        <a href="#faq">常见问答</a>
+        <a href="#reviews">使用者评论</a>
+        <a href="#rank">条目热度榜</a>
+      </div>
+      <div class="foot-col">
+        <h3>延伸方向</h3>
+        <a href="#news">相关资讯</a>
+        <a href="#reco">方向推荐</a>
+        <a href="#updates">更新与动态</a>
+        <a href="#categories">分类索引</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 www.yandex.com 内容导航 · 本站为第三方内容聚合示例，与 Yandex 官方无隶属关系</span>
+      <span class="disclaimer">部分内容为示例数据，仅用于展示页面结构</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* 移动端菜单 */
+  var btn = document.getElementById('menuBtn');
+  var nav = document.getElementById('headNav');
+  if (btn && nav) {
+    btn.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? '收起' : '菜单';
+    });
+    nav.addEventListener('click', function(e){
+      if (e.target.tagName === 'A' && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = '菜单';
+      }
+    });
+  }
+
+  /* 站内查找：筛选精选卡片与榜单条目 */
+  var form = document.getElementById('localSearch');
+  var input = document.getElementById('q');
+  if (!form || !input) return;
+
+  var scope = document.querySelectorAll('.feat-card, .rank-item, .update-item, .news-item, .cat-item');
+  var empty = document.createElement('p');
+  empty.textContent = '没有找到匹配的条目，试试“地图”“翻译”“街景”“术语库”等词。';
+  empty.style.cssText = 'display:none;padding:14px 16px;background:#fdf5e6;border:1px solid #f0e0c2;border-radius:8px;color:#8a5a10;font-size:13.5px;margin:8px 0;';
+  var mainCol = document.querySelector('.main-col');
+  if (mainCol) mainCol.appendChild(empty);
+
+  function runFilter(){
+    var kw = input.value.trim().toLowerCase();
+    var hit = 0;
+    scope.forEach(function(el){
+      if (!kw) { el.style.display = ''; hit++; return; }
+      var txt = (el.textContent || '').toLowerCase();
+      var ok = txt.indexOf(kw) !== -1;
+      el.style.display = ok ? '' : 'none';
+      if (ok) hit++;
+    });
+    empty.style.display = hit === 0 ? 'block' : 'none';
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    runFilter();
+  });
+  input.addEventListener('input', function(){
+    if (input.value.trim() === '') runFilter();
+  });
+})();
+</script>
+</body>
+  </html>
