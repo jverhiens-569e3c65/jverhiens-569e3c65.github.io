@@ -1,0 +1,1134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日大赛最新在线 - 赛事日程与参赛作品聚合</title>
+<meta name="description" content="每日大赛最新在线聚合每日赛事日程、参赛作品与赛果解析，涵盖创意设计、算法挑战、写作竞技等赛区，提供赛程表、评审标准与参赛经验，适合关注竞赛动态与作品对比的读者。">
+<meta name="keywords" content="赛程安排,参赛作品,赛果解析,创意设计赛,算法挑战赛">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b2a4a'/%3E%3Cpath d='M18 40h8v8h-8zM28 28h8v20h-8zM38 18h8v30h-8z' fill='%23f2b73d'/%3E%3C/svg%3E">
+<style>
+:root{
+  --navy:#16233d;
+  --navy-2:#1f3157;
+  --ink:#1c2433;
+  --ink-2:#4a566b;
+  --ink-3:#7b8798;
+  --line:#e2e7ef;
+  --line-2:#eef1f6;
+  --bg:#f5f7fb;
+  --panel:#ffffff;
+  --gold:#c98a12;
+  --gold-soft:#fdf4e2;
+  --blue:#2c5aa0;
+  --blue-soft:#e9f0fb;
+  --red:#b5342c;
+  --red-soft:#fbeceb;
+  --green:#2f7a55;
+  --green-soft:#e8f5ee;
+  --radius:10px;
+  --radius-sm:6px;
+  --shadow:0 1px 2px rgba(22,35,61,.06),0 6px 20px rgba(22,35,61,.05);
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",system-ui,sans-serif;
+  --stick:112px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:var(--stick)}
+body{
+  margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);
+  line-height:1.75;font-size:15px;-webkit-font-smoothing:antialiased;
+}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+img{display:block;max-width:100%}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 12px;padding-left:20px}
+li{margin-bottom:6px}
+.wrap{max-width:1340px;margin:0 auto;padding:0 20px}
+
+/* ---------- 吸顶公告条 ---------- */
+.announce{
+  background:var(--navy);color:#dbe4f3;font-size:13px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.announce .wrap{display:flex;gap:14px;align-items:center;min-height:38px;flex-wrap:wrap}
+.announce .tag{
+  background:var(--gold);color:#20180a;font-weight:700;font-size:11px;
+  padding:2px 8px;border-radius:3px;letter-spacing:.5px;white-space:nowrap;
+}
+.announce-list{display:flex;gap:22px;flex-wrap:wrap;overflow:hidden}
+.announce-list span{white-space:nowrap}
+.announce-list b{color:#fff;font-weight:600}
+
+/* ---------- 吸顶页头 ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);
+  backdrop-filter:saturate(180%) blur(8px);
+  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(22,35,61,.03);
+}
+.site-header .wrap{display:flex;align-items:center;gap:26px;min-height:66px}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand svg{width:34px;height:34px;flex-shrink:0}
+.brand-text{font-size:19px;font-weight:800;color:var(--navy);letter-spacing:.3px;white-space:nowrap}
+.main-nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}
+.main-nav a{color:var(--ink-2);font-weight:500;white-space:nowrap}
+.main-nav a:hover{color:var(--navy);text-decoration:none}
+.header-tools{margin-left:auto;display:flex;align-items:center;gap:10px}
+.search-box{position:relative}
+.search-box input{
+  width:200px;padding:7px 10px;font-size:13px;font-family:var(--font);
+  border:1px solid var(--line);border-radius:var(--radius-sm);background:#fbfcfe;color:var(--ink);
+}
+.search-box input:focus{outline:2px solid var(--blue);outline-offset:1px;background:#fff}
+.search-feedback{
+  position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;
+  border:1px solid var(--line);border-radius:var(--radius-sm);box-shadow:var(--shadow);
+  font-size:12.5px;padding:8px 10px;color:var(--ink-2);display:none;z-index:60;
+}
+.search-feedback.show{display:block}
+.btn-quick{
+  font-size:13px;padding:7px 14px;border-radius:var(--radius-sm);
+  background:var(--navy);color:#fff;border:none;cursor:pointer;font-family:var(--font);
+  white-space:nowrap;
+}
+.btn-quick:hover{background:var(--navy-2)}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:var(--radius-sm);padding:6px 10px;cursor:pointer;font-size:13px;color:var(--ink-2)}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  background:
+    radial-gradient(900px 320px at 88% -20%, rgba(201,138,18,.16), transparent 70%),
+    linear-gradient(160deg,#1b2a4a 0%,#22365c 52%,#2a4270 100%);
+  color:#eef2f9;padding:44px 0 46px;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;right:-120px;bottom:-140px;width:420px;height:420px;
+  border-radius:50%;border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 0 0 60px rgba(255,255,255,.03),0 0 0 120px rgba(255,255,255,.02);
+  pointer-events:none;
+}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.35fr .85fr;gap:40px;align-items:center}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:1.2px;
+  color:#f2c96b;margin-bottom:14px;text-transform:uppercase;
+}
+.hero-kicker::before{content:"";width:26px;height:2px;background:#f2c96b;display:inline-block}
+.hero h1{font-size:38px;letter-spacing:1px;color:#fff;margin-bottom:16px}
+.hero-lead{font-size:15.5px;color:#c9d6ec;max-width:560px;margin-bottom:24px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.hero-actions a{
+  display:inline-block;padding:10px 20px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;
+}
+.hero-actions .primary{background:var(--gold);color:#1c1408}
+.hero-actions .primary:hover{background:#dc9a1e;text-decoration:none}
+.hero-actions .ghost{border:1px solid rgba(255,255,255,.34);color:#e8eefa}
+.hero-actions .ghost:hover{background:rgba(255,255,255,.1);text-decoration:none}
+.hero-stats{display:flex;gap:34px;flex-wrap:wrap}
+.hero-stats div{font-size:12.5px;color:#9fb1cf}
+.hero-stats strong{display:block;font-size:22px;color:#fff;font-weight:800;letter-spacing:.5px}
+
+/* 首屏右侧图形 */
+.hero-visual{
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.14);
+  border-radius:14px;padding:18px;
+}
+.hv-title{font-size:12px;letter-spacing:1px;color:#9fb1cf;margin-bottom:12px;display:flex;justify-content:space-between}
+.hv-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-size:12.5px;color:#d7e2f4}
+.hv-row .name{width:96px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hv-bar{flex:1;height:7px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+.hv-bar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#f2c96b,#e0a12c)}
+.hv-row .val{width:40px;text-align:right;font-variant-numeric:tabular-nums;color:#f2c96b;font-weight:600}
+.hv-foot{margin-top:14px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.16);font-size:12px;color:#9fb1cf;display:flex;justify-content:space-between}
+
+/* ---------- 三栏布局 ---------- */
+.layout{
+  display:grid;grid-template-columns:176px minmax(0,1fr) 252px;gap:26px;
+  align-items:start;padding:30px 0 50px;
+}
+/* 左频道索引 */
+.channel-col{position:sticky;top:var(--stick);align-self:start}
+.channel-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 0;box-shadow:var(--shadow)}
+.channel-panel h2{
+  font-size:12px;letter-spacing:1.4px;color:var(--ink-3);font-weight:700;
+  padding:0 16px 10px;border-bottom:1px solid var(--line-2);margin-bottom:8px;text-transform:uppercase;
+}
+.channel-panel ul{list-style:none;padding:0;margin:0}
+.channel-panel li a{
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  padding:8px 16px;font-size:13.5px;color:var(--ink-2);border-left:2px solid transparent;
+}
+.channel-panel li a:hover{background:#f6f8fc;color:var(--navy);text-decoration:none;border-left-color:var(--gold)}
+.channel-panel li a em{font-style:normal;font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.channel-note{margin-top:12px;padding:12px 14px;background:var(--gold-soft);border-radius:var(--radius-sm);font-size:12px;color:#7a5a12;line-height:1.65}
+
+/* 主栏 */
+.main-col{min-width:0}
+.module{margin-bottom:34px}
+.module-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.module-head h2{font-size:20px;color:var(--navy);letter-spacing:.3px;position:relative;padding-left:12px}
+.module-head h2::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:3px;border-radius:2px;background:var(--gold)}
+.module-head .sub{font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.section-lead{font-size:14px;color:var(--ink-2);margin-bottom:16px}
+
+/* 领域概览 */
+.overview{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow)}
+.overview p{font-size:14.5px;color:var(--ink-2);margin-bottom:14px}
+.overview p:last-child{margin-bottom:0}
+.overview strong{color:var(--ink)}
+.ov-points{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ov-points li{
+  background:var(--blue-soft);border-radius:var(--radius-sm);padding:9px 12px;font-size:13px;color:#23406b;
+  display:flex;gap:8px;align-items:flex-start;margin:0;
+}
+.ov-points li::before{content:"◆";color:var(--blue);font-size:10px;line-height:1.9;flex-shrink:0}
+
+/* 精选卡片 */
+.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .18s,border-color .18s;
+}
+.card:hover{transform:translateY(-2px);border-color:#c6d2e6}
+.card-cover{aspect-ratio:4/3;overflow:hidden;background:#e8edf5}
+.card-cover img{width:100%;height:100%;object-fit:cover}
+.card-body{padding:13px 14px 15px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card-type{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.6px}
+.card-title{font-size:15px;color:var(--navy);line-height:1.45}
+.card-desc{font-size:12.8px;color:var(--ink-2);line-height:1.65;flex:1;margin:0}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px}
+.tag{
+  font-size:11px;padding:2px 7px;border-radius:3px;background:#f0f3f9;color:var(--ink-2);white-space:nowrap;
+}
+.tag.hot{background:var(--red-soft);color:var(--red)}
+.tag.live{background:var(--green-soft);color:var(--green)}
+.card-meta{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--line-2);padding-top:9px;font-variant-numeric:tabular-nums}
+.card-meta b{color:var(--navy);font-weight:700}
+
+/* 最新动态列表 */
+.update-list{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.update-item{display:grid;grid-template-columns:88px minmax(0,1fr) auto;gap:14px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line-2)}
+.update-item:last-child{border-bottom:none}
+.update-item:hover{background:#fafbfe}
+.up-time{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.up-main{min-width:0}
+.up-title{font-size:14px;color:var(--navy);font-weight:600;margin-bottom:2px}
+.up-desc{font-size:12.6px;color:var(--ink-2);margin:0;line-height:1.6}
+.up-badge{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--blue-soft);color:var(--blue);white-space:nowrap}
+
+/* 分类入口 */
+.cat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cat-item{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 14px 13px;display:flex;flex-direction:column;gap:5px;transition:border-color .18s,background .18s;
+}
+.cat-item:hover{border-color:var(--gold);background:var(--gold-soft);text-decoration:none}
+.cat-item .cat-name{font-size:14.5px;font-weight:700;color:var(--navy)}
+.cat-item .cat-desc{font-size:12px;color:var(--ink-3);line-height:1.55}
+.cat-item .cat-count{font-size:11.5px;color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* 深度解析 */
+.article-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;box-shadow:var(--shadow)}
+.article-panel h3{font-size:16.5px;color:var(--navy);margin:22px 0 10px;padding-left:10px;border-left:3px solid var(--gold)}
+.article-panel h3:first-child{margin-top:0}
+.article-panel p{font-size:14.3px;color:var(--ink-2);margin-bottom:12px}
+.article-panel ul,.article-panel ol{font-size:14.3px;color:var(--ink-2)}
+.article-panel li{margin-bottom:7px}
+.article-panel strong{color:var(--ink)}
+.mini-table{width:100%;border-collapse:collapse;font-size:13.2px;margin:14px 0 6px}
+.mini-table th,.mini-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.mini-table th{background:#f4f7fc;color:var(--navy);font-weight:700;white-space:nowrap}
+.mini-table td{color:var(--ink-2)}
+
+/* 体验路径 编号步骤 */
+.steps{display:grid;gap:12px}
+.step{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:15px 18px 15px 60px;position:relative;box-shadow:var(--shadow);
+}
+.step .num{
+  position:absolute;left:16px;top:15px;width:28px;height:28px;border-radius:50%;
+  background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.step h3{font-size:14.5px;color:var(--navy);margin-bottom:5px}
+.step p{font-size:13.2px;color:var(--ink-2);margin:0}
+
+/* FAQ */
+.faq-list{display:grid;gap:10px}
+.faq-list details{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+}
+.faq-list summary{
+  cursor:pointer;padding:13px 18px;font-size:14.2px;font-weight:600;color:var(--navy);
+  list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:center;
+}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::after{content:"＋";color:var(--gold);font-size:16px;font-weight:400;flex-shrink:0}
+.faq-list details[open] summary::after{content:"－"}
+.faq-list details[open] summary{border-bottom:1px solid var(--line-2)}
+.faq-list .ans{padding:13px 18px 16px;font-size:13.6px;color:var(--ink-2);line-height:1.75}
+.faq-list .ans p:last-child{margin-bottom:0}
+
+/* 评论 */
+.comment-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.comment{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px 15px;
+}
+.comment-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.avatar{
+  width:26px;height:26px;border-radius:50%;background:var(--blue-soft);color:var(--blue);
+  font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.comment-name{font-size:12.8px;font-weight:700;color:var(--navy)}
+.comment-time{font-size:11px;color:var(--ink-3);margin-left:auto;font-variant-numeric:tabular-nums}
+.comment-body{font-size:13px;color:var(--ink-2);margin:0;line-height:1.68}
+.comment-target{color:var(--blue);font-weight:600}
+
+/* 相关资讯 */
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.news-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:var(--shadow);
+}
+.news-card img{width:100%;height:132px;object-fit:cover;background:#e8edf5}
+.news-body{padding:12px 15px 14px}
+.news-date{font-size:11.5px;color:var(--gold);font-weight:600;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.news-title{font-size:14px;color:var(--navy);font-weight:700;margin-bottom:5px;line-height:1.45}
+.news-sum{font-size:12.7px;color:var(--ink-2);margin:0;line-height:1.65}
+
+/* 相关推荐 标签索引 */
+.rel-tags{display:flex;flex-wrap:wrap;gap:9px}
+.rel-tags a{
+  display:inline-block;font-size:13px;padding:7px 14px;border-radius:20px;
+  background:var(--panel);border:1px solid var(--line);color:var(--ink-2);
+}
+.rel-tags a:hover{border-color:var(--navy);color:var(--navy);text-decoration:none;background:#f6f9ff}
+.rel-tags a span{color:var(--ink-3);font-size:11.5px;margin-left:5px}
+
+/* 榜单 */
+.rank-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.rank-row{display:grid;grid-template-columns:34px minmax(0,1fr) 76px 62px;gap:10px;align-items:center;padding:11px 16px;border-bottom:1px solid var(--line-2);font-size:13.2px}
+.rank-row:last-child{border-bottom:none}
+.rank-no{font-size:14px;font-weight:800;color:var(--ink-3);font-variant-numeric:tabular-nums;text-align:center}
+.rank-row:nth-child(1) .rank-no{color:#c9a227}
+.rank-row:nth-child(2) .rank-no{color:#8b98a8}
+.rank-row:nth-child(3) .rank-no{color:#b07a4a}
+.rank-name{color:var(--navy);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-tag{font-size:11px;color:var(--ink-3);text-align:right}
+.rank-score{font-size:13px;font-weight:700;color:var(--gold);text-align:right;font-variant-numeric:tabular-nums}
+
+/* 右侧辅助栏 */
+.side-col{position:sticky;top:var(--stick);align-self:start;display:grid;gap:18px}
+.side-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px;box-shadow:var(--shadow)}
+.side-panel h2{font-size:13px;letter-spacing:.8px;color:var(--navy);margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid var(--line-2);display:flex;justify-content:space-between;align-items:center}
+.side-panel h2 span{font-size:11px;font-weight:400;color:var(--ink-3);letter-spacing:0}
+.side-list{list-style:none;padding:0;margin:0}
+.side-list li{padding:8px 0;border-bottom:1px dashed var(--line-2);font-size:13px;margin:0}
+.side-list li:last-child{border-bottom:none;padding-bottom:0}
+.side-list a{color:var(--ink-2);display:block;line-height:1.55}
+.side-list a:hover{color:var(--navy);text-decoration:none}
+.side-list .meta{display:block;font-size:11.5px;color:var(--ink-3);margin-top:2px}
+.side-cta{background:linear-gradient(150deg,#1f3157,#2a4270);color:#e6eefb;border:none}
+.side-cta h2{color:#fff;border-bottom-color:rgba(255,255,255,.16)}
+.side-cta p{font-size:12.6px;color:#b9c8e2;line-height:1.7;margin-bottom:10px}
+.side-cta a{display:block;text-align:center;background:var(--gold);color:#1c1408;font-weight:700;font-size:13px;padding:8px;border-radius:var(--radius-sm)}
+.side-cta a:hover{text-decoration:none;background:#dc9a1e}
+.rule-mini{font-size:12.4px;color:var(--ink-2);line-height:1.7}
+.rule-mini b{color:var(--navy)}
+
+/* 页尾 */
+.site-footer{background:#121c30;color:#a8b6cd;padding:40px 0 26px;font-size:13px}
+.footer-top{display:grid;grid-template-columns:1.3fr 2fr;gap:36px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.footer-brand svg{width:30px;height:30px}
+.footer-brand span{font-size:17px;font-weight:800;color:#fff}
+.footer-intro{color:#8fa1bd;line-height:1.8;font-size:12.8px;max-width:340px}
+.footer-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.footer-links h3{font-size:12.5px;color:#fff;letter-spacing:1px;margin-bottom:10px;font-weight:700}
+.footer-links ul{list-style:none;padding:0;margin:0}
+.footer-links li{margin-bottom:7px}
+.footer-links a{color:#93a5c1;font-size:12.6px}
+.footer-links a:hover{color:#fff;text-decoration:none}
+.footer-bottom{padding-top:18px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#6f80a0}
+.footer-bottom .disclaimer{color:#6f80a0}
+
+/* 响应式 */
+@media (max-width:1120px){
+  .layout{grid-template-columns:176px minmax(0,1fr);gap:22px}
+  .side-col{grid-column:1/-1;position:static;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:26px}
+  .hero h1{font-size:31px}
+  .hero-visual{max-width:520px}
+  .main-nav{display:none}
+  .menu-toggle{display:inline-block}
+  .site-header .wrap{flex-wrap:wrap;gap:14px;padding-top:10px;padding-bottom:10px}
+  .main-nav.open{display:flex;flex-basis:100%;order:5;padding-bottom:6px;gap:14px}
+  .search-box input{width:150px}
+  .side-col{grid-template-columns:1fr 1fr}
+}
+@media (max-width:740px){
+  :root{--stick:104px}
+  .layout{grid-template-columns:1fr;gap:22px;padding-top:20px}
+  .channel-col{position:static}
+  .channel-panel ul{display:flex;flex-wrap:wrap;gap:4px;padding:0 8px 4px}
+  .channel-panel li a{padding:6px 10px;border-left:none;border-radius:var(--radius-sm);background:#f4f7fc;font-size:13px}
+  .channel-panel li a em{display:none}
+  .channel-panel h2{border-bottom:none}
+  .channel-note{display:none}
+  .card-grid{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .comment-grid,.news-grid{grid-template-columns:1fr}
+  .ov-points{grid-template-columns:1fr}
+  .article-panel{padding:20px 18px}
+  .hero h1{font-size:27px}
+  .hero-stats{gap:22px}
+  .update-item{grid-template-columns:minmax(0,1fr) auto;gap:8px}
+  .up-time{grid-column:1/-1;font-size:11.5px}
+  .side-col{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr;gap:24px}
+  .footer-links{grid-template-columns:1fr 1fr}
+  .rank-row{grid-template-columns:28px minmax(0,1fr) 58px;font-size:12.6px}
+  .rank-tag{display:none}
+  .search-box input{width:120px}
+  .header-tools{gap:8px}
+  .btn-quick{display:none}
+}
+@media (max-width:400px){
+  .cat-grid{grid-template-columns:1fr}
+  .hero h1{font-size:24px}
+  .wrap{padding:0 14px}
+}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 吸顶公告条 -->
+<div class="announce">
+  <div class="wrap">
+    <span class="tag">今日更新</span>
+    <div class="announce-list">
+      <span><b>11 月 8 日</b> 创意设计赛 B 组评审结果已公布</span>
+      <span><b>算法挑战赛</b> 第 6 轮榜单 21:00 刷新</span>
+      <span>本周新增 <b>18 件</b> 参赛作品档案</span>
+    </div>
+  </div>
+</div>
+
+<!-- 吸顶页头 -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/#top" aria-label="每日大赛最新在线 首页">
+      <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#16233d"/>
+        <path d="M15 42h7v9h-7z" fill="#f2b73d"/>
+        <path d="M27 30h7v21h-7z" fill="#f2b73d" opacity=".82"/>
+        <path d="M39 18h7v33h-7z" fill="#f2b73d" opacity=".62"/>
+        <circle cx="18.5" cy="20" r="4" fill="none" stroke="#f2b73d" stroke-width="2"/>
+        <path d="M16.5 20l1.6 1.6L21 18.5" stroke="#f2b73d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">每日大赛最新在线</span>
+    </a>
+    <nav class="main-nav" id="mainNav" aria-label="主题导航">
+      <a href="/#overview">赛事概览</a>
+      <a href="/#featured">精选作品</a>
+      <a href="/#updates">赛程动态</a>
+      <a href="/#category">赛区分类</a>
+      <a href="/#analysis">赛制解析</a>
+      <a href="/#faq">常见问题</a>
+    </nav>
+    <div class="header-tools">
+      <div class="search-box">
+        <input type="search" id="siteSearch" placeholder="搜索赛区或作品" aria-label="搜索赛区或作品">
+        <div class="search-feedback" id="searchFeedback" role="status" aria-live="polite"></div>
+      </div>
+      <button class="btn-quick" type="button" id="jumpRank">今日榜单</button>
+      <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="mainNav">栏目</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="wrap">
+      <div>
+        <div class="hero-kicker">Daily Contest Live</div>
+        <h1 id="heroTitle">每日大赛最新在线</h1>
+        <p class="hero-lead">
+          汇总每日创意设计、算法挑战、写作竞技、影像创作等赛区的开赛安排、参赛作品档案与评审结果，提供赛制规则、评分维度和参赛经验，帮助你在同一个入口比较不同赛区的作品与进度。
+        </p>
+        <div class="hero-actions">
+          <a class="primary" href="/#featured">查看今日精选作品</a>
+          <a class="ghost" href="/#updates">赛程与结果动态</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>12</strong>个常设赛区</div>
+          <div><strong>184</strong>件本周在评作品</div>
+          <div><strong>6</strong>场今日开赛</div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hv-title"><span>今日赛区进度</span><span>11-08</span></div>
+        <div class="hv-row"><span class="name">创意设计赛</span><span class="hv-bar"><i style="width:86%"></i></span><span class="val">86%</span></div>
+        <div class="hv-row"><span class="name">算法挑战赛</span><span class="hv-bar"><i style="width:72%"></i></span><span class="val">72%</span></div>
+        <div class="hv-row"><span class="name">写作竞技赛</span><span class="hv-bar"><i style="width:64%"></i></span><span class="val">64%</span></div>
+        <div class="hv-row"><span class="name">影像创作赛</span><span class="hv-bar"><i style="width:48%"></i></span><span class="val">48%</span></div>
+        <div class="hv-row"><span class="name">知识问答赛</span><span class="hv-bar"><i style="width:35%"></i></span><span class="val">35%</span></div>
+        <div class="hv-foot"><span>评审中 9 场</span><span>已出结果 3 场</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="layout">
+
+      <!-- 左频道索引 -->
+      <aside class="channel-col" aria-label="赛区频道索引">
+        <div class="channel-panel">
+          <h2>赛区频道</h2>
+          <ul>
+            <li><a href="/#category">创意设计赛<em>42</em></a></li>
+            <li><a href="/#category">算法挑战赛<em>36</em></a></li>
+            <li><a href="/#category">写作竞技赛<em>28</em></a></li>
+            <li><a href="/#category">影像创作赛<em>24</em></a></li>
+            <li><a href="/#category">知识问答赛<em>19</em></a></li>
+            <li><a href="/#category">数据分析赛<em>17</em></a></li>
+            <li><a href="/#category">音频播客赛<em>13</em></a></li>
+            <li><a href="/#category">产品原型赛<em>11</em></a></li>
+            <li><a href="/#category">插画速写赛<em>9</em></a></li>
+            <li><a href="/#category">翻译接力赛<em>7</em></a></li>
+            <li><a href="/#rank">今日榜单<em>TOP</em></a></li>
+            <li><a href="/#news">赛事资讯<em>6</em></a></li>
+          </ul>
+        </div>
+        <div class="channel-note">
+          今日 21:00 算法挑战赛第 6 轮提交截止，创意设计赛 B 组评审结果已于上午公布。
+        </div>
+      </aside>
+
+      <!-- 主内容栏 -->
+      <div class="main-col">
+
+        <!-- ① 主题领域概览 -->
+        <section class="module" id="overview" aria-labelledby="h-overview">
+          <div class="module-head">
+            <h2 id="h-overview">每日大赛在比什么：赛区构成与当前看点</h2>
+            <span class="sub">2026-11-08 更新</span>
+          </div>
+          <div class="overview">
+            <p>
+              “每日大赛”通常指按日或按轮次推进的多赛区竞赛集合：同一平台下并行开设多个赛区，每个赛区有自己的题目方向、提交截止时间与评审周期。当前活跃的方向大致分为五类——<strong>创意设计</strong>偏重视觉表达与提案完整度，<strong>算法挑战</strong>以自动评测分数排名，<strong>写作竞技</strong>看重叙事结构与语言密度，<strong>影像创作</strong>考察镜头组织与剪辑节奏，<strong>知识问答</strong>则以限时答题正确率决出名次。
+            </p>
+            <p>
+              不同赛区的节奏差异很大。算法挑战赛往往一天一轮、当天出榜，适合即时反馈型参与者；创意设计赛与影像创作赛多为一周一评，评审团需要时间逐件阅读提案；写作竞技赛介于两者之间，常见三天提交、五天公布结果。了解这个节奏差，是判断一件作品“现在值不值得看”的前提。
+            </p>
+            <p>
+              当前值得关注的几个具体节点：创意设计赛 B 组以“城市公共座椅”为命题，已收到 42 件作品，其中 11 件进入复评；算法挑战赛第 6 轮的题目是稀疏矩阵压缩，榜单前八名分差只有 0.7 分；写作竞技赛本期主题为“夜班”，参赛作品多在 3000 字上下。下面各板块围绕这些具体赛区与作品展开。
+            </p>
+            <ul class="ov-points">
+              <li>创意设计赛 B 组复评名单已公布，11 件作品进入终评</li>
+              <li>算法挑战赛第 6 轮前八名分差 0.7 分，排名仍可能变化</li>
+              <li>写作竞技赛“夜班”主题提交截止 11 月 9 日 23:59</li>
+              <li>影像创作赛本期改为 90 秒限时命题，评审维度同步调整</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ② 精选内容推荐 -->
+        <section class="module" id="featured" aria-labelledby="h-featured">
+          <div class="module-head">
+            <h2 id="h-featured">今日精选参赛作品</h2>
+            <span class="sub">6 件在评作品</span>
+          </div>
+          <p class="section-lead">以下作品均处于本轮评审期内，可按赛区标签对照查看命题要求与评分维度。</p>
+          <div class="card-grid">
+            <article class="card">
+              <div class="card-cover"><img src="https://picsum.photos/seed/daily-contest-seat12/400/300" width="400" height="300" loading="lazy" alt="城市公共座椅提案《折叠长凳》效果图"></div>
+              <div class="card-body">
+                <span class="card-type">创意设计赛 · B 组</span>
+                <h3 class="card-title">《折叠长凳》——可收纳的街角休息单元</h3>
+                <p class="card-desc">以镀锌钢管与竹木复合板搭建，展开后可供三人并坐，收拢后厚度仅 18 厘米。提案附有安装节点图与人流模拟，重点回应老街区狭窄人行道的占用问题。</p>
+                <div class="tag-row"><span class="tag">公共设施</span><span class="tag">结构提案</span><span class="tag hot">复评入围</span></div>
+                <div class="card-meta"><span>评审分 <b>87.4</b></span><span>11-07 提交</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-cover"><img src="https://picsum.photos/seed/daily-contest-matrix08/400/300" width="400" height="300" loading="lazy" alt="稀疏矩阵压缩赛题提交记录截图"></div>
+              <div class="card-body">
+                <span class="card-type">算法挑战赛 · 第 6 轮</span>
+                <h3 class="card-title">稀疏矩阵压缩：CSR 分块重排解法</h3>
+                <p class="card-desc">作者把原始稀疏矩阵按 64×64 分块后重排索引，压缩率提升到 3.1 倍，单次解码耗时控制在 12 毫秒内。题解中列出了三种分块粒度下的内存占用对比。</p>
+                <div class="tag-row"><span class="tag">数据结构</span><span class="tag">性能优化</span><span class="tag live">榜单位列第 3</span></div>
+                <div class="card-meta"><span>评测分 <b>96.2</b></span><span>今天 09:40</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-cover"><img src="https://picsum.photos/seed/daily-contest-nightshift21/400/300" width="400" height="300" loading="lazy" alt="写作竞技赛《夜班》作品封面"></div>
+              <div class="card-body">
+                <span class="card-type">写作竞技赛 · 第 14 期</span>
+                <h3 class="card-title">《夜班》——便利店凌晨三点的十一个顾客</h3>
+                <p class="card-desc">以一名夜班店员的视角串起十一段短对话，每段控制在 250 字左右，用商品名与找零动作替代心理描写。评委点评提到“结构像排班表一样整齐”。</p>
+                <div class="tag-row"><span class="tag">短篇</span><span class="tag">都市题材</span><span class="tag">限时命题</span></div>
+                <div class="card-meta"><span>评审分 <b>84.6</b></span><span>11-06 提交</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-cover"><img src="https://picsum.photos/seed/daily-contest-film90s05/400/300" width="400" height="300" loading="lazy" alt="影像创作赛 90 秒命题作品剧照"></div>
+              <div class="card-body">
+                <span class="card-type">影像创作赛 · 90 秒命题</span>
+                <h3 class="card-title">《末班电梯》——单场景三镜到底</h3>
+                <p class="card-desc">全片在电梯轿厢内完成，用三次开门切换时间线，声音设计上刻意保留了钢缆摩擦与楼层提示音。命题要求“不出现人物正脸”，作品用反光面板完成叙事。</p>
+                <div class="tag-row"><span class="tag">限时短片</span><span class="tag">单场景</span><span class="tag hot">评审关注</span></div>
+                <div class="card-meta"><span>评审分 <b>82.9</b></span><span>11-05 提交</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-cover"><img src="https://picsum.photos/seed/daily-contest-quiz33/400/300" width="400" height="300" loading="lazy" alt="知识问答赛限时答题界面截图"></div>
+              <div class="card-body">
+                <span class="card-type">知识问答赛 · 日榜</span>
+                <h3 class="card-title">限时 60 题：城市史与建筑术语专场</h3>
+                <p class="card-desc">本场题库集中在近代城市规划与建筑构件名称，正确率前二十名的平均用时为 4 分 12 秒。错题集中在“骑楼”“券廊”两个概念的区分上。</p>
+                <div class="tag-row"><span class="tag">限时答题</span><span class="tag">城市史</span><span class="tag live">今日可参与</span></div>
+                <div class="card-meta"><span>最高分 <b>98</b></span><span>今天 10:15</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-cover"><img src="https://picsum.photos/seed/daily-contest-data17/400/300" width="400" height="300" loading="lazy" alt="数据分析赛公开数据集可视化图"></div>
+              <div class="card-body">
+                <span class="card-type">数据分析赛 · 第 9 轮</span>
+                <h3 class="card-title">共享单车潮汐数据：站点再平衡方案</h3>
+                <p class="card-desc">基于 30 天骑行记录，作者用早晚高峰差值识别出 14 个“净流出站点”，并给出三轮调度建议。报告里的可视化用分组柱状图替代热力图，可读性更好。</p>
+                <div class="tag-row"><span class="tag">公开数据</span><span class="tag">调度优化</span><span class="tag">报告类</span></div>
+                <div class="card-meta"><span>评审分 <b>80.1</b></span><span>11-04 提交</span></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ③ 最新动态 -->
+        <section class="module" id="updates" aria-labelledby="h-updates">
+          <div class="module-head">
+            <h2 id="h-updates">赛程与结果动态</h2>
+            <span class="sub">按时间倒序</span>
+          </div>
+          <div class="update-list">
+            <div class="update-item">
+              <span class="up-time">今天 10:40</span>
+              <div class="up-main"><div class="up-title">创意设计赛 B 组复评结果公布</div><p class="up-desc">42 件作品中 11 件进入终评，终评答辩安排在本周三晚。</p></div>
+              <span class="up-badge">结果</span>
+            </div>
+            <div class="update-item">
+              <span class="up-time">今天 09:40</span>
+              <div class="up-main"><div class="up-title">算法挑战赛第 6 轮榜单刷新</div><p class="up-desc">前八名分差 0.7 分，第 3 名提交记录显示解码耗时 12 毫秒。</p></div>
+              <span class="up-badge">榜单</span>
+            </div>
+            <div class="update-item">
+              <span class="up-time">今天 09:00</span>
+              <div class="up-main"><div class="up-title">知识问答赛“城市史专场”开放参与</div><p class="up-desc">限时 60 题，题库覆盖近代城市规划与建筑构件名称。</p></div>
+              <span class="up-badge">开赛</span>
+            </div>
+            <div class="update-item">
+              <span class="up-time">昨天 21:10</span>
+              <div class="up-main"><div class="up-title">写作竞技赛第 14 期收稿截止提醒</div><p class="up-desc">“夜班”主题已收到 28 篇，最终提交时间为 11 月 9 日 23:59。</p></div>
+              <span class="up-badge">提醒</span>
+            </div>
+            <div class="update-item">
+              <span class="up-time">昨天 18:30</span>
+              <div class="up-main"><div class="up-title">影像创作赛评审维度调整说明</div><p class="up-desc">90 秒限时命题新增“声音设计”一项，占总分 15%。</p></div>
+              <span class="up-badge">规则</span>
+            </div>
+            <div class="update-item">
+              <span class="up-time">11-06 16:20</span>
+              <div class="up-main"><div class="up-title">数据分析赛第 9 轮数据集更新</div><p class="up-desc">共享单车骑行记录补充了 10 月 20 日至 31 日的站点进出量。</p></div>
+              <span class="up-badge">数据</span>
+            </div>
+            <div class="update-item">
+              <span class="up-time">11-06 11:05</span>
+              <div class="up-main"><div class="up-title">插画速写赛本期命题公布</div><p class="up-desc">命题为“雨天的便利店招牌”，限时 4 小时完成，尺寸不限。</p></div>
+              <span class="up-badge">命题</span>
+            </div>
+            <div class="update-item">
+              <span class="up-time">11-05 20:15</span>
+              <div class="up-main"><div class="up-title">音频播客赛第 5 期听审完成</div><p class="up-desc">13 件作品完成盲听打分，平均时长 8 分 40 秒，结果本周内公布。</p></div>
+              <span class="up-badge">评审</span>
+            </div>
+            <div class="update-item">
+              <span class="up-time">11-04 14:00</span>
+              <div class="up-main"><div class="up-title">产品原型赛开放新一轮报名</div><p class="up-desc">本轮限定“无障碍工具”方向，报名截止 11 月 12 日。</p></div>
+              <span class="up-badge">报名</span>
+            </div>
+            <div class="update-item">
+              <span class="up-time">11-03 09:30</span>
+              <div class="up-main"><div class="up-title">翻译接力赛第 3 棒交接完成</div><p class="up-desc">中译日段落已交付下一位选手，接力窗口为 48 小时。</p></div>
+              <span class="up-badge">进程</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ④ 分类入口 -->
+        <section class="module" id="category" aria-labelledby="h-category">
+          <div class="module-head">
+            <h2 id="h-category">按赛区分类查找</h2>
+            <span class="sub">8 个常设分类</span>
+          </div>
+          <p class="section-lead">每个分类对应固定的命题方向与评审口径，进入后可查看该赛区的在评作品与历史结果。</p>
+          <div class="cat-grid">
+            <a class="cat-item" href="/#featured">
+              <span class="cat-name">创意设计赛</span>
+              <span class="cat-desc">视觉提案、结构草图与完整方案</span>
+              <span class="cat-count">42 件在评</span>
+            </a>
+            <a class="cat-item" href="/#featured">
+              <span class="cat-name">算法挑战赛</span>
+              <span class="cat-desc">自动评测、按分数实时排名</span>
+              <span class="cat-count">36 件在评</span>
+            </a>
+            <a class="cat-item" href="/#featured">
+              <span class="cat-name">写作竞技赛</span>
+              <span class="cat-desc">限时命题短篇，评审看结构</span>
+              <span class="cat-count">28 件在评</span>
+            </a>
+            <a class="cat-item" href="/#featured">
+              <span class="cat-name">影像创作赛</span>
+              <span class="cat-desc">90 秒限时短片与声音设计</span>
+              <span class="cat-count">24 件在评</span>
+            </a>
+            <a class="cat-item" href="/#featured">
+              <span class="cat-name">知识问答赛</span>
+              <span class="cat-desc">限时答题，按正确率与用时排名</span>
+              <span class="cat-count">19 场次</span>
+            </a>
+            <a class="cat-item" href="/#featured">
+              <span class="cat-name">数据分析赛</span>
+              <span class="cat-desc">公开数据集上的分析与可视化</span>
+              <span class="cat-count">17 件在评</span>
+            </a>
+            <a class="cat-item" href="/#featured">
+              <span class="cat-name">音频播客赛</span>
+              <span class="cat-desc">盲听打分，考察叙事与剪辑</span>
+              <span class="cat-count">13 件在评</span>
+            </a>
+            <a class="cat-item" href="/#featured">
+              <span class="cat-name">产品原型赛</span>
+              <span class="cat-desc">限定方向的功能原型与交互稿</span>
+              <span class="cat-count">11 件在评</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- ⑤ 深度解析 -->
+        <section class="module" id="analysis" aria-labelledby="h-analysis">
+          <div class="module-head">
+            <h2 id="h-analysis">赛区差异与评审维度：怎么看懂一场大赛</h2>
+            <span class="sub">深度解析</span>
+          </div>
+          <div class="article-panel">
+            <h3>按评审方式分成两类赛区</h3>
+            <p>
+              所有赛区最终都落到一个分数，但打分方式差别明显。<strong>自动评测类</strong>（算法挑战、知识问答、数据分析的部分环节）由程序在提交后几分钟内给出结果，分数稳定、可复现，同一份提交在任何时间重测都得到相同分数。这类赛区的争议通常集中在题目本身——测试用例是否覆盖边界情况、评分脚本对内存和耗时的权重是否合理。
+            </p>
+            <p>
+              <strong>人工评审类</strong>（创意设计、写作竞技、影像创作、音频播客）则由评审团按维度打分再汇总。这类赛区的分数波动更大，同一件作品在不同评审手里可能相差 5 到 8 分。因此人工评审赛区通常会公布分维度得分，而不只是一个总分——看分维度，比看总分更能判断一件作品的强项和短板。
+            </p>
+
+            <h3>各赛区的核心评分维度对照</h3>
+            <table class="mini-table">
+              <thead>
+                <tr><th>赛区</th><th>主要维度</th><th>常见权重</th><th>容易被忽略的失分点</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>创意设计赛</td><td>命题契合、结构可行、表达完整</td><td>40 / 35 / 25</td><td>只给效果图，缺少安装或制作说明</td></tr>
+                <tr><td>算法挑战赛</td><td>正确性、耗时、内存</td><td>按评测脚本加权</td><td>忽略极端输入导致的超时</td></tr>
+                <tr><td>写作竞技赛</td><td>结构、语言、主题完成度</td><td>35 / 35 / 30</td><td>开头铺陈过长，后半段仓促收尾</td></tr>
+                <tr><td>影像创作赛</td><td>镜头组织、声音设计、命题遵守</td><td>40 / 15 / 45</td><td>声音只做背景铺底，未参与叙事</td></tr>
+                <tr><td>知识问答赛</td><td>正确率、用时</td><td>先比正确率再比用时</td><td>在难题上耗时过多，挤占简单题</td></tr>
+                <tr><td>数据分析赛</td><td>方法合理、结论可复现、可视化</td><td>40 / 35 / 25</td><td>图表漂亮但结论无法从数据推出</td></tr>
+              </tbody>
+            </table>
+
+            <h3>同一命题下，作品之间差在哪里</h3>
+            <p>
+              以创意设计赛 B 组“城市公共座椅”为例，42 件作品里有超过一半停留在“造型 + 效果图”的层面，真正进入复评的 11 件都补齐了三样东西：一是尺寸与安装节点，说明这个座椅怎么固定在人行道上；二是使用场景，说明它服务的是等公交的人、还是午后休息的老人；三是维护方式，说明材料在户外两三年后会不会变形。
+            </p>
+            <ul>
+              <li><strong>《折叠长凳》</strong>强在占用空间小，收拢后厚度 18 厘米，直接回应了老街区人行道狭窄的问题。</li>
+              <li><strong>《阶梯座台》</strong>强在与现有台阶结合，不需要额外打孔，但材料说明偏简略。</li>
+              <li><strong>《双面靠椅》</strong>强在可双向使用，弱在结构图只画了正面，评审无法判断背面受力。</li>
+            </ul>
+            <p>
+              这三件的差别不是“谁更好看”，而是“谁的方案更接近能落地”。人工评审赛区里，完成度往往比创意本身更能拉开分数——创意大家都有，把创意写到能施工、能拍摄、能运行的程度，才是分水岭。
+            </p>
+
+            <h3>算法类赛区的排名为什么经常变动</h3>
+            <p>
+              算法挑战赛第 6 轮的题目是稀疏矩阵压缩，评分脚本对压缩率和解码耗时同时计分。前八名分差只有 0.7 分，原因是大部分选手都用了 CSR 或 COO 这类标准结构，差异主要出现在分块粒度上：块太大压缩率上不去，块太小索引开销反而增加。第 3 名把粒度定在 64×64，第 1 名用的是自适应分块，在不同稀疏度下切换块大小。
+            </p>
+            <p>
+              这类赛区的排名在截止前几乎每小时都会变，因为选手会反复提交微调版本。看这类榜单时，与其盯名次，不如看提交次数和分数曲线——一个用 3 次提交就达到 96 分的方案，通常比用 40 次提交磨到 96.5 分的方案更值得参考。
+            </p>
+
+            <h3>限时命题赛的取舍逻辑</h3>
+            <p>
+              影像创作赛本期改为 90 秒限时命题，写作竞技赛是三天提交窗口，插画速写赛只有 4 小时。时间越短，越考验“先定结构再填内容”的能力。90 秒短片如果在前 15 秒还没建立场景关系，后面基本救不回来；4 小时速写如果前 40 分钟还在纠结构图，完成度一定受影响。
+            </p>
+            <p>
+              一个实用的判断方法是看往期高分作品的<strong>信息密度曲线</strong>：开头 10% 交代场景，中间 70% 推进，最后 20% 收束。写作、影像、播客三类赛区都适用这个比例，偏离太多的作品，即使单段写得漂亮，整体评分通常也不会高。
+            </p>
+          </div>
+        </section>
+
+        <!-- ⑥ 体验指南 -->
+        <section class="module" id="guide" aria-labelledby="h-guide">
+          <div class="module-head">
+            <h2 id="h-guide">从哪看起：按目的选择赛区与作品</h2>
+            <span class="sub">消费路径</span>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <span class="num">1</span>
+              <h3>想快速看到结果，先看算法挑战赛与知识问答赛</h3>
+              <p>这两类赛区当天出分，榜单每小时刷新。适合先建立“今天有哪些人在比、比到什么程度”的整体印象，再决定要不要深入看人工评审赛区。</p>
+            </div>
+            <div class="step">
+              <span class="num">2</span>
+              <h3>想看完整作品，从创意设计赛的复评名单进</h3>
+              <p>进入复评的作品通常附带结构图、场景说明和维护方案，信息量远高于初评作品。先看 11 件复评作品，比翻 42 件初评作品效率高得多。</p>
+            </div>
+            <div class="step">
+              <span class="num">3</span>
+              <h3>判断一件作品值不值得细读，看三个信号</h3>
+              <p>一看是否公布分维度得分，二看是否附有过程材料（草图、题解、分镜），三看评审点评是否具体到某一处细节。三条都满足的作品，通常值得花十分钟以上。</p>
+            </div>
+            <div class="step">
+              <span class="num">4</span>
+              <h3>比较同类作品，用同一维度横向对照</h3>
+              <p>不要拿 A 作品的创意去比 B 作品的完成度。选定一个维度——比如“命题契合”或“结构可行”——把三到五件作品放在一起看，差异会立刻显现。</p>
+            </div>
+            <div class="step">
+              <span class="num">5</span>
+              <h3>想自己参与，先读赛区的提交规范</h3>
+              <p>每个赛区对格式、尺寸、时长的要求不同。影像创作赛要求 90 秒内且必须包含同期声，写作竞技赛限制 5000 字以内，产品原型赛要求附交互说明。规范读错，作品再好也会被判无效。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ⑦ FAQ -->
+        <section class="module" id="faq" aria-labelledby="h-faq">
+          <div class="module-head">
+            <h2 id="h-faq">关于赛程与评审的常见问题</h2>
+            <span class="sub">6 个问答</span>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>算法挑战赛一般多久出一次榜单？</summary>
+              <div class="ans"><p>按轮次推进，通常一天一轮，当天 21:00 截止提交，22:00 前后刷新最终榜单。截止前的排名会随提交实时变化，看榜时注意区分“实时排名”和“最终排名”。</p></div>
+            </details>
+            <details>
+              <summary>创意设计赛和产品原型赛有什么区别？</summary>
+              <div class="ans"><p>创意设计赛偏视觉与结构提案，评审看命题契合、结构可行和表达完整，交付物通常是效果图加节点图；产品原型赛偏功能与交互，评审看流程是否走得通、边界情况是否处理，交付物是可点击原型或交互稿。两者都可能涉及界面，但前者重“做出来长什么样”，后者重“用起来顺不顺”。</p></div>
+            </details>
+            <details>
+              <summary>第一次看这类大赛，从哪个赛区开始比较好？</summary>
+              <div class="ans"><p>建议从知识问答赛或算法挑战赛开始，这两类结果直观、当天出分，容易建立对赛制的基本理解。看完再转到创意设计赛的复评名单，能更快看懂人工评审在评什么。</p></div>
+            </details>
+            <details>
+              <summary>人工评审赛区的分数为什么同件作品差很多？</summary>
+              <div class="ans"><p>因为评审团通常由三到五人组成，各自对“完成度”和“创意”的权重理解不同。同一件作品在不同评审手里相差 5 到 8 分属于常见范围。看分维度得分比看总分更能判断真实水平。</p></div>
+            </details>
+            <details>
+              <summary>写作竞技赛的字数限制是多少？</summary>
+              <div class="ans"><p>第 14 期“夜班”主题要求 5000 字以内，实际提交作品多在 3000 字上下。超字数会被扣分或直接判无效，提交前务必核对。评审更看重结构完整，而不是字数堆满。</p></div>
+            </details>
+            <details>
+              <summary>影像创作赛的“声音设计”具体评什么？</summary>
+              <div class="ans"><p>本期新增的声音设计占 15%，评的是声音是否参与叙事——比如环境音是否交代空间、对白间隙的静默是否有含义、音乐是否只在情绪转折处出现。只把声音当背景铺底的作品，这一项通常拿不到高分。</p></div>
+            </details>
+          </div>
+        </section>
+
+        <!-- ⑧ 用户评论 -->
+        <section class="module" id="comments" aria-labelledby="h-comments">
+          <div class="module-head">
+            <h2 id="h-comments">参赛者与观众怎么说</h2>
+            <span class="sub">14 条</span>
+          </div>
+          <div class="comment-grid">
+            <div class="comment"><div class="comment-head"><span class="avatar">林</span><span class="comment-name">林间有风</span><span class="comment-time">今天 10:52</span></div><p class="comment-body">《折叠长凳》那个 18 厘米厚度是真的解决了问题，我们街区人行道就一米二宽，普通长凳一放就过不去人。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">陈</span><span class="comment-name">陈默数构</span><span class="comment-time">今天 10:20</span></div><p class="comment-body">算法第 6 轮自适应分块那个思路确实巧，但我觉得 64×64 固定块的方案更稳，换数据集也不容易崩。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">苏</span><span class="comment-name">苏打水半糖</span><span class="comment-time">今天 09:58</span></div><p class="comment-body">《夜班》读到第七段才反应过来每段是一个顾客，这个结构挺妙的，就是前两段有点慢。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">周</span><span class="comment-name">周更不鸽</span><span class="comment-time">今天 09:31</span></div><p class="comment-body">影像赛这次要求同期声，好多作品还是后期配的，一听就出戏。评审加声音设计这一项加得对。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">何</span><span class="comment-name">何处不相逢</span><span class="comment-time">昨天 22:14</span></div><p class="comment-body">知识问答那个“骑楼”和“券廊”我也错了，两个概念确实容易混，题库要是能出解析就好了。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">吴</span><span class="comment-name">吴钩霜雪</span><span class="comment-time">昨天 21:40</span></div><p class="comment-body">数据分析那份报告的可视化做得一般，但调度建议是真的能落地，比花里胡哨的热力图有用。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">郑</span><span class="comment-name">郑在画图</span><span class="comment-time">昨天 20:05</span></div><p class="comment-body">插画速写 4 小时太赶了，我光起稿就花了一个半小时，最后上色完全是糊的。下次得先定色稿。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">许</span><span class="comment-name">许愿不加班</span><span class="comment-time">昨天 18:47</span></div><p class="comment-body">创意设计赛初评那 31 件没进的，大部分确实只画了效果图，连尺寸都没标，评审没法判断。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">冯</span><span class="comment-name">冯虚御风</span><span class="comment-time">11-06 23:12</span></div><p class="comment-body">写作赛三天窗口挺合理的，一天写完再改两天，比那种 24 小时极限命题舒服多了。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">韩</span><span class="comment-name">韩江夜雨</span><span class="comment-time">11-06 19:30</span></div><p class="comment-body">播客赛盲听打分这个机制好，不知道作者是谁，纯听内容，比看简介投票公平。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">曹</span><span class="comment-name">曹衣出水</span><span class="comment-time">11-05 21:08</span></div><p class="comment-body">《末班电梯》那个反光面板拍正脸的巧思挺有意思，但第三次开门之后节奏有点拖。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">沈</span><span class="comment-name">沈舟侧畔</span><span class="comment-time">11-05 15:22</span></div><p class="comment-body">产品原型赛这次限定无障碍工具，方向挺好，就是报名时间只给一周，有点紧。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">邓</span><span class="comment-name">邓林逐日</span><span class="comment-time">11-04 12:40</span></div><p class="comment-body">翻译接力赛那个 48 小时窗口太短了，中译日一段 800 字，认真查词根本不够。</p></div>
+            <div class="comment"><div class="comment-head"><span class="avatar">袁</span><span class="comment-name">袁安卧雪</span><span class="comment-time">11-03 20:16</span></div><p class="comment-body">整体看下来，自动评测类赛区适合天天刷，人工评审类适合一周看一次，节奏完全不一样。</p></div>
+          </div>
+        </section>
+
+        <!-- ⑨ 相关资讯 -->
+        <section class="module" id="news" aria-labelledby="h-news">
+          <div class="module-head">
+            <h2 id="h-news">赛事资讯</h2>
+            <span class="sub">近一周</span>
+          </div>
+          <div class="news-grid">
+            <article class="news-card">
+              <img src="https://picsum.photos/seed/daily-contest-news01/600/400" width="600" height="400" loading="lazy" alt="创意设计赛复评答辩安排通知配图">
+              <div class="news-body">
+                <div class="news-date">2026-11-08</div>
+                <h3 class="news-title">创意设计赛 B 组终评答辩定于本周三晚</h3>
+                <p class="news-sum">11 件入围作品需在 12 分钟内完成方案陈述，答辩顺序按提交时间排列。</p>
+              </div>
+            </article>
+            <article class="news-card">
+              <img src="https://picsum.photos/seed/daily-contest-news02/600/400" width="600" height="400" loading="lazy" alt="算法挑战赛第 6 轮题目说明配图">
+              <div class="news-body">
+                <div class="news-date">2026-11-08</div>
+                <h3 class="news-title">算法挑战赛第 6 轮题目改为稀疏矩阵压缩</h3>
+                <p class="news-sum">评分脚本对压缩率与解码耗时同时计分，测试用例新增两组极端稀疏数据。</p>
+              </div>
+            </article>
+            <article class="news-card">
+              <img src="https://picsum.photos/seed/daily-contest-news03/600/400" width="600" height="400" loading="lazy" alt="影像创作赛声音设计评审细则配图">
+              <div class="news-body">
+                <div class="news-date">2026-11-07</div>
+                <h3 class="news-title">影像创作赛新增“声音设计”评分项</h3>
+                <p class="news-sum">该项占总分 15%，评审关注环境音、静默处理与音乐介入时机，细则已同步更新。</p>
+              </div>
+            </article>
+            <article class="news-card">
+              <img src="https://picsum.photos/seed/daily-contest-news04/600/400" width="600" height="400" loading="lazy" alt="写作竞技赛夜班主题收稿情况配图">
+              <div class="news-body">
+                <div class="news-date">2026-11-06</div>
+                <h3 class="news-title">写作竞技赛“夜班”主题已收稿 28 篇</h3>
+                <p class="news-sum">平均字数 3120 字，最长一篇 4980 字，提交窗口将于 11 月 9 日 23:59 关闭。</p>
+              </div>
+            </article>
+            <article class="news-card">
+              <img src="https://picsum.photos/seed/daily-contest-news05/600/400" width="600" height="400" loading="lazy" alt="产品原型赛无障碍方向报名说明配图">
+              <div class="news-body">
+                <div class="news-date">2026-11-04</div>
+                <h3 class="news-title">产品原型赛新一轮限定“无障碍工具”方向</h3>
+                <p class="news-sum">报名截止 11 月 12 日，提交物需包含可点击原型与交互说明文档。</p>
+              </div>
+            </article>
+            <article class="news-card">
+              <img src="https://picsum.photos/seed/daily-contest-news06/600/400" width="600" height="400" loading="lazy" alt="插画速写赛雨天便利店招牌命题配图">
+              <div class="news-body">
+                <div class="news-date">2026-11-03</div>
+                <h3 class="news-title">插画速写赛本期命题：雨天的便利店招牌</h3>
+                <p class="news-sum">限时 4 小时，尺寸不限，评审按构图、色彩与命题契合三项打分。</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ⑩ 相关推荐 -->
+        <section class="module" id="related" aria-labelledby="h-related">
+          <div class="module-head">
+            <h2 id="h-related">延伸方向与往期专题</h2>
+            <span class="sub">标签索引</span>
+          </div>
+          <div class="rel-tags">
+            <a href="/#analysis">限时命题的取舍方法<span>方法</span></a>
+            <a href="/#analysis">自动评测与人工评审对比<span>赛制</span></a>
+            <a href="/#featured">公共设施类设计方案<span>创意设计</span></a>
+            <a href="/#featured">稀疏矩阵压缩题解合集<span>算法</span></a>
+            <a href="/#featured">单场景短片拍摄技巧<span>影像</span></a>
+            <a href="/#guide">分维度得分怎么看<span>评审</span></a>
+            <a href="/#updates">第 5 轮算法赛果复盘<span>往期</span></a>
+            <a href="/#faq">赛区提交规范速查<span>规则</span></a>
+          </div>
+        </section>
+
+        <!-- ⑪ 补充板块：今日榜单 -->
+        <section class="module" id="rank" aria-labelledby="h-rank">
+          <div class="module-head">
+            <h2 id="h-rank">今日作品榜（综合评审分）</h2>
+            <span class="sub">2026-11-08 10:40</span>
+          </div>
+          <div class="rank-panel">
+            <div class="rank-row"><span class="rank-no">1</span><span class="rank-name">稀疏矩阵压缩：自适应分块方案</span><span class="rank-tag">算法挑战赛</span><span class="rank-score">97.1</span></div>
+            <div class="rank-row"><span class="rank-no">2</span><span class="rank-name">稀疏矩阵压缩：CSR 分块重排解法</span><span class="rank-tag">算法挑战赛</span><span class="rank-score">96.2</span></div>
+            <div class="rank-row"><span class="rank-no">3</span><span class="rank-name">《折叠长凳》可收纳街角休息单元</span><span class="rank-tag">创意设计赛</span><span class="rank-score">87.4</span></div>
+            <div class="rank-row"><span class="rank-no">4</span><span class="rank-name">《夜班》便利店凌晨的十一个顾客</span><span class="rank-tag">写作竞技赛</span><span class="rank-score">84.6</span></div>
+            <div class="rank-row"><span class="rank-no">5</span><span class="rank-name">《末班电梯》单场景三镜到底</span><span class="rank-tag">影像创作赛</span><span class="rank-score">82.9</span></div>
+            <div class="rank-row"><span class="rank-no">6</span><span class="rank-name">共享单车潮汐数据站点再平衡</span><span class="rank-tag">数据分析赛</span><span class="rank-score">80.1</span></div>
+            <div class="rank-row"><span class="rank-no">7</span><span class="rank-name">《阶梯座台》与步道结合的休息面</span><span class="rank-tag">创意设计赛</span><span class="rank-score">79.5</span></div>
+            <div class="rank-row"><span class="rank-no">8</span><span class="rank-name">城市史与建筑术语限时答题记录</span><span class="rank-tag">知识问答赛</span><span class="rank-score">78.8</span></div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 右侧辅助栏 -->
+      <aside class="side-col" aria-label="辅助信息">
+        <div class="side-panel">
+          <h2>今日截止<span>11-08</span></h2>
+          <ul class="side-list">
+            <li><a href="/#updates">算法挑战赛第 6 轮提交<span class="meta">21:00 截止 · 当前 36 件</span></a></li>
+            <li><a href="/#updates">知识问答赛城市史专场<span class="meta">22:00 关闭 · 19 场次</span></a></li>
+            <li><a href="/#updates">插画速写赛雨天招牌命题<span class="meta">20:00 截稿 · 9 件在评</span></a></li>
+          </ul>
+        </div>
+        <div class="side-panel">
+          <h2>评审规则速查<span>要点</span></h2>
+          <div class="rule-mini">
+            <p><b>创意设计赛：</b>命题契合 40、结构可行 35、表达完整 25。</p>
+            <p><b>影像创作赛：</b>镜头组织 40、声音设计 15、命题遵守 45。</p>
+            <p><b>写作竞技赛：</b>结构 35、语言 35、主题完成度 30。</p>
+          </div>
+        </div>
+        <div class="side-panel">
+          <h2>热门赛区<span>在评</span></h2>
+          <ul class="side-list">
+            <li><a href="/#category">创意设计赛<span class="meta">42 件在评 · 复评 11 件</span></a></li>
+            <li><a href="/#category">算法挑战赛<span class="meta">36 件在评 · 前八差 0.7 分</span></a></li>
+            <li><a href="/#category">写作竞技赛<span class="meta">28 件在评 · 11-09 截止</span></a></li>
+            <li><a href="/#category">影像创作赛<span class="meta">24 件在评 · 新增声音项</span></a></li>
+            <li><a href="/#category">知识问答赛<span class="meta">19 场次 · 今日可参与</span></a></li>
+          </ul>
+        </div>
+        <div class="side-panel side-cta">
+          <h2>本周赛程表</h2>
+          <p>周三晚创意设计赛终评答辩，周四写作竞技赛结果公布，周五音频播客赛盲听结果揭晓。</p>
+          <a href="/#updates">查看完整赛程</a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<!-- 页尾 -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#22365c"/>
+            <path d="M15 42h7v9h-7z" fill="#f2b73d"/>
+            <path d="M27 30h7v21h-7z" fill="#f2b73d" opacity=".82"/>
+            <path d="M39 18h7v33h-7z" fill="#f2b73d" opacity=".62"/>
+          </svg>
+          <span>每日大赛最新在线</span>
+        </div>
+        <p class="footer-intro">聚合创意设计、算法挑战、写作竞技、影像创作等赛区的开赛日程、参赛作品与评审结果，提供赛制对照与参赛经验参考。</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h3>赛区</h3>
+          <ul>
+            <li><a href="/#category">创意设计赛</a></li>
+            <li><a href="/#category">算法挑战赛</a></li>
+            <li><a href="/#category">写作竞技赛</a></li>
+            <li><a href="/#category">影像创作赛</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>内容</h3>
+          <ul>
+            <li><a href="/#featured">今日精选作品</a></li>
+            <li><a href="/#updates">赛程与结果动态</a></li>
+            <li><a href="/#analysis">赛制解析</a></li>
+            <li><a href="/#rank">今日榜单</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>参考</h3>
+          <ul>
+            <li><a href="/#guide">观看路径</a></li>
+            <li><a href="/#faq">常见问题</a></li>
+            <li><a href="/#comments">用户评论</a></li>
+            <li><a href="/#news">赛事资讯</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>每日大赛最新在线 · 赛区日程与作品聚合</span>
+      <span class="disclaimer">部分内容为示例数据，仅用于展示页面结构。</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var toggle = document.getElementById('menuToggle');
+  var nav = document.getElementById('mainNav');
+  if(toggle && nav){
+    toggle.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function(e){
+      if(e.target.tagName === 'A' && window.innerWidth <= 900){
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+
+  var rankBtn = document.getElementById('jumpRank');
+  if(rankBtn){
+    rankBtn.addEventListener('click', function(){
+      var el = document.getElementById('rank');
+      if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  }
+
+  var input = document.getElementById('siteSearch');
+  var feedback = document.getElementById('searchFeedback');
+  if(input && feedback){
+    var timer = null;
+    var doSearch = function(){
+      var q = input.value.trim().toLowerCase();
+      if(!q){
+        feedback.classList.remove('show');
+        feedback.textContent = '';
+        return;
+      }
+      var pool = document.querySelectorAll('.card-title, .up-title, .cat-item .cat-name, .rank-name, .news-title, .faq-list summary');
+      var hits = [];
+      for(var i=0;i<pool.length;i++){
+        var txt = pool[i].textContent.toLowerCase();
+        if(txt.indexOf(q) !== -1){
+          hits.push(pool[i].textContent.trim());
+        }
+      }
+      feedback.classList.add('show');
+      if(hits.length === 0){
+        feedback.textContent = '未找到与“' + input.value.trim() + '”相关的内容，可尝试赛区名或作品关键词。';
+      }else{
+        var list = hits.slice(0,4).join('、');
+        feedback.textContent = '找到 ' + hits.length + ' 条相关内容：' + list + (hits.length > 4 ? ' 等' : '');
+      }
+    };
+    input.addEventListener('input', function(){
+      clearTimeout(timer);
+      timer = setTimeout(doSearch, 220);
+    });
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){ input.value=''; feedback.classList.remove('show'); }
+    });
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.search-box')){ feedback.classList.remove('show'); }
+    });
+  }
+})();
+</script>
+</body>
+                  </html>
