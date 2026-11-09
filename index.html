@@ -1,0 +1,2644 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>海角今日回家地址 - 社区入口与地址更新导航</title>
+  <meta name="description" content="海角今日回家地址页面汇总社区可用入口、最新地址发布节点、镜像站状态与移动端访问说明，适合需要稳定导航的社区用户查阅。">
+  <meta name="keywords" content="海角社区入口, 地址发布页, 镜像站状态, 回家导航, 社区访问节点">
+  <style>
+    /* ---------- 全局重置与设计系统 ---------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* 色彩系统 */
+      --color-bg: #f7f8fa;
+      --color-surface: #ffffff;
+      --color-surface-alt: #f2f4f8;
+      --color-border: #e2e6ed;
+      --color-border-light: #eef1f6;
+
+      --color-primary: #1a3b5c;
+      --color-primary-light: #2b5a7a;
+      --color-primary-soft: #e8eef4;
+
+      --color-accent: #e07a3c;
+      --color-accent-soft: #fcf0e8;
+      --color-accent-dark: #b85e28;
+
+      --color-text: #1e293b;
+      --color-text-secondary: #4b5a6b;
+      --color-text-muted: #7b8a9b;
+
+      --color-success: #2e7d5e;
+      --color-success-soft: #e6f3ee;
+      --color-warning: #b8860b;
+      --color-warning-soft: #fef9e7;
+
+      /* 字体 */
+      --font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.8125rem;
+      --font-size-base: 0.9375rem;
+      --font-size-md: 1rem;
+      --font-size-lg: 1.125rem;
+      --font-size-xl: 1.25rem;
+      --font-size-2xl: 1.5rem;
+      --font-size-3xl: 1.875rem;
+
+      /* 间距 */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+
+      /* 圆角与阴影 */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --shadow-sm: 0 1px 3px rgba(26, 59, 92, 0.06);
+      --shadow-md: 0 4px 12px rgba(26, 59, 92, 0.08);
+      --shadow-lg: 0 8px 24px rgba(26, 59, 92, 0.10);
+
+      /* 吸顶高度 */
+      --notice-height: 40px;
+      --header-height: 64px;
+      --sticky-offset: calc(var(--notice-height) + var(--header-height));
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--sticky-offset);
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-size-base);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--color-primary-light);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    /* ---------- 吸顶公告条 ---------- */
+    .notice-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--notice-height);
+      background: var(--color-primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 var(--space-4);
+      font-size: var(--font-size-sm);
+      gap: var(--space-2);
+    }
+
+    .notice-bar strong {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+
+    .notice-bar .notice-tag {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius-sm);
+      padding: 1px 8px;
+      font-size: var(--font-size-xs);
+      white-space: nowrap;
+    }
+
+    /* ---------- 吸顶页头 ---------- */
+    .site-header {
+      position: fixed;
+      top: var(--notice-height);
+      left: 0;
+      right: 0;
+      z-index: 99;
+      height: var(--header-height);
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 var(--space-5);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-shrink: 0;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      flex: 1;
+    }
+
+    .header-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .header-nav a {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      font-weight: 500;
+    }
+
+    .header-nav a:hover {
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-shrink: 0;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--color-surface-alt);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 0 var(--space-3);
+      height: 34px;
+      width: 200px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--color-primary-light);
+      box-shadow: 0 0 0 3px rgba(43, 90, 122, 0.10);
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: var(--font-size-sm);
+      color: var(--color-text);
+      width: 100%;
+      font-family: inherit;
+      padding: 0;
+    }
+
+    .search-box input::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .search-box .search-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--color-text-muted);
+    }
+
+    .search-feedback {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: var(--space-1);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      box-shadow: var(--shadow-md);
+      display: none;
+      z-index: 10;
+    }
+
+    .search-feedback.visible {
+      display: block;
+    }
+
+    /* ---------- 页面主体偏移 ---------- */
+    .page-offset {
+      padding-top: var(--sticky-offset);
+    }
+
+    /* ---------- 首屏 ---------- */
+    .hero {
+      background: linear-gradient(135deg, var(--color-primary) 0%, #1f4a6e 55%, #2b5a7a 100%);
+      color: #fff;
+      padding: var(--space-10) 0 var(--space-8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 var(--space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      border-radius: 100px;
+      padding: var(--space-1) var(--space-3);
+      font-size: var(--font-size-xs);
+      color: #fde68a;
+      margin-bottom: var(--space-4);
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      font-size: var(--font-size-3xl);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: 0.01em;
+      margin-bottom: var(--space-4);
+      color: #fff;
+    }
+
+    .hero-desc {
+      font-size: var(--font-size-md);
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 640px;
+      margin-bottom: var(--space-6);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: var(--font-size-sm);
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-dark);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-weight: 500;
+      font-size: var(--font-size-sm);
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.20);
+      border-color: rgba(255, 255, 255, 0.40);
+      text-decoration: none;
+    }
+
+    .hero-visual {
+      flex-shrink: 0;
+      width: 280px;
+      display: none;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* ---------- 三栏门户布局 ---------- */
+    .portal-layout {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-5) var(--space-10);
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: var(--space-6);
+      align-items: start;
+    }
+
+    /* ---------- 左频道索引 ---------- */
+    .channel-sidebar {
+      position: sticky;
+      top: calc(var(--sticky-offset) + var(--space-4));
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .channel-sidebar h2 {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: var(--space-4) var(--space-4) var(--space-2);
+    }
+
+    .channel-list {
+      list-style: none;
+      padding: var(--space-1) var(--space-2) var(--space-3);
+    }
+
+    .channel-list li a {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      font-weight: 500;
+      transition: background 0.12s, color 0.12s;
+    }
+
+    .channel-list li a:hover,
+    .channel-list li a.active {
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .channel-list .ch-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      opacity: 0.65;
+    }
+
+    .channel-list li a.active .ch-icon {
+      opacity: 1;
+    }
+
+    /* ---------- 主内容区 ---------- */
+    .main-content {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    /* 板块通用 */
+    .section-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: var(--space-4) var(--space-5);
+      border-bottom: 1px solid var(--color-border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .section-header h2 {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .section-header h2 .h2-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--color-accent);
+      flex-shrink: 0;
+    }
+
+    .section-more {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    .section-body {
+      padding: var(--space-5);
+    }
+
+    /* 概览段落 */
+    .overview-text p {
+      margin-bottom: var(--space-3);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: 1.75;
+    }
+
+    .overview-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .entry-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: box-shadow 0.15s, transform 0.15s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .entry-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .entry-card-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: var(--color-surface-alt);
+    }
+
+    .entry-card-body {
+      padding: var(--space-3) var(--space-4) var(--space-4);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: var(--space-2);
+    }
+
+    .entry-card-title {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .entry-card-desc {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-1);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 1px 7px;
+      border-radius: var(--radius-sm);
+      background: var(--color-primary-soft);
+      color: var(--color-primary-light);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .tag.accent {
+      background: var(--color-accent-soft);
+      color: var(--color-accent-dark);
+    }
+
+    .tag.success {
+      background: var(--color-success-soft);
+      color: var(--color-success);
+    }
+
+    .entry-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      margin-top: auto;
+      padding-top: var(--space-1);
+    }
+
+    .entry-meta .hot {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    /* 紧凑列表 */
+    .compact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .compact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .compact-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .compact-list li:first-child {
+      padding-top: 0;
+    }
+
+    .list-index {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-sm);
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .list-index.top {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .list-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .list-title {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 2px;
+    }
+
+    .list-desc {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    .list-time {
+      flex-shrink: 0;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    /* 分类入口网格 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+    }
+
+    .category-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-2);
+      background: var(--color-surface-alt);
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      transition: border-color 0.15s, background 0.15s;
+      text-align: center;
+    }
+
+    .category-item:hover {
+      border-color: var(--color-border);
+      background: var(--color-surface);
+      text-decoration: none;
+    }
+
+    .category-item .cat-icon {
+      width: 32px;
+      height: 32px;
+      color: var(--color-primary-light);
+    }
+
+    .category-item .cat-name {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .category-item .cat-count {
+      font-size: 11px;
+      color: var(--color-text-muted);
+    }
+
+    /* 深度解析 */
+    .deep-dive h3 {
+      font-size: var(--font-size-md);
+      font-weight: 700;
+      color: var(--color-primary);
+      margin: var(--space-5) 0 var(--space-2);
+    }
+
+    .deep-dive h3:first-child {
+      margin-top: 0;
+    }
+
+    .deep-dive p {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+      line-height: 1.75;
+      margin-bottom: var(--space-3);
+    }
+
+    .deep-dive ul {
+      margin: var(--space-2) 0 var(--space-4) var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .deep-dive ul li {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    .deep-dive ul li strong {
+      color: var(--color-text);
+    }
+
+    /* 体验指南步骤 */
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      counter-reset: step;
+    }
+
+    .guide-step {
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+      counter-increment: step;
+    }
+
+    .guide-step::before {
+      content: counter(step);
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .guide-step-content h3 {
+      font-size: var(--font-size-base);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-1);
+    }
+
+    .guide-step-content p {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      line-height: 1.65;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .faq-item {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.15s;
+    }
+
+    .faq-item[open] {
+      border-color: var(--color-primary-light);
+    }
+
+    .faq-item summary {
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      background: var(--color-surface);
+      transition: background 0.12s;
+      user-select: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary:hover {
+      background: var(--color-surface-alt);
+    }
+
+    .faq-item summary::after {
+      content: '+';
+      font-size: var(--font-size-lg);
+      color: var(--color-text-muted);
+      font-weight: 400;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .faq-item[open] summary::after {
+      content: '−';
+    }
+
+    .faq-answer {
+      padding: 0 var(--space-4) var(--space-4);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* 用户评论 */
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .comment-item {
+      display: flex;
+      gap: var(--space-3);
+      padding: var(--space-3);
+      background: var(--color-surface-alt);
+      border-radius: var(--radius-md);
+    }
+
+    .comment-avatar {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comment-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .comment-head {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: 2px;
+      flex-wrap: wrap;
+    }
+
+    .comment-nickname {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .comment-time {
+      font-size: 11px;
+      color: var(--color-text-muted);
+    }
+
+    .comment-text {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* 相关资讯 */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .news-item {
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+    }
+
+    .news-item-img {
+      flex-shrink: 0;
+      width: 120px;
+      height: 80px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      background: var(--color-surface-alt);
+    }
+
+    .news-item-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .news-item-title {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 2px;
+      line-height: 1.4;
+    }
+
+    .news-item-title a {
+      color: inherit;
+    }
+
+    .news-item-title a:hover {
+      color: var(--color-primary-light);
+    }
+
+    .news-item-summary {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .news-item-date {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      margin-top: var(--space-1);
+    }
+
+    /* 相关推荐标签 */
+    .related-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .related-tags a {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: var(--space-2) var(--space-3);
+      background: var(--color-surface-alt);
+      border: 1px solid var(--color-border-light);
+      border-radius: 100px;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      font-weight: 500;
+      transition: background 0.12s, border-color 0.12s, color 0.12s;
+      white-space: nowrap;
+    }
+
+    .related-tags a:hover {
+      background: var(--color-primary-soft);
+      border-color: var(--color-primary-light);
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    /* 榜单表格 */
+    .rank-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--font-size-sm);
+    }
+
+    .rank-table th {
+      text-align: left;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      font-weight: 600;
+      padding: var(--space-2) var(--space-2);
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+
+    .rank-table td {
+      padding: var(--space-2) var(--space-2);
+      border-bottom: 1px solid var(--color-border-light);
+      color: var(--color-text-secondary);
+      vertical-align: middle;
+    }
+
+    .rank-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .rank-table .rank-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: var(--radius-sm);
+      background: var(--color-surface-alt);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-text-muted);
+    }
+
+    .rank-table .rank-num.top3 {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .rank-table .rank-name {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* 右辅助栏 */
+    .aux-sidebar {
+      position: sticky;
+      top: calc(var(--sticky-offset) + var(--space-4));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .aux-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .aux-card-header {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--color-border-light);
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .aux-card-header .aux-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--color-accent);
+    }
+
+    .aux-card-body {
+      padding: var(--space-3) var(--space-4) var(--space-4);
+    }
+
+    .status-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-xs);
+      padding: var(--space-1) 0;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .status-dot.green {
+      background: var(--color-success);
+    }
+
+    .status-dot.yellow {
+      background: var(--color-warning);
+    }
+
+    .status-dot.gray {
+      background: var(--color-text-muted);
+    }
+
+    .status-name {
+      flex: 1;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .status-time {
+      color: var(--color-text-muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .update-feed {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .update-feed li {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .update-feed li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .update-feed .feed-title {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .update-feed .feed-time {
+      font-size: 11px;
+      color: var(--color-text-muted);
+    }
+
+    /* ---------- 页尾 ---------- */
+    .site-footer {
+      background: var(--color-primary);
+      color: rgba(255, 255, 255, 0.80);
+      padding: var(--space-10) 0 var(--space-6);
+      margin-top: var(--space-8);
+    }
+
+    .footer-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 var(--space-5);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: var(--space-8);
+      padding-bottom: var(--space-8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .footer-brand .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+
+    .footer-brand .footer-logo svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .footer-brand .footer-logo span {
+      font-size: var(--font-size-md);
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .footer-brand p {
+      font-size: var(--font-size-xs);
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.60);
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: var(--space-3);
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .footer-col ul li a {
+      font-size: var(--font-size-xs);
+      color: rgba(255, 255, 255, 0.60);
+      transition: color 0.12s;
+    }
+
+    .footer-col ul li a:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      padding-top: var(--space-5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* ---------- 响应式 ---------- */
+    @media (min-width: 1025px) {
+      .hero-visual {
+        display: block;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .portal-layout {
+        grid-template-columns: 160px 1fr 230px;
+        gap: var(--space-4);
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .portal-layout {
+        grid-template-columns: 1fr 260px;
+        gap: var(--space-5);
+      }
+
+      .channel-sidebar {
+        display: none;
+      }
+
+      .header-nav {
+        gap: 0;
+      }
+
+      .header-nav a {
+        font-size: var(--font-size-xs);
+        padding: var(--space-2) var(--space-2);
+      }
+
+      .search-box {
+        width: 150px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-6);
+      }
+    }
+
+    @media (max-width: 820px) {
+      .portal-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .aux-sidebar {
+        position: static;
+      }
+
+      .hero h1 {
+        font-size: var(--font-size-2xl);
+      }
+
+      .hero {
+        padding: var(--space-8) 0 var(--space-6);
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .news-item {
+        flex-direction: column;
+      }
+
+      .news-item-img {
+        width: 100%;
+        height: 140px;
+      }
+
+      .search-box {
+        width: 120px;
+      }
+
+      .header-inner {
+        gap: var(--space-3);
+      }
+    }
+
+    @media (max-width: 740px) {
+      :root {
+        --notice-height: 36px;
+        --header-height: 56px;
+      }
+
+      .header-inner {
+        padding: 0 var(--space-3);
+        gap: var(--space-2);
+      }
+
+      .brand-name {
+        font-size: var(--font-size-base);
+      }
+
+      .brand-logo {
+        width: 30px;
+        height: 30px;
+      }
+
+      .header-nav {
+        display: none;
+      }
+
+      .header-actions {
+        margin-left: auto;
+      }
+
+      .search-box {
+        width: 130px;
+        height: 30px;
+      }
+
+      .hero {
+        padding: var(--space-6) 0 var(--space-5);
+      }
+
+      .hero h1 {
+        font-size: var(--font-size-xl);
+      }
+
+      .hero-desc {
+        font-size: var(--font-size-sm);
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .btn-primary,
+      .hero-actions .btn-secondary {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .portal-layout {
+        padding: var(--space-4) var(--space-3) var(--space-8);
+        gap: var(--space-4);
+      }
+
+      .section-body {
+        padding: var(--space-4);
+      }
+
+      .section-header {
+        padding: var(--space-3) var(--space-4);
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: var(--space-3);
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-2);
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: var(--space-5);
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .compact-list li {
+        gap: var(--space-2);
+      }
+
+      .list-time {
+        display: none;
+      }
+
+      .comment-item {
+        padding: var(--space-2);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 焦点可见 */
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    /* 减少动态 */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 -->
+  <div class="notice-bar" role="banner" aria-label="站点公告">
+    <span class="notice-tag">导航更新</span>
+    <span><strong>11 月 8 日</strong> 新增 3 个可用入口节点 · 镜像站状态已同步 · 移动端访问说明已更新</span>
+  </div>
+
+  <!-- 吸顶页头 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/#top" class="brand" aria-label="海角今日回家地址首页">
+        <svg class="brand-logo" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="#1a3b5c"/>
+          <path d="M10 24L18 10L26 24H10Z" fill="#e07a3c" opacity="0.9"/>
+          <circle cx="18" cy="20" r="3" fill="#fff"/>
+          <path d="M8 28H28" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+        </svg>
+        <span class="brand-name">海角今日回家地址</span>
+      </a>
+
+      <nav class="header-nav" aria-label="主题导航">
+        <a href="/#channel-entry">入口导航</a>
+        <a href="/#latest-updates">地址动态</a>
+        <a href="/#deep-dive">访问解析</a>
+        <a href="/#faq">常见问题</a>
+        <a href="/#comments">用户讨论</a>
+        <a href="/#news">相关资讯</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="search-box" style="position:relative;">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21L16.65 16.65"/>
+          </svg>
+          <input type="search" id="siteSearch" placeholder="搜索入口/节点…" aria-label="搜索页面内容">
+          <div class="search-feedback" id="searchFeedback" role="status"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 页面偏移包裹 -->
+  <div class="page-offset" id="top">
+
+    <!-- 首屏 -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <span class="hero-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6V12L16 14"/>
+            </svg>
+            2026 年 11 月 8 日 · 状态已同步
+          </span>
+          <h1 id="hero-title">海角今日回家地址</h1>
+          <p class="hero-desc">
+            汇总海角社区当前可用入口节点、镜像站实时状态、移动端访问方式与地址发布规律，为需要稳定导航的社区用户提供可查阅的入口索引与访问参考。
+          </p>
+          <div class="hero-actions">
+            <a href="/#channel-entry" class="btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
+              </svg>
+              查看可用入口
+            </a>
+            <a href="/#latest-updates" class="btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 8V12L15 15"/>
+                <circle cx="12" cy="12" r="10"/>
+              </svg>
+              地址更新记录
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="30" width="240" height="160" rx="12" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <rect x="36" y="46" width="100" height="12" rx="4" fill="rgba(255,255,255,0.18)"/>
+            <rect x="36" y="66" width="160" height="8" rx="3" fill="rgba(255,255,255,0.10)"/>
+            <rect x="36" y="82" width="140" height="8" rx="3" fill="rgba(255,255,255,0.10)"/>
+            <rect x="36" y="104" width="208" height="36" rx="8" fill="rgba(224,122,60,0.20)" stroke="rgba(224,122,60,0.45)" stroke-width="1"/>
+            <circle cx="54" cy="122" r="7" fill="#e07a3c" opacity="0.8"/>
+            <rect x="70" y="116" width="80" height="6" rx="3" fill="rgba(255,255,255,0.30)"/>
+            <rect x="70" y="128" width="50" height="5" rx="2.5" fill="rgba(255,255,255,0.15)"/>
+            <rect x="180" y="116" width="48" height="12" rx="6" fill="rgba(46,125,94,0.5)"/>
+            <rect x="36" y="152" width="96" height="24" rx="6" fill="rgba(255,255,255,0.08)"/>
+            <rect x="148" y="152" width="96" height="24" rx="6" fill="rgba(255,255,255,0.08)"/>
+            <circle cx="52" cy="164" r="5" fill="rgba(255,255,255,0.20)"/>
+            <circle cx="164" cy="164" r="5" fill="rgba(255,255,255,0.20)"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 三栏门户布局 -->
+    <div class="portal-layout">
+
+      <!-- 左频道索引 -->
+      <aside class="channel-sidebar" aria-label="频道索引">
+        <h2>频道索引</h2>
+        <ul class="channel-list">
+          <li>
+            <a href="/#channel-entry" class="active">
+              <svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 9L12 2L21 9V20C21 20.5 20.5 21 20 21H4C3.5 21 3 20.5 3 20V9Z"/>
+                <path d="M9 21V12H15V21"/>
+              </svg>
+              入口导航
+            </a>
+          </li>
+          <li>
+            <a href="/#latest-updates">
+              <svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6V12L16 14"/>
+              </svg>
+              地址动态
+            </a>
+          </li>
+          <li>
+            <a href="/#deep-dive">
+              <svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M2 3H8L12 9L16 3H22L16 12L22 21H16L12 15L8 21H2L8 12L2 3Z"/>
+              </svg>
+              访问解析
+            </a>
+          </li>
+          <li>
+            <a href="/#experience-guide">
+              <svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M9 11L12 14L22 4"/>
+                <path d="M21 12V19C21 20.1 20.1 21 19 21H5C3.9 21 3 20.1 3 19V5C3 3.9 3.9 3 5 3H16"/>
+              </svg>
+              体验指南
+            </a>
+          </li>
+          <li>
+            <a href="/#faq">
+              <svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9C9.325 8.04 10.18 7.33 11.25 7.33C12.49 7.33 13.5 8.31 13.5 9.5C13.5 11 12 11.5 12 13"/>
+                <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+              </svg>
+              常见问题
+            </a>
+          </li>
+          <li>
+            <a href="/#comments">
+              <svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 11.5C21 16.19 16.97 20 12 20C10.6 20 9.27 19.7 8.08 19.16L3 21L4.57 16.47C3.58 15.03 3 13.32 3 11.5C3 6.81 7.03 3 12 3C16.97 3 21 6.81 21 11.5Z"/>
+              </svg>
+              用户讨论
+            </a>
+          </li>
+          <li>
+            <a href="/#news">
+              <svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 22H20C21.1 22 22 21.1 22 20V4C22 2.9 21.1 2 20 2H8L2 8V20C2 21.1 2.9 22 4 22Z"/>
+                <path d="M8 2V8H2"/>
+              </svg>
+              相关资讯
+            </a>
+          </li>
+          <li>
+            <a href="/#rank">
+              <svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              节点榜单
+            </a>
+          </li>
+          <li>
+            <a href="/#related">
+              <svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M10 13C10.4295 13.5741 10.9774 14.0491 11.6066 14.3929C12.2357 14.7367 12.9315 14.9411 13.6467 14.9923C14.3618 15.0435 15.0796 14.9403 15.7513 14.6897C16.4231 14.4392 17.0331 14.047 17.54 13.54L20.54 10.54C21.4508 9.59695 21.9547 8.33394 21.9434 7.02296C21.9321 5.71198 21.4061 4.45791 20.4791 3.53087C19.5521 2.60383 18.298 2.07781 16.987 2.06653C15.676 2.05525 14.4131 2.55918 13.47 3.47L11.75 5.18"/>
+                <path d="M14 11C13.5705 10.4259 13.0226 9.95087 12.3934 9.60709C11.7643 9.26331 11.0685 9.05887 10.3533 9.00767C9.63817 8.95647 8.92039 9.05971 8.24868 9.31026C7.57696 9.56082 6.96693 9.95301 6.46 10.46L3.46 13.46C2.54918 14.403 2.04525 15.666 2.05653 16.977C2.06781 18.288 2.59383 19.5421 3.52087 20.4691C4.44791 21.3962 5.70198 21.9222 7.01296 21.9335C8.32394 21.9448 9.58695 21.4408 10.53 20.53L12.24 18.82"/>
+              </svg>
+              相关推荐
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- 主内容区 -->
+      <main class="main-content">
+
+        <!-- 板块 1：主题领域概览 -->
+        <section class="section-card" id="overview" aria-labelledby="overview-title">
+          <div class="section-header">
+            <h2 id="overview-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M2 3H8L12 9L16 3H22L16 12L22 21H16L12 15L8 21H2L8 12L2 3Z"/>
+              </svg>
+              海角社区入口领域概览
+            </h2>
+          </div>
+          <div class="section-body overview-text">
+            <p>海角社区的访问入口通常以“今日回家地址”的形式在导航页、发布页和用户群组之间流转。一个完整的入口体系包含主站域名、备用镜像站、移动端专用通道以及临时跳转节点四类载体。主站域名保持核心功能完整，镜像站侧重浏览与检索，移动端通道针对手机浏览器做适配，临时节点则用于突发维护期间的应急跳转。</p>
+            <p>当前可关注的具体方向有：主站入口的证书状态与响应速度、镜像站每日同步的时间节点、移动端通道的页面加载完成度，以及节点列表里标注“新”字样的新增入口。11 月 8 日当天，主站入口证书正常，镜像站有 2 个节点在上午 09:30 完成同步，移动端通道的图片加载策略有调整。对于经常访问的用户，建议同时收藏主站入口与至少一个镜像站入口，并在书签文件夹中按“主站—镜像—移动端”三层结构整理。</p>
+            <p>入口类信息的核心价值在于“可验证”。每个节点是否可用，取决于证书有效期、DNS 解析状态与页面首屏渲染时间三个具体指标。用户在选择日常入口时，优先关注证书有效期在 60 天以上的节点，其次观察页面首屏加载是否在 3 秒内完成，最后确认登录区域与内容列表是否能正常显示。这三个判断依据比单纯的“能不能打开”更能反映入口的实际可用程度。</p>
+          </div>
+        </section>
+
+        <!-- 板块 2：精选内容推荐（入口卡片） -->
+        <section class="section-card" id="channel-entry" aria-labelledby="entry-title">
+          <div class="section-header">
+            <h2 id="entry-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 9L12 2L21 9V20C21 20.5 20.5 21 20 21H4C3.5 21 3 20.5 3 20V9Z"/>
+                <path d="M9 21V12H15V21"/>
+              </svg>
+              今日可用入口精选
+            </h2>
+            <span class="section-more">2026-11-08 09:30 同步</span>
+          </div>
+          <div class="section-body">
+            <div class="card-grid">
+              <!-- 卡片 1 -->
+              <article class="entry-card">
+                <img class="entry-card-img" src="https://picsum.photos/seed/haijiao-main08/400/300" alt="海角主站入口节点示意图" width="400" height="300" loading="lazy">
+                <div class="entry-card-body">
+                  <h3 class="entry-card-title">海角主站入口 · 直连节点</h3>
+                  <div class="tag-row">
+                    <span class="tag success">正常</span>
+                    <span class="tag">主站</span>
+                    <span class="tag">SSL 有效</span>
+                  </div>
+                  <p class="entry-card-desc">证书有效期至 2027-01-15，首屏加载 1.8 秒，登录与内容列表均正常显示。</p>
+                  <div class="entry-meta">
+                    <span class="hot">热度 9.8</span>
+                    <span>11-08 09:30 检测</span>
+                  </div>
+                </div>
+              </article>
+              <!-- 卡片 2 -->
+              <article class="entry-card">
+                <img class="entry-card-img" src="https://picsum.photos/seed/haijiao-mirror47/400/300" alt="海角镜像站 B 入口示意图" width="400" height="300" loading="lazy">
+                <div class="entry-card-body">
+                  <h3 class="entry-card-title">镜像站 B · 浏览优化节点</h3>
+                  <div class="tag-row">
+                    <span class="tag success">正常</span>
+                    <span class="tag">镜像</span>
+                    <span class="tag">浏览优先</span>
+                  </div>
+                  <p class="entry-card-desc">内容列表与搜索可用，发帖功能受限，适合日常浏览与检索，11-08 09:30 完成同步。</p>
+                  <div class="entry-meta">
+                    <span class="hot">热度 9.2</span>
+                    <span>11-08 09:30 同步</span>
+                  </div>
+                </div>
+              </article>
+              <!-- 卡片 3 -->
+              <article class="entry-card">
+                <img class="entry-card-img" src="https://picsum.photos/seed/haijiao-mobile03/400/300" alt="海角移动端专用通道示意图" width="400" height="300" loading="lazy">
+                <div class="entry-card-body">
+                  <h3 class="entry-card-title">移动端通道 · 手机适配版</h3>
+                  <div class="tag-row">
+                    <span class="tag success">正常</span>
+                    <span class="tag">移动端</span>
+                    <span class="tag">H5 适配</span>
+                  </div>
+                  <p class="entry-card-desc">针对手机浏览器优化，图片懒加载策略已调整，首屏内容呈现更紧凑，适合通勤场景。</p>
+                  <div class="entry-meta">
+                    <span class="hot">热度 8.9</span>
+                    <span>11-08 08:15 更新</span>
+                  </div>
+                </div>
+              </article>
+              <!-- 卡片 4 -->
+              <article class="entry-card">
+                <img class="entry-card-img" src="https://picsum.photos/seed/haijiao-backup12/400/300" alt="海角备用跳转节点示意图" width="400" height="300" loading="lazy">
+                <div class="entry-card-body">
+                  <h3 class="entry-card-title">备用跳转节点 · 应急通道</h3>
+                  <div class="tag-row">
+                    <span class="tag">备用</span>
+                    <span class="tag accent">新增</span>
+                    <span class="tag">跳转</span>
+                  </div>
+                  <p class="entry-card-desc">11-07 新增的临时跳转节点，主站维护期间可应急访问，跳转耗时约 2 秒。</p>
+                  <div class="entry-meta">
+                    <span class="hot">热度 8.5</span>
+                    <span>11-07 18:20 新增</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块 3：最新更新 / 地址动态 -->
+        <section class="section-card" id="latest-updates" aria-labelledby="updates-title">
+          <div class="section-header">
+            <h2 id="updates-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6V12L16 14"/>
+              </svg>
+              地址发布与节点动态
+            </h2>
+            <span class="section-more">最近 7 天</span>
+          </div>
+          <div class="section-body">
+            <ul class="compact-list">
+              <li>
+                <span class="list-index top">1</span>
+                <div class="list-content">
+                  <div class="list-title">主站入口证书续期完成</div>
+                  <div class="list-desc">SSL 证书有效期延长至 2027-01-15，浏览器安全提示已消除。</div>
+                </div>
+                <span class="list-time">11-08 09:30</span>
+              </li>
+              <li>
+                <span class="list-index top">2</span>
+                <div class="list-content">
+                  <div class="list-title">镜像站 B 内容索引同步完毕</div>
+                  <div class="list-desc">11 月 8 日早间同步完成，帖子列表与搜索功能恢复正常。</div>
+                </div>
+                <span class="list-time">11-08 09:30</span>
+              </li>
+              <li>
+                <span class="list-index">3</span>
+                <div class="list-content">
+                  <div class="list-title">移动端通道图片加载策略调整</div>
+                  <div class="list-desc">首屏图片改为懒加载，弱网环境下的内容呈现速度提升约 40%。</div>
+                </div>
+                <span class="list-time">11-08 08:15</span>
+              </li>
+              <li>
+                <span class="list-index">4</span>
+                <div class="list-content">
+                  <div class="list-title">备用跳转节点 3 号上线</div>
+                  <div class="list-desc">新增应急跳转节点，跳转耗时约 2 秒，适合主站维护时临时使用。</div>
+                </div>
+                <span class="list-time">11-07 18:20</span>
+              </li>
+              <li>
+                <span class="list-index">5</span>
+                <div class="list-content">
+                  <div class="list-title">镜像站 C 维护完成</div>
+                  <div class="list-desc">数据库迁移结束，页面响应速度恢复至 2 秒以内。</div>
+                </div>
+                <span class="list-time">11-06 22:10</span>
+              </li>
+              <li>
+                <span class="list-index">6</span>
+                <div class="list-content">
+                  <div class="list-title">主站入口 DNS 解析优化</div>
+                  <div class="list-desc">更换解析服务商，部分地区解析延迟下降约 30%。</div>
+                </div>
+                <span class="list-time">11-05 14:30</span>
+              </li>
+              <li>
+                <span class="list-index">7</span>
+                <div class="list-content">
+                  <div class="list-title">移动端通道新增深色模式</div>
+                  <div class="list-desc">跟随系统设置自动切换，夜间浏览体验改善。</div>
+                </div>
+                <span class="list-time">11-04 10:00</span>
+              </li>
+              <li>
+                <span class="list-index">8</span>
+                <div class="list-content">
+                  <div class="list-title">镜像站 A 恢复访问</div>
+                  <div class="list-desc">11 月 3 日短暂维护后恢复，内容同步已补全。</div>
+                </div>
+                <span class="list-time">11-03 16:45</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 板块 4：分类入口 -->
+        <section class="section-card" id="category" aria-labelledby="category-title">
+          <div class="section-header">
+            <h2 id="category-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <rect x="14" y="14" width="7" height="7" rx="1"/>
+              </svg>
+              入口分类导航
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="category-grid">
+              <a href="/#channel-entry" class="category-item">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M3 9L12 2L21 9V20C21 20.5 20.5 21 20 21H4C3.5 21 3 20.5 3 20V9Z"/>
+                  <path d="M9 21V12H15V21"/>
+                </svg>
+                <span class="cat-name">主站入口</span>
+                <span class="cat-count">3 个节点</span>
+              </a>
+              <a href="/#channel-entry" class="category-item">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M4 4H20V16H13L9 20V16H4V4Z"/>
+                </svg>
+                <span class="cat-name">镜像站点</span>
+                <span class="cat-count">5 个节点</span>
+              </a>
+              <a href="/#channel-entry" class="category-item">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="7" y="2" width="10" height="20" rx="2"/>
+                  <path d="M12 18H12.01"/>
+                </svg>
+                <span class="cat-name">移动端通道</span>
+                <span class="cat-count">2 个节点</span>
+              </a>
+              <a href="/#channel-entry" class="category-item">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M10 13C10.4295 13.5741 10.9774 14.0491 11.6066 14.3929C12.2357 14.7367 12.9315 14.9411 13.6467 14.9923C14.3618 15.0435 15.0796 14.9403 15.7513 14.6897C16.4231 14.4392 17.0331 14.047 17.54 13.54L20.54 10.54C21.4508 9.59695 21.9547 8.33394 21.9434 7.02296C21.9321 5.71198 21.4061 4.45791 20.4791 3.53087C19.5521 2.60383 18.298 2.07781 16.987 2.06653C15.676 2.05525 14.4131 2.55918 13.47 3.47L11.75 5.18"/>
+                  <path d="M14 11C13.5705 10.4259 13.0226 9.95087 12.3934 9.60709C11.7643 9.26331 11.0685 9.05887 10.3533 9.00767C9.63817 8.95647 8.92039 9.05971 8.24868 9.31026C7.57696 9.56082 6.96693 9.95301 6.46 10.46L3.46 13.46C2.54918 14.403 2.04525 15.666 2.05653 16.977C2.06781 18.288 2.59383 19.5421 3.52087 20.4691C4.44791 21.3962 5.70198 21.9222 7.01296 21.9335C8.32394 21.9448 9.58695 21.4408 10.53 20.53L12.24 18.82"/>
+                </svg>
+                <span class="cat-name">临时跳转</span>
+                <span class="cat-count">2 个节点</span>
+              </a>
+              <a href="/#latest-updates" class="category-item">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 6V12L16 14"/>
+                </svg>
+                <span class="cat-name">地址更新</span>
+                <span class="cat-count">今日 4 条</span>
+              </a>
+              <a href="/#rank" class="category-item">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+                <span class="cat-name">节点榜单</span>
+                <span class="cat-count">TOP 8</span>
+              </a>
+              <a href="/#faq" class="category-item">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M9.09 9C9.325 8.04 10.18 7.33 11.25 7.33C12.49 7.33 13.5 8.31 13.5 9.5C13.5 11 12 11.5 12 13"/>
+                  <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+                </svg>
+                <span class="cat-name">访问问答</span>
+                <span class="cat-count">6 个问题</span>
+              </a>
+              <a href="/#related" class="category-item">
+                <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M10 13C10.4295 13.5741 10.9774 14.0491 11.6066 14.3929C12.2357 14.7367 12.9315 14.9411 13.6467 14.9923C14.3618 15.0435 15.0796 14.9403 15.7513 14.6897C16.4231 14.4392 17.0331 14.047 17.54 13.54L20.54 10.54C21.4508 9.59695 21.9547 8.33394 21.9434 7.02296C21.9321 5.71198 21.4061 4.45791 20.4791 3.53087C19.5521 2.60383 18.298 2.07781 16.987 2.06653C15.676 2.05525 14.4131 2.55918 13.47 3.47L11.75 5.18"/>
+                  <path d="M14 11C13.5705 10.4259 13.0226 9.95087 12.3934 9.60709C11.7643 9.26331 11.0685 9.05887 10.3533 9.00767C9.63817 8.95647 8.92039 9.05971 8.24868 9.31026C7.57696 9.56082 6.96693 9.95301 6.46 10.46L3.46 13.46C2.54918 14.403 2.04525 15.666 2.05653 16.977C2.06781 18.288 2.59383 19.5421 3.52087 20.4691C4.44791 21.3962 5.70198 21.9222 7.01296 21.9335C8.32394 21.9448 9.58695 21.4408 10.53 20.53L12.24 18.82"/>
+                </svg>
+                <span class="cat-name">延伸方向</span>
+                <span class="cat-count">8 个标签</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块 5：深度解析正文 -->
+        <section class="section-card deep-dive" id="deep-dive" aria-labelledby="deep-title">
+          <div class="section-header">
+            <h2 id="deep-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M2 3H8L12 9L16 3H22L16 12L22 21H16L12 15L8 21H2L8 12L2 3Z"/>
+              </svg>
+              入口类型差异与选择依据
+            </h2>
+          </div>
+          <div class="section-body">
+            <h3>主站入口与镜像站的核心区别</h3>
+            <p>主站入口是功能最完整的访问载体，包含登录、发帖、消息、内容浏览全部模块。镜像站则通常只开放浏览与搜索功能，发帖和消息模块会被裁剪。判断一个入口是主站还是镜像，最直接的方法是观察页面顶部导航栏：主站导航包含“发布”与“消息”两个入口，镜像站导航只有“首页”和“搜索”。对于日常浏览型用户，镜像站的加载速度往往比主站快 0.5 到 1 秒，因为减少了动态模块的渲染。但如果需要参与互动，主站入口是唯一选择。</p>
+            <h3>移动端通道的适配差异</h3>
+            <p>移动端通道并非简单地把主站页面缩小，而是针对手机浏览器重新排布了信息层级。具体表现有三点：内容列表改为单列卡片流，每条内容占据整行宽度；图片采用懒加载并压缩为 WebP 格式，单张图片体积控制在 80KB 以内；底部固定操作栏收纳了“首页”“搜索”“我的”三个高频入口。使用移动端通道时，首屏可见内容条目通常为 4 到 5 条，比桌面浏览器少 2 到 3 条，但单条内容的标题和摘要字号更大，阅读负担更低。</p>
+            <h3>临时跳转节点的判断标准</h3>
+            <p>临时跳转节点通常出现在主站维护或域名切换期间，页面会先加载一个轻量跳转页，再自动重定向到目标地址。判断一个跳转节点是否可用，可以观察三个细节：跳转页是否有明确的“正在前往”提示文字，跳转耗时是否在 3 秒以内，跳转后目标页面是否正常显示内容列表。如果跳转页停留超过 5 秒仍无动作，说明节点可能已失效。11 月 7 日新增的备用跳转节点 3 号，跳转耗时约 2 秒，跳转后内容列表可正常加载，属于当前可用的应急通道。</p>
+            <h3>入口选择的具体策略</h3>
+            <ul>
+              <li><strong>日常浏览：</strong>优先使用镜像站 B 或移动端通道，加载速度快，内容列表完整。</li>
+              <li><strong>参与互动：</strong>使用主站直连节点，确保登录状态与发帖功能正常。</li>
+              <li><strong>主站维护期间：</strong>使用备用跳转节点应急，跳转后功能与主站一致。</li>
+              <li><strong>弱网环境：</strong>选择移动端通道，图片懒加载和压缩策略能显著减少流量消耗。</li>
+              <li><strong>书签整理：</strong>按“主站—镜像—移动端”三层文件夹结构保存，每层保留 1 到 2 个节点即可。</li>
+            </ul>
+            <h3>节点状态的日常观察方法</h3>
+            <p>节点是否可用，不能只靠“能否打开”来判断。建议每周固定观察一次证书有效期、首屏加载耗时和内容列表完整度三个指标。证书有效期低于 30 天时，部分浏览器会显示安全警告；首屏加载耗时超过 4 秒时，浏览体验明显下降；内容列表如果只显示标题而没有摘要，说明该节点的数据同步可能不完整。这三个指标可以在 2 分钟内完成检查，比逐个点击测试更高效。</p>
+          </div>
+        </section>
+
+        <!-- 板块 6：体验指南 / 消费路径 -->
+        <section class="section-card" id="experience-guide" aria-labelledby="guide-title">
+          <div class="section-header">
+            <h2 id="guide-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M9 11L12 14L22 4"/>
+                <path d="M21 12V19C21 20.1 20.1 21 19 21H5C3.9 21 3 20.1 3 19V5C3 3.9 3.9 3 5 3H16"/>
+              </svg>
+              入口选择与访问顺序指南
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="guide-steps">
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <h3>先确认访问目的</h3>
+                  <p>如果只是浏览内容列表，直接使用镜像站或移动端通道，加载更快。如果需要登录、发帖或查看消息，必须使用主站入口。目的决定了入口类型的选择顺序，先定目的再看节点列表，比逐个尝试更省时间。</p>
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <h3>检查节点状态标识</h3>
+                  <p>节点列表中标注“正常”的入口可直接使用，标注“维护”或“同步中”的入口暂时跳过。11 月 8 日当天，主站直连节点、镜像站 B、移动端通道均标注为正常，备用跳转节点 3 号标注为新增可用。</p>
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <h3>比较加载速度与功能完整度</h3>
+                  <p>同一类型有多个节点时，优先选择首屏加载耗时更短的节点。功能完整度方面，主站节点包含全部模块，镜像站节点缺少发帖与消息，移动端节点缺少部分桌面端管理功能。根据实际需要的功能选择，不必追求“功能最全”而牺牲速度。</p>
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <h3>保存稳定入口到书签</h3>
+                  <p>确认一个节点可稳定访问后，将其保存到浏览器书签，并按“主站—镜像—移动端”分类。每个分类保留 1 到 2 个节点即可，过多节点反而增加选择成本。书签命名建议包含节点类型和最近检测日期，方便后续回顾。</p>
+                </div>
+              </div>
+              <div class="guide-step">
+                <div class="guide-step-content">
+                  <h3>定期复查节点有效性</h3>
+                  <p>每周花 2 分钟检查一次已保存节点的证书有效期和首屏加载速度。证书有效期低于 30 天时，提前寻找替代节点。首屏加载明显变慢时，切换到同类型的其他节点。定期复查比临时寻找更从容。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块 7：FAQ -->
+        <section class="section-card" id="faq" aria-labelledby="faq-title">
+          <div class="section-header">
+            <h2 id="faq-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9C9.325 8.04 10.18 7.33 11.25 7.33C12.49 7.33 13.5 8.31 13.5 9.5C13.5 11 12 11.5 12 13"/>
+                <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+              </svg>
+              海角入口常见问题
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="faq-list">
+              <details class="faq-item">
+                <summary>海角今日回家地址一般多久更新一次？</summary>
+                <div class="faq-answer">地址发布页通常在每天上午 09:00 至 10:00 之间完成当天首次同步，如果主站有维护或域名调整，更新频率会提高到每天 2 到 3 次。观察 11 月 8 日的记录，主站证书状态在 09:30 更新，镜像站 B 的索引同步也在同一时段完成。日常使用不需要时刻盯着更新，每天查看一次即可。</div>
+              </details>
+              <details class="faq-item">
+                <summary>主站入口和镜像站 B 有什么区别？</summary>
+                <div class="faq-answer">主站入口功能完整，包含登录、发帖、消息、内容浏览全部模块，适合需要互动的用户。镜像站 B 只开放浏览与搜索，发帖和消息模块被裁剪，但页面加载速度更快，适合以浏览为主的场景。两者内容列表基本一致，差异主要在功能模块和加载速度上。</div>
+              </details>
+              <details class="faq-item">
+                <summary>移动端通道和手机浏览器直接访问主站有什么不同？</summary>
+                <div class="faq-answer">移动端通道针对手机屏幕重新排布了信息层级，内容列表为单列卡片流，图片懒加载并压缩，底部固定操作栏收纳高频入口。手机浏览器直接访问主站则是桌面布局的缩放，需要手动放大缩小，操作不够方便。如果主要在手机上使用，移动端通道的阅读体验更顺畅。</div>
+              </details>
+              <details class="faq-item">
+                <summary>第一次使用应该从哪个入口开始？</summary>
+                <div class="faq-answer">如果是第一次访问，建议先使用镜像站 B 或移动端通道浏览内容列表，熟悉版块结构。需要登录或参与互动时，再切换到主站直连节点。不建议一开始就使用临时跳转节点，因为跳转节点的稳定性不如常规节点，适合作为应急备用。</div>
+              </details>
+              <details class="faq-item">
+                <summary>节点显示“维护中”时还能用吗？</summary>
+                <div class="faq-answer">标注“维护中”的节点通常部分功能不可用，例如登录或内容列表加载不完整，不建议作为日常入口使用。可以切换到同类型的其他正常节点。如果所有主站节点都显示维护中，可以使用备用跳转节点应急，跳转后功能与主站一致。</div>
+              </details>
+              <details class="faq-item">
+                <summary>怎么判断一个入口是否稳定可用？</summary>
+                <div class="faq-answer">观察三个具体指标：证书有效期是否在 60 天以上，首屏加载耗时是否在 3 秒以内，内容列表是否完整显示标题和摘要。三个指标都满足时，该入口可以视为稳定可用。如果其中一项不满足，建议优先选择其他节点，或将该节点作为备用。</div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块 8：用户评论 -->
+        <section class="section-card" id="comments" aria-labelledby="comments-title">
+          <div class="section-header">
+            <h2 id="comments-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 11.5C21 16.19 16.97 20 12 20C10.6 20 9.27 19.7 8.08 19.16L3 21L4.57 16.47C3.58 15.03 3 13.32 3 11.5C3 6.81 7.03 3 12 3C16.97 3 21 6.81 21 11.5Z"/>
+              </svg>
+              社区用户讨论
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="comment-list">
+              <div class="comment-item">
+                <div class="comment-avatar">海</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">海边散步的猫</span>
+                    <span class="comment-time">11-08 10:12</span>
+                  </div>
+                  <p class="comment-text">今天早上试了镜像站 B，加载确实快，内容列表也很完整。主站入口也正常，证书问题解决了。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">灯</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">灯塔守望者</span>
+                    <span class="comment-time">11-08 09:55</span>
+                  </div>
+                  <p class="comment-text">移动端通道的深色模式挺实用，晚上刷的时候眼睛舒服多了。图片加载速度也比之前快。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">路</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">路过的风</span>
+                    <span class="comment-time">11-08 09:30</span>
+                  </div>
+                  <p class="comment-text">备用跳转节点 3 号刚上线就试了，跳转大概两秒，跳过去之后内容都能看，应急用足够了。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">小</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">小岛居民</span>
+                    <span class="comment-time">11-07 22:40</span>
+                  </div>
+                  <p class="comment-text">主站直连节点最近一周都很稳定，没有再出现证书警告了。建议把主站和镜像站都存书签。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">南</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">南风知我意</span>
+                    <span class="comment-time">11-07 20:15</span>
+                  </div>
+                  <p class="comment-text">镜像站 C 维护完之后速度确实恢复了，昨天试了一下，列表加载比之前还快一点。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">海</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">海角拾贝</span>
+                    <span class="comment-time">11-07 18:50</span>
+                  </div>
+                  <p class="comment-text">DNS 优化之后我这边解析快了不少，之前偶尔要等几秒，现在基本秒开。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">潮</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">潮汐观测员</span>
+                    <span class="comment-time">11-07 15:20</span>
+                  </div>
+                  <p class="comment-text">希望移动端通道能加上内容列表的排序选项，现在只能按默认顺序看，有点不方便。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">一</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">一只海鸥</span>
+                    <span class="comment-time">11-06 21:05</span>
+                  </div>
+                  <p class="comment-text">镜像站 B 的发帖功能虽然受限，但搜索很好用，找老帖子比主站还快。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">蓝</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">蓝鲸不蓝</span>
+                    <span class="comment-time">11-06 19:30</span>
+                  </div>
+                  <p class="comment-text">主站入口的登录状态保存时间好像变长了，之前隔天就要重新登录，现在能撑三四天。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">半</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">半岛铁盒</span>
+                    <span class="comment-time">11-06 16:10</span>
+                  </div>
+                  <p class="comment-text">建议在入口列表里加一个“最近检测时间”的排序，方便找最新同步的节点。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">海</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">海风轻拂</span>
+                    <span class="comment-time">11-05 22:45</span>
+                  </div>
+                  <p class="comment-text">移动端通道的图片压缩做得不错，同样一张图桌面端要 200 多 KB，手机上只有 70 多 KB。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">码</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">码头少年</span>
+                    <span class="comment-time">11-05 20:30</span>
+                  </div>
+                  <p class="comment-text">临时跳转节点适合应急，但跳转页的提示文字可以再明显一点，第一次用差点以为卡住了。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">听</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">听涛人</span>
+                    <span class="comment-time">11-05 14:20</span>
+                  </div>
+                  <p class="comment-text">主站证书续期之后，Chrome 的安全提示确实没了，之前每次都要手动点继续访问。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">慢</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">慢半拍</span>
+                    <span class="comment-time">11-04 18:55</span>
+                  </div>
+                  <p class="comment-text">镜像站 A 恢复之后内容同步挺全的，之前缺的帖子都补上了。</p>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">夜</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="comment-nickname">夜航星</span>
+                    <span class="comment-time">11-04 11:30</span>
+                  </div>
+                  <p class="comment-text">深色模式跟系统自动切换很方便，不用手动调。希望桌面端也能加这个功能。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块 9：相关资讯 -->
+        <section class="section-card" id="news" aria-labelledby="news-title">
+          <div class="section-header">
+            <h2 id="news-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 22H20C21.1 22 22 21.1 22 20V4C22 2.9 21.1 2 20 2H8L2 8V20C2 21.1 2.9 22 4 22Z"/>
+                <path d="M8 2V8H2"/>
+              </svg>
+              入口相关资讯
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="news-list">
+              <article class="news-item">
+                <img class="news-item-img" src="https://picsum.photos/seed/haijiao-news01/600/400" alt="主站证书续期完成资讯配图" width="600" height="400" loading="lazy">
+                <div class="news-item-content">
+                  <h3 class="news-item-title"><a href="/#latest-updates">主站 SSL 证书续期完成 有效期延长至 2027 年 1 月</a></h3>
+                  <p class="news-item-summary">11 月 8 日上午完成证书续期，浏览器安全警告消除，主站直连节点恢复无提示访问。</p>
+                  <div class="news-item-date">2026-11-08</div>
+                </div>
+              </article>
+              <article class="news-item">
+                <img class="news-item-img" src="https://picsum.photos/seed/haijiao-news02/600/400" alt="移动端通道图片加载优化资讯配图" width="600" height="400" loading="lazy">
+                <div class="news-item-content">
+                  <h3 class="news-item-title"><a href="/#latest-updates">移动端通道图片加载策略调整 弱网首屏提速约 40%</a></h3>
+                  <p class="news-item-summary">首屏图片改为懒加载并压缩为 WebP 格式，单张图片体积控制在 80KB 以内，弱网环境改善明显。</p>
+                  <div class="news-item-date">2026-11-08</div>
+                </div>
+              </article>
+              <article class="news-item">
+                <img class="news-item-img" src="https://picsum.photos/seed/haijiao-news03/600/400" alt="备用跳转节点上线资讯配图" width="600" height="400" loading="lazy">
+                <div class="news-item-content">
+                  <h3 class="news-item-title"><a href="/#latest-updates">备用跳转节点 3 号上线 应急通道跳转耗时约 2 秒</a></h3>
+                  <p class="news-item-summary">11 月 7 日傍晚新增应急跳转节点，主站维护期间可临时使用，跳转后功能与主站一致。</p>
+                  <div class="news-item-date">2026-11-07</div>
+                </div>
+              </article>
+              <article class="news-item">
+                <img class="news-item-img" src="https://picsum.photos/seed/haijiao-news04/600/400" alt="镜像站C维护完成资讯配图" width="600" height="400" loading="lazy">
+                <div class="news-item-content">
+                  <h3 class="news-item-title"><a href="/#latest-updates">镜像站 C 数据库迁移完成 页面响应恢复至 2 秒以内</a></h3>
+                  <p class="news-item-summary">11 月 6 日晚间维护结束，内容索引补全，搜索与列表加载速度回到正常水平。</p>
+                  <div class="news-item-date">2026-11-06</div>
+                </div>
+              </article>
+              <article class="news-item">
+                <img class="news-item-img" src="https://picsum.photos/seed/haijiao-news05/600/400" alt="DNS解析优化资讯配图" width="600" height="400" loading="lazy">
+                <div class="news-item-content">
+                  <h3 class="news-item-title"><a href="/#latest-updates">主站入口 DNS 解析服务更换 部分地区延迟下降约 30%</a></h3>
+                  <p class="news-item-summary">11 月 5 日完成解析服务商切换，华南与华东地区解析速度提升较为明显。</p>
+                  <div class="news-item-date">2026-11-05</div>
+                </div>
+              </article>
+              <article class="news-item">
+                <img class="news-item-img" src="https://picsum.photos/seed/haijiao-news06/600/400" alt="移动端深色模式上线资讯配图" width="600" height="400" loading="lazy">
+                <div class="news-item-content">
+                  <h3 class="news-item-title"><a href="/#latest-updates">移动端通道新增深色模式 跟随系统自动切换</a></h3>
+                  <p class="news-item-summary">11 月 4 日更新加入深色模式支持，夜间浏览时页面背景自动切换为深色，降低视觉疲劳。</p>
+                  <div class="news-item-date">2026-11-04</div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块 10：相关推荐 -->
+        <section class="section-card" id="related" aria-labelledby="related-title">
+          <div class="section-header">
+            <h2 id="related-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M10 13C10.4295 13.5741 10.9774 14.0491 11.6066 14.3929C12.2357 14.7367 12.9315 14.9411 13.6467 14.9923C14.3618 15.0435 15.0796 14.9403 15.7513 14.6897C16.4231 14.4392 17.0331 14.047 17.54 13.54L20.54 10.54C21.4508 9.59695 21.9547 8.33394 21.9434 7.02296C21.9321 5.71198 21.4061 4.45791 20.4791 3.53087C19.5521 2.60383 18.298 2.07781 16.987 2.06653C15.676 2.05525 14.4131 2.55918 13.47 3.47L11.75 5.18"/>
+                <path d="M14 11C13.5705 10.4259 13.0226 9.95087 12.3934 9.60709C11.7643 9.26331 11.0685 9.05887 10.3533 9.00767C9.63817 8.95647 8.92039 9.05971 8.24868 9.31026C7.57696 9.56082 6.96693 9.95301 6.46 10.46L3.46 13.46C2.54918 14.403 2.04525 15.666 2.05653 16.977C2.06781 18.288 2.59383 19.5421 3.52087 20.4691C4.44791 21.3962 5.70198 21.9222 7.01296 21.9335C8.32394 21.9448 9.58695 21.4408 10.53 20.53L12.24 18.82"/>
+              </svg>
+              延伸方向推荐
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="related-tags">
+              <a href="/#deep-dive">镜像站与主站功能对比</a>
+              <a href="/#experience-guide">移动端访问技巧</a>
+              <a href="/#rank">节点稳定性排行</a>
+              <a href="/#faq">证书有效期判断方法</a>
+              <a href="/#latest-updates">临时跳转节点使用场景</a>
+              <a href="/#deep-dive">弱网环境下的入口选择</a>
+              <a href="/#comments">社区用户入口反馈</a>
+              <a href="/#news">地址发布规律观察</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块 11：补充板块 - 节点榜单 -->
+        <section class="section-card" id="rank" aria-labelledby="rank-title">
+          <div class="section-header">
+            <h2 id="rank-title">
+              <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              今日节点热度榜
+            </h2>
+            <span class="section-more">2026-11-08 09:30 数据</span>
+          </div>
+          <div class="section-body">
+            <table class="rank-table">
+              <thead>
+                <tr>
+                  <th>排名</th>
+                  <th>节点名称</th>
+                  <th>类型</th>
+                  <th>状态</th>
+                  <th>首屏耗时</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="rank-num top3">1</span></td>
+                  <td class="rank-name">主站直连节点</td>
+                  <td>主站</td>
+                  <td><span class="tag success">正常</span></td>
+                  <td>1.8s</td>
+                </tr>
+                <tr>
+                  <td><span class="rank-num top3">2</span></td>
+                  <td class="rank-name">镜像站 B</td>
+                  <td>镜像</td>
+                  <td><span class="tag success">正常</span></td>
+                  <td>1.5s</td>
+                </tr>
+                <tr>
+                  <td><span class="rank-num top3">3</span></td>
+                  <td class="rank-name">移动端通道</td>
+                  <td>移动端</td>
+                  <td><span class="tag success">正常</span></td>
+                  <td>1.6s</td>
+                </tr>
+                <tr>
+                  <td><span class="rank-num">4</span></td>
+                  <td class="rank-name">备用跳转节点 3 号</td>
+                  <td>临时</td>
+                  <td><span class="tag accent">新增</span></td>
+                  <td>2.0s</td>
+                </tr>
+                <tr>
+                  <td><span class="rank-num">5</span></td>
+                  <td class="rank-name">镜像站 A</td>
+                  <td>镜像</td>
+                  <td><span class="tag success">正常</span></td>
+                  <td>2.2s</td>
+                </tr>
+                <tr>
+                  <td><span class="rank-num">6</span></td>
+                  <td class="rank-name">镜像站 C</td>
+                  <td>镜像</td>
+                  <td><span class="tag success">正常</span></td>
+                  <td>1.9s</td>
+                </tr>
+                <tr>
+                  <td><span class="rank-num">7</span></td>
+                  <td class="rank-name">备用跳转节点 1 号</td>
+                  <td>临时</td>
+                  <td><span class="tag">待检测</span></td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><span class="rank-num">8</span></td>
+                  <td class="rank-name">移动端备用通道</td>
+                  <td>移动端</td>
+                  <td><span class="tag success">正常</span></td>
+                  <td>2.4s</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- 右辅助栏 -->
+      <aside class="aux-sidebar" aria-label="辅助信息">
+        <div class="aux-card">
+          <div class="aux-card-header">
+            <svg class="aux-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6V12L16 14"/>
+            </svg>
+            节点实时状态
+          </div>
+          <div class="aux-card-body">
+            <ul class="status-list">
+              <li class="status-item">
+                <span class="status-dot green"></span>
+                <span class="status-name">主站直连</span>
+                <span class="status-time">09:30 正常</span>
+              </li>
+              <li class="status-item">
+                <span class="status-dot green"></span>
+                <span class="status-name">镜像站 B</span>
+                <span class="status-time">09:30 正常</span>
+              </li>
+              <li class="status-item">
+                <span class="status-dot green"></span>
+                <span class="status-name">移动端通道</span>
+                <span class="status-time">08:15 正常</span>
+              </li>
+              <li class="status-item">
+                <span class="status-dot yellow"></span>
+                <span class="status-name">镜像站 A</span>
+                <span class="status-time">11-03 恢复</span>
+              </li>
+              <li class="status-item">
+                <span class="status-dot green"></span>
+                <span class="status-name">备用跳转 3 号</span>
+                <span class="status-time">11-07 新增</span>
+              </li>
+              <li class="status-item">
+                <span class="status-dot gray"></span>
+                <span class="status-name">备用跳转 1 号</span>
+                <span class="status-time">待检测</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="aux-card">
+          <div class="aux-card-header">
+            <svg class="aux-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M12 8V12L15 15"/>
+              <circle cx="12" cy="12" r="10"/>
+            </svg>
+            更新动态流
+          </div>
+          <div class="aux-card-body">
+            <ul class="update-feed">
+              <li>
+                <span class="feed-title">主站证书续期完成</span>
+                <span class="feed-time">11-08 09:30</span>
+              </li>
+              <li>
+                <span class="feed-title">镜像站 B 内容同步完毕</span>
+                <span class="feed-time">11-08 09:30</span>
+              </li>
+              <li>
+                <span class="feed-title">移动端图片加载策略调整</span>
+                <span class="feed-time">11-08 08:15</span>
+              </li>
+              <li>
+                <span class="feed-title">备用跳转节点 3 号上线</span>
+                <span class="feed-time">11-07 18:20</span>
+              </li>
+              <li>
+                <span class="feed-title">镜像站 C 维护完成</span>
+                <span class="feed-time">11-06 22:10</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+    </div><!-- /portal-layout -->
+
+    <!-- 页尾 -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="28" height="28" rx="6" fill="#e07a3c"/>
+                <path d="M7 19L14 7L21 19H7Z" fill="#fff" opacity="0.9"/>
+                <circle cx="14" cy="16" r="2.5" fill="#1a3b5c"/>
+              </svg>
+              <span>海角今日回家地址</span>
+            </div>
+            <p>汇总海角社区当前可用入口节点、镜像站实时状态、移动端访问方式与地址发布规律，为社区用户提供可查阅的入口导航参考。</p>
+          </div>
+          <div class="footer-col">
+            <h4>入口导航</h4>
+            <ul>
+              <li><a href="/#channel-entry">主站入口节点</a></li>
+              <li><a href="/#channel-entry">镜像站列表</a></li>
+              <li><a href="/#channel-entry">移动端通道</a></li>
+              <li><a href="/#channel-entry">备用跳转节点</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>信息参考</h4>
+            <ul>
+              <li><a href="/#latest-updates">地址更新记录</a></li>
+              <li><a href="/#deep-dive">入口类型解析</a></li>
+              <li><a href="/#experience-guide">访问顺序指南</a></li>
+              <li><a href="/#rank">节点热度榜</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>社区讨论</h4>
+            <ul>
+              <li><a href="/#faq">常见问题解答</a></li>
+              <li><a href="/#comments">用户讨论区</a></li>
+              <li><a href="/#news">入口相关资讯</a></li>
+              <li><a href="/#related">延伸方向推荐</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 海角今日回家地址 · 入口导航参考</span>
+          <span>部分内容为示例数据，仅用于展示页面结构</span>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /page-offset -->
+
+  <!-- 内联脚本：搜索筛选与无结果反馈 -->
+  <script>
+    (function() {
+      var searchInput = document.getElementById('siteSearch');
+      var feedback = document.getElementById('searchFeedback');
+      if (!searchInput || !feedback) return;
+
+      // 收集可搜索内容节点（标题、列表项、卡片标题、评论等）
+      var searchTargets = document.querySelectorAll(
+        '.entry-card-title, .list-title, .news-item-title, .comment-nickname, ' +
+        '.category-item .cat-name, .related-tags a, .faq-item summary, ' +
+        '.rank-table .rank-name, .section-header h2, .guide-step-content h3, ' +
+        '.status-name, .feed-title'
+      );
+
+      function clearHighlights() {
+        searchTargets.forEach(function(el) {
+          el.style.backgroundColor = '';
+          el.style.transition = '';
+        });
+      }
+
+      function doSearch() {
+        var query = searchInput.value.trim().toLowerCase();
+        clearHighlights();
+
+        if (query === '') {
+          feedback.classList.remove('visible');
+          feedback.textContent = '';
+          return;
+        }
+
+        var matches = [];
+        searchTargets.forEach(function(el) {
+          var text = el.textContent.toLowerCase();
+          if (text.indexOf(query) !== -1) {
+            matches.push(el);
+            el.style.transition = 'background-color 0.25s';
+            el.style.backgroundColor = '#fef3c7';
+          }
+        });
+
+        if (matches.length > 0) {
+          feedback.textContent = '找到 ' + matches.length + ' 处匹配内容';
+          feedback.classList.add('visible');
+          // 滚动到第一个匹配位置（考虑吸顶偏移）
+          var firstMatch = matches[0];
+          var rect = firstMatch.getBoundingClientRect();
+          var offset = 120; // 公告条 + 页头 + 额外间距
+          if (rect.top < offset || rect.bottom > window.innerHeight) {
+            window.scrollTo({
+              top: window.pageYOffset + rect.top - offset,
+              behavior: 'smooth'
+            });
+          }
+        } else {
+          feedback.textContent = '未找到匹配内容，请尝试其他关键词';
+          feedback.classList.add('visible');
+        }
+      }
+
+      // 防抖
+      var debounceTimer;
+      searchInput.addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(doSearch, 280);
+      });
+
+      // 点击页面其他区域时，若搜索框为空则隐藏反馈
+      document.addEventListener('click', function(e) {
+        if (e.target !== searchInput && e.target !== feedback) {
+          if (searchInput.value.trim() === '') {
+            feedback.classList.remove('visible');
+          }
+        }
+      });
+
+      // Esc 清空
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          searchInput.value = '';
+          clearHighlights();
+          feedback.classList.remove('visible');
+          searchInput.blur();
+        }
+      });
+    })();
+  </script>
+
+</body>
+    </html>
