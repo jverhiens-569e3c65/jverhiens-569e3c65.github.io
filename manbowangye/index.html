@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>漫播网页版 - 广播剧有声书聚合</title>
+  <meta name="description" content="漫播网页版聚合广播剧、有声书、配音访谈与声音企划，提供新剧速递、分类索引、深度解析、听众评论和更新日历，适合广播剧爱好者和声音内容创作者浏览。">
+  <meta name="keywords" content="广播剧推荐，有声书收听，配音演员访谈，声音企划，漫播分类">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a2e'/%3E%3Cpath d='M12 10v12l10-6-10-6z' fill='%23f0a500'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%23f0a500' opacity='0.6'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --panel: #17172a;
+      --panel-2: #1e1e36;
+      --card: #22223e;
+      --text: #e8e8f0;
+      --text-2: #a8a8c0;
+      --text-3: #6e6e8a;
+      --accent: #f0a500;
+      --accent-2: #e05a7a;
+      --accent-3: #4ecdc4;
+      --border: #2a2a48;
+      --radius: 10px;
+      --radius-s: 6px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --header-h: 120px;
+      --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding-top: var(--header-h);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; max-width: 100%; height: auto; object-fit: cover; }
+    .container { max-width: 1360px; margin: 0 auto; padding: 0 20px; }
+
+    /* ---------- 吸顶公告条 + 页头 ---------- */
+    .sticky-wrap {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--bg);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .announce-bar {
+      background: linear-gradient(90deg, #2a1a3a, #3a1a2a);
+      color: var(--accent);
+      font-size: 13px;
+      padding: 7px 20px;
+      text-align: center;
+      letter-spacing: 0.3px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .announce-bar strong { color: #fff; font-weight: 600; }
+    .announce-bar .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 10px 0;
+      flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .brand svg { width: 38px; height: 38px; }
+    .brand-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+    .brand-text span { color: var(--accent); }
+    .main-nav { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .main-nav a {
+      color: var(--text-2);
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+    .main-nav a:hover, .main-nav a:focus {
+      background: var(--panel-2);
+      color: #fff;
+      text-decoration: none;
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+    .search-box {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      background: var(--panel-2);
+      border-radius: 20px;
+      padding: 2px 4px 2px 14px;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .search-box input {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 13px;
+      padding: 7px 6px;
+      width: 150px;
+      outline: none;
+      font-family: var(--font);
+    }
+    .search-box input::placeholder { color: var(--text-3); }
+    .search-box button {
+      background: var(--accent);
+      border: none;
+      color: #111;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 18px;
+      cursor: pointer;
+      font-family: var(--font);
+    }
+    .search-box button:hover { background: #ffb733; }
+
+    /* ---------- 首屏 ---------- */
+    .hero {
+      padding: 36px 0 28px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-content h1 {
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .hero-content h1 em {
+      font-style: normal;
+      color: var(--accent);
+      position: relative;
+    }
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-2);
+      max-width: 560px;
+      margin-bottom: 22px;
+      line-height: 1.7;
+    }
+    .hero-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-tags a {
+      background: var(--panel-2);
+      color: var(--text-2);
+      font-size: 13px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      transition: 0.2s;
+    }
+    .hero-tags a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #111;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 11px 28px;
+      border-radius: 28px;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: var(--font);
+    }
+    .btn-primary:hover { background: #ffb733; text-decoration: none; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 10px 24px;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      transition: 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .hero-visual {
+      position: relative;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-visual svg { width: 100%; height: auto; max-height: 260px; }
+
+    /* ---------- 布局：三栏门户 ---------- */
+    .layout-3col {
+      display: grid;
+      grid-template-columns: 175px minmax(0, 1fr) 250px;
+      gap: 28px;
+      padding: 32px 0 40px;
+      align-items: start;
+    }
+    .col-left, .col-right { position: sticky; top: calc(var(--header-h) + 20px); }
+
+    /* 频道索引 */
+    .channel-index {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 18px 12px;
+      border: 1px solid var(--border);
+    }
+    .channel-index h2 {
+      font-size: 14px;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      padding-left: 8px;
+    }
+    .channel-index ul { list-style: none; }
+    .channel-index li { margin-bottom: 2px; }
+    .channel-index a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: var(--radius-s);
+      color: var(--text-2);
+      font-size: 14px;
+      transition: 0.15s;
+    }
+    .channel-index a:hover, .channel-index a:focus {
+      background: var(--panel-2);
+      color: #fff;
+      text-decoration: none;
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+    .channel-index .badge {
+      float: right;
+      background: var(--accent);
+      color: #111;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 10px;
+    }
+
+    /* 主内容 */
+    .main-content section {
+      margin-bottom: 44px;
+      scroll-margin-top: calc(var(--header-h) + 10px);
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .section-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    .section-header h2 .accent-line {
+      display: inline-block;
+      width: 4px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    .section-header .more-link {
+      font-size: 13px;
+      color: var(--text-3);
+      transition: 0.2s;
+    }
+    .section-header .more-link:hover { color: var(--accent); }
+
+    /* 概览 */
+    .overview-box {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      border: 1px solid var(--border);
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.8;
+    }
+    .overview-box p { margin-bottom: 10px; }
+    .overview-box p:last-child { margin-bottom: 0; }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
+    }
+    .content-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .content-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-color: #3a3a60;
+    }
+    .content-card .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: var(--panel-2);
+    }
+    .content-card .card-body { padding: 12px 14px 14px; flex: 1; display: flex; flex-direction: column; }
+    .content-card .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 5px;
+      line-height: 1.35;
+    }
+    .content-card .card-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px; }
+    .content-card .card-tags span {
+      font-size: 10.5px;
+      background: var(--panel-2);
+      color: var(--text-2);
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .content-card .card-tags span.primary { background: var(--accent); color: #111; border-color: var(--accent); }
+    .content-card .card-desc {
+      font-size: 12.5px;
+      color: var(--text-2);
+      line-height: 1.55;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+    .content-card .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      color: var(--text-3);
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+    }
+    .content-card .card-meta .score { color: var(--accent); font-weight: 700; }
+
+    /* 最新更新列表 */
+    .update-list { list-style: none; }
+    .update-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--panel);
+      border-radius: var(--radius-s);
+      margin-bottom: 6px;
+      border: 1px solid var(--border);
+      font-size: 13.5px;
+      transition: 0.15s;
+      flex-wrap: wrap;
+    }
+    .update-list li:hover { border-color: #3a3a60; }
+    .update-list .up-title { font-weight: 600; color: #fff; min-width: 130px; }
+    .update-list .up-desc { color: var(--text-2); flex: 1; }
+    .update-list .up-time { color: var(--text-3); font-size: 12px; white-space: nowrap; margin-left: auto; }
+
+    /* 分类入口 */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .cat-item {
+      background: var(--panel);
+      border-radius: var(--radius-s);
+      padding: 14px 10px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: 0.2s;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .cat-item:hover { background: var(--panel-2); border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .cat-item small { display: block; font-weight: 400; font-size: 11px; color: var(--text-3); margin-top: 3px; }
+
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      border: 1px solid var(--border);
+    }
+    .deep-dive h3 {
+      font-size: 17px;
+      color: var(--accent);
+      margin: 22px 0 10px;
+      font-weight: 700;
+    }
+    .deep-dive h3:first-child { margin-top: 0; }
+    .deep-dive p {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+    .deep-dive ul { margin: 8px 0 14px 20px; color: var(--text-2); font-size: 14px; line-height: 1.8; }
+    .deep-dive ul li { margin-bottom: 4px; }
+    .deep-dive strong { color: #fff; }
+
+    /* 体验指南 */
+    .guide-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .guide-step {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 18px 16px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .guide-step .step-num {
+      display: inline-block;
+      width: 26px; height: 26px;
+      background: var(--accent);
+      color: #111;
+      font-weight: 800;
+      font-size: 13px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 26px;
+      margin-bottom: 8px;
+    }
+    .guide-step h4 { font-size: 15px; color: #fff; margin-bottom: 6px; }
+    .guide-step p { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    .faq-list details {
+      background: var(--panel);
+      border-radius: var(--radius-s);
+      border: 1px solid var(--border);
+      padding: 0;
+      overflow: hidden;
+    }
+    .faq-list summary {
+      padding: 14px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: 0.15s;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: '+';
+      font-size: 18px;
+      color: var(--accent);
+      transition: 0.2s;
+      flex-shrink: 0;
+      margin-left: 12px;
+    }
+    .faq-list details[open] summary::after { content: '−'; }
+    .faq-list summary:hover { background: var(--panel-2); }
+    .faq-list details[open] summary { border-bottom: 1px solid var(--border); }
+    .faq-body { padding: 14px 18px 16px; font-size: 13.5px; color: var(--text-2); line-height: 1.75; }
+
+    /* 评论 */
+    .comment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+    }
+    .comment-item {
+      background: var(--panel);
+      border-radius: var(--radius-s);
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .comment-item .c-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+    .comment-item .c-avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .comment-item .c-name { font-weight: 600; color: #fff; font-size: 12.5px; }
+    .comment-item .c-time { color: var(--text-3); font-size: 11px; margin-left: auto; }
+    .comment-item .c-text { color: var(--text-2); line-height: 1.6; }
+    .comment-item .c-text em { color: var(--accent); font-style: normal; }
+
+    /* 资讯 */
+    .news-list { list-style: none; }
+    .news-list li {
+      display: flex;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .news-list li:last-child { border-bottom: none; }
+    .news-list .news-date {
+      font-size: 12px;
+      color: var(--text-3);
+      white-space: nowrap;
+      min-width: 80px;
+      padding-top: 2px;
+    }
+    .news-list .news-title { font-weight: 600; color: #fff; font-size: 14px; display: block; margin-bottom: 3px; }
+    .news-list .news-summary { font-size: 12.5px; color: var(--text-2); line-height: 1.55; }
+
+    /* 相关推荐 */
+    .related-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .related-tags a {
+      background: var(--panel);
+      color: var(--text-2);
+      font-size: 13px;
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      transition: 0.2s;
+    }
+    .related-tags a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    /* 榜单 */
+    .rank-list { list-style: none; counter-reset: rank; }
+    .rank-list li {
+      counter-increment: rank;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--panel);
+      border-radius: var(--radius-s);
+      margin-bottom: 6px;
+      border: 1px solid var(--border);
+      font-size: 13.5px;
+    }
+    .rank-list li::before {
+      content: counter(rank);
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--text-3);
+      width: 24px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .rank-list li:nth-child(1)::before { color: #f0a500; }
+    .rank-list li:nth-child(2)::before { color: #c0c0d0; }
+    .rank-list li:nth-child(3)::before { color: #cd7f32; }
+    .rank-list .rank-name { font-weight: 600; color: #fff; flex: 1; }
+    .rank-list .rank-tag { font-size: 11px; color: var(--text-3); background: var(--panel-2); padding: 2px 8px; border-radius: 8px; }
+
+    /* 右栏 */
+    .right-panel {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+    .right-panel h3 {
+      font-size: 14px;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hot-list { list-style: none; }
+    .hot-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .hot-list li:last-child { border-bottom: none; }
+    .hot-list .hot-rank {
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--text-3);
+      width: 20px;
+      flex-shrink: 0;
+    }
+    .hot-list li:nth-child(1) .hot-rank { color: #f0a500; }
+    .hot-list li:nth-child(2) .hot-rank { color: #c0c0d0; }
+    .hot-list li:nth-child(3) .hot-rank { color: #cd7f32; }
+    .hot-list .hot-name { flex: 1; color: var(--text); }
+    .hot-list .hot-score { color: var(--accent); font-weight: 700; font-size: 12px; }
+
+    .timeline { list-style: none; position: relative; padding-left: 16px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 4px; top: 6px; bottom: 6px;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline li {
+      position: relative;
+      margin-bottom: 12px;
+      font-size: 12.5px;
+      color: var(--text-2);
+      padding-left: 6px;
+    }
+    .timeline li::before {
+      content: '';
+      position: absolute;
+      left: -16px; top: 5px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+    .timeline .tl-date { display: block; font-size: 11px; color: var(--text-3); margin-bottom: 2px; }
+    .timeline .tl-title { font-weight: 600; color: #fff; }
+
+    /* 页尾 */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 0 26px;
+      font-size: 13px;
+      color: var(--text-3);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 26px;
+    }
+    .footer-brand .brand-text { font-size: 18px; margin-bottom: 8px; }
+    .footer-brand p { font-size: 12.5px; color: var(--text-3); line-height: 1.7; max-width: 280px; }
+    .footer h4 { color: var(--text-2); font-size: 13px; margin-bottom: 10px; font-weight: 600; }
+    .footer ul { list-style: none; }
+    .footer ul li { margin-bottom: 6px; }
+    .footer ul a { color: var(--text-3); font-size: 12.5px; }
+    .footer ul a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+    }
+    .footer-bottom .disclaimer { color: var(--text-3); }
+
+    /* 搜索无结果提示 */
+    .no-result {
+      display: none;
+      padding: 18px;
+      text-align: center;
+      color: var(--text-3);
+      font-size: 14px;
+      background: var(--panel);
+      border-radius: var(--radius-s);
+      border: 1px dashed var(--border);
+    }
+    .no-result.show { display: block; }
+    .hidden-by-search { display: none !important; }
+
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      :root { --header-h: 130px; }
+      .layout-3col { grid-template-columns: 1fr 240px; }
+      .col-left { display: none; }
+      .hero { grid-template-columns: 1fr 260px; gap: 20px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 740px) {
+      :root { --header-h: 150px; }
+      .header { gap: 10px; padding: 8px 0; }
+      .brand-text { font-size: 18px; }
+      .main-nav a { font-size: 12px; padding: 5px 9px; }
+      .search-box { margin-left: 0; width: 100%; }
+      .search-box input { width: 100%; }
+      .hero { grid-template-columns: 1fr; gap: 10px; padding: 20px 0 18px; }
+      .hero-visual { height: 160px; }
+      .layout-3col { grid-template-columns: 1fr; }
+      .col-right { position: static; margin-top: 10px; }
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 18px; }
+      .announce-bar { font-size: 11px; padding: 5px 12px; }
+      .section-header h2 { font-size: 18px; }
+      .content-card .card-title { font-size: 14px; }
+      .deep-dive { padding: 18px 16px; }
+      .comment-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 400px) {
+      .cat-grid { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 + 页头 -->
+  <div class="sticky-wrap">
+    <div class="announce-bar">
+      <span class="dot"></span>
+      <span><strong>11月7日</strong>《山河故人》广播剧最终季上线</span>
+      <span>·</span>
+      <span>本周新增 <strong>8</strong> 部有声剧</span>
+      <span>·</span>
+      <span>声优访谈「风起洛阳」篇已更新</span>
+    </div>
+    <div class="container">
+      <header class="header">
+        <div class="brand">
+          <svg viewBox="0 0 40 40" width="38" height="38" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="#1e1e36"/>
+            <path d="M14 12v16l14-8-14-8z" fill="#f0a500"/>
+            <circle cx="9" cy="9" r="3" fill="#e05a7a" opacity="0.7"/>
+            <circle cx="31" cy="31" r="2.5" fill="#4ecdc4" opacity="0.7"/>
+            <path d="M10 20 Q5 20 5 14" stroke="#f0a500" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M30 20 Q35 20 35 26" stroke="#4ecdc4" stroke-width="1.5" fill="none" opacity="0.5"/>
+          </svg>
+          <span class="brand-text">漫播<span>网页版</span></span>
+        </div>
+        <nav class="main-nav" aria-label="主题导航">
+          <a href="#overview">领域概览</a>
+          <a href="#featured">精选推荐</a>
+          <a href="#updates">最新更新</a>
+          <a href="#categories">分类入口</a>
+          <a href="#deepdive">深度解析</a>
+          <a href="#faq">常见问答</a>
+          <a href="#comments">听众评论</a>
+          <a href="#news">相关资讯</a>
+        </nav>
+        <div class="search-box">
+          <input type="search" id="siteSearch" placeholder="搜索条目、类型、声优…" aria-label="搜索本站内容">
+          <button type="button" id="searchBtn">搜索</button>
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- 首屏 -->
+    <section class="hero" aria-label="主题首屏">
+      <div class="hero-content">
+        <h1>漫播网页版</h1>
+        <p class="hero-desc">聚合广播剧、有声书、配音访谈与声音企划的收听入口。按悬疑、古风、现代言情、科幻等类型索引，提供新剧速递、更新日历、深度解析与听众真实反馈，帮助声音内容爱好者快速定位想听的作品。</p>
+        <div class="hero-tags">
+          <a href="#featured">广播剧推荐</a>
+          <a href="#categories">有声书分类</a>
+          <a href="#deepdive">配音演员访谈</a>
+          <a href="#updates">更新日历</a>
+          <a href="#ranking">热门榜单</a>
+        </div>
+        <div class="hero-actions">
+          <a href="#featured" class="btn-primary">浏览精选条目 →</a>
+          <a href="#updates" class="btn-secondary">查看今日更新</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 380 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="140" height="180" rx="12" fill="#1e1e36" stroke="#2a2a48" stroke-width="1.5"/>
+          <rect x="36" y="48" width="108" height="70" rx="6" fill="#2a2a48"/>
+          <circle cx="90" cy="83" r="18" fill="#f0a500" opacity="0.3"/>
+          <path d="M82 76v14l12-7-12-7z" fill="#f0a500"/>
+          <rect x="36" y="128" width="80" height="8" rx="4" fill="#2a2a48"/>
+          <rect x="36" y="144" width="60" height="8" rx="4" fill="#2a2a48"/>
+          <rect x="36" y="166" width="50" height="8" rx="4" fill="#e05a7a" opacity="0.5"/>
+          <rect x="200" y="50" width="140" height="160" rx="12" fill="#1e1e36" stroke="#2a2a48" stroke-width="1.5"/>
+          <rect x="216" y="68" width="108" height="60" rx="6" fill="#2a2a48"/>
+          <circle cx="270" cy="98" r="16" fill="#4ecdc4" opacity="0.2"/>
+          <path d="M264 92v12l10-6-10-6z" fill="#4ecdc4"/>
+          <rect x="216" y="142" width="70" height="8" rx="4" fill="#2a2a48"/>
+          <rect x="216" y="158" width="90" height="8" rx="4" fill="#2a2a48"/>
+          <rect x="216" y="180" width="40" height="8" rx="4" fill="#f0a500" opacity="0.4"/>
+          <path d="M170 120 Q185 100 200 120" stroke="#f0a500" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
+          <circle cx="185" cy="108" r="4" fill="#f0a500"/>
+          <text x="168" y="240" font-family="system-ui" font-size="10" fill="#6e6e8a">声音内容聚合</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 三栏布局 -->
+    <div class="layout-3col">
+
+      <!-- 左栏频道索引 -->
+      <aside class="col-left">
+        <div class="channel-index">
+          <h2>频道索引</h2>
+          <ul>
+            <li><a href="#categories">广播剧 <span class="badge">热</span></a></li>
+            <li><a href="#categories">有声书</a></li>
+            <li><a href="#categories">配音访谈</a></li>
+            <li><a href="#categories">声音企划</a></li>
+            <li><a href="#categories">悬疑推理</a></li>
+            <li><a href="#categories">古风言情</a></li>
+            <li><a href="#categories">现代都市</a></li>
+            <li><a href="#categories">科幻奇幻</a></li>
+            <li><a href="#categories">全年龄</a></li>
+            <li><a href="#categories">同人广播剧</a></li>
+            <li><a href="#updates">更新日历</a></li>
+            <li><a href="#ranking">热门榜单</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 中栏主内容 -->
+      <main class="main-content">
+
+        <!-- 1. 主题领域概览 -->
+        <section id="overview">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>广播剧与有声内容概览</h2>
+          </div>
+          <div class="overview-box">
+            <p>漫播网页版所对应的声音内容领域，涵盖广播剧、有声书、配音演员访谈、声音企划和同人音频创作。广播剧按题材分为悬疑推理、古风言情、现代都市、科幻奇幻等大类，每类在制作规模、更新节奏和收听体验上有明显差异。悬疑推理类通常单集时长 25—40 分钟，注重音效与线索铺陈，适合专注收听；古风言情类多改编自热门小说，单集 30—45 分钟，配乐与配音阵容是核心看点；现代都市类更贴近日常场景，单集 20—30 分钟，通勤时段收听友好。</p>
+            <p>有声书方面，单人演播与多人剧集是两种主要形态。单人演播侧重叙事连贯性，适合长篇连续收听；多人剧集加入环境音与角色对话，沉浸感更强但制作周期较长。近期值得关注的方向包括：悬疑厂牌「回声剧场」推出的《雾港来信》系列、古风言情《山河故人》最终季、科幻有声剧《零号协议》第二季，以及配音演员访谈企划「声之形」对行业幕后制作的记录。对于刚接触这一领域的听众，建议先从单集时长较短、口碑稳定的作品入手，再根据偏好向长篇或特定类型延伸。</p>
+          </div>
+        </section>
+
+        <!-- 2. 精选内容推荐 -->
+        <section id="featured">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>精选广播剧与有声书</h2>
+            <a href="#categories" class="more-link">查看全部 →</a>
+          </div>
+          <div class="card-grid" id="featuredGrid">
+            <article class="content-card">
+              <img class="card-img" src="https://picsum.photos/seed/manbo-shanhe47/400/300" width="400" height="300" alt="山河故人广播剧最终季封面" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">山河故人 · 最终季</div>
+                <div class="card-tags"><span class="primary">古风言情</span><span>多人剧</span><span>完结</span></div>
+                <p class="card-desc">改编自同名小说，讲述乱世中两位主角跨越十年的书信与重逢。最终季共 12 集，配音阵容延续前两季，配乐由「弦上」工作室制作。</p>
+                <div class="card-meta"><span>更新至第 12 集</span><span class="score">9.4</span></div>
+              </div>
+            </article>
+            <article class="content-card">
+              <img class="card-img" src="https://picsum.photos/seed/manbo-wugang83/400/300" width="400" height="300" alt="雾港来信悬疑广播剧封面" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">雾港来信</div>
+                <div class="card-tags"><span class="primary">悬疑推理</span><span>回声剧场</span><span>连载中</span></div>
+                <p class="card-desc">一封来自失踪者的信件牵出港口旧案。每集以不同证人视角推进，音效设计突出环境压迫感，适合喜欢线索拼图的听众。</p>
+                <div class="card-meta"><span>更新至第 8 集</span><span class="score">9.1</span></div>
+              </div>
+            </article>
+            <article class="content-card">
+              <img class="card-img" src="https://picsum.photos/seed/manbo-linghao29/400/300" width="400" height="300" alt="零号协议科幻有声剧封面" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">零号协议 · 第二季</div>
+                <div class="card-tags"><span class="primary">科幻奇幻</span><span>有声剧</span><span>连载中</span></div>
+                <p class="card-desc">近未来设定下，一支信号修复小队发现深空传回的并非人类语言。第二季引入双线叙事，单集 35 分钟，含大量原创音效。</p>
+                <div class="card-meta"><span>更新至第 6 集</span><span class="score">8.9</span></div>
+              </div>
+            </article>
+            <article class="content-card">
+              <img class="card-img" src="https://picsum.photos/seed/manbo-shengzhixing55/400/300" width="400" height="300" alt="声之形配音访谈企划封面" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">声之形 · 配音访谈</div>
+                <div class="card-tags"><span class="primary">访谈企划</span><span>行业幕后</span><span>周更</span></div>
+                <p class="card-desc">每期邀请一位广播剧配音演员，聊角色准备、录音棚趣事和行业变化。最新一期嘉宾为《雾港来信》主演，谈悬疑题材的声线控制。</p>
+                <div class="card-meta"><span>11月6日更新</span><span class="score">9.0</span></div>
+              </div>
+            </article>
+            <article class="content-card">
+              <img class="card-img" src="https://picsum.photos/seed/manbo-tongqin91/400/300" width="400" height="300" alt="同寝日常现代广播剧封面" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">同寝日常</div>
+                <div class="card-tags"><span class="primary">现代都市</span><span>轻喜剧</span><span>每周三更</span></div>
+                <p class="card-desc">四个合租年轻人的生活碎片，每集一个独立小故事，单集 20 分钟。对话密度高，适合通勤或做家务时收听。</p>
+                <div class="card-meta"><span>更新至第 15 集</span><span class="score">8.6</span></div>
+              </div>
+            </article>
+            <article class="content-card">
+              <img class="card-img" src="https://picsum.photos/seed/manbo-yanjing37/400/300" width="400" height="300" alt="眼睛想旅行有声书封面" loading="lazy">
+              <div class="card-body">
+                <div class="card-title">眼睛想旅行</div>
+                <div class="card-tags"><span class="primary">旅行随笔</span><span>单人演播</span><span>完结</span></div>
+                <p class="card-desc">一本旅行随笔集的有声版，由作者本人演播。记录在十二座小城停留的见闻，语速舒缓，适合睡前收听。</p>
+                <div class="card-meta"><span>全 24 集完</span><span class="score">8.8</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="no-result" id="searchNoResult">没有找到匹配的条目，试试「悬疑」「古风」「有声书」等关键词。</div>
+        </section>
+
+        <!-- 3. 最新更新 -->
+        <section id="updates">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>最新更新与热播动态</h2>
+          </div>
+          <ul class="update-list">
+            <li><span class="up-title">山河故人 · 最终季</span><span class="up-desc">第 12 集「归途」上线，全季完结</span><span class="up-time">今天 10:00</span></li>
+            <li><span class="up-title">雾港来信</span><span class="up-desc">第 8 集「第二封证词」上线，片尾含下集预告</span><span class="up-time">今天 09:30</span></li>
+            <li><span class="up-title">零号协议 · 第二季</span><span class="up-desc">第 6 集「回声定位」上线</span><span class="up-time">昨天 21:10</span></li>
+            <li><span class="up-title">同寝日常</span><span class="up-desc">第 15 集「冰箱辩论赛」上线</span><span class="up-time">昨天 18:00</span></li>
+            <li><span class="up-title">声之形 · 配音访谈</span><span class="up-desc">最新一期嘉宾公布：悬疑剧主演谈声线控制</span><span class="up-time">11月6日</span></li>
+            <li><span class="up-title">长夜将明</span><span class="up-desc">新广播剧上线，首更 3 集，古风悬疑题材</span><span class="up-time">11月5日</span></li>
+            <li><span class="up-title">短篇集 · 睡前故事</span><span class="up-desc">新增 4 篇独立短篇，单篇 15 分钟以内</span><span class="up-time">11月4日</span></li>
+            <li><span class="up-title">回声剧场</span><span class="up-desc">公布 11 月新剧排期，共 3 部悬疑广播剧</span><span class="up-time">11月3日</span></li>
+            <li><span class="up-title">科幻有声剧合辑</span><span class="up-desc">《零号协议》《星尘信标》等 6 部作品打包上线</span><span class="up-time">11月2日</span></li>
+            <li><span class="up-title">同人广播剧大赛</span><span class="up-desc">入围名单公布，共 24 部作品进入展播阶段</span><span class="up-time">11月1日</span></li>
+          </ul>
+        </section>
+
+        <!-- 4. 分类入口 -->
+        <section id="categories">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>按类型分类入口</h2>
+          </div>
+          <div class="cat-grid">
+            <a href="#featured" class="cat-item">悬疑推理<small>雾港来信 · 长夜将明</small></a>
+            <a href="#featured" class="cat-item">古风言情<small>山河故人 · 锦书难托</small></a>
+            <a href="#featured" class="cat-item">现代都市<small>同寝日常 · 晚风便利店</small></a>
+            <a href="#featured" class="cat-item">科幻奇幻<small>零号协议 · 星尘信标</small></a>
+            <a href="#featured" class="cat-item">全年龄<small>眼睛想旅行 · 睡前故事</small></a>
+            <a href="#featured" class="cat-item">配音访谈<small>声之形 · 录音棚手记</small></a>
+            <a href="#featured" class="cat-item">同人广播剧<small>大赛展播 · 独立制作</small></a>
+            <a href="#featured" class="cat-item">声音企划<small>原创短篇 · 多人剧集</small></a>
+          </div>
+        </section>
+
+        <!-- 5. 深度解析正文 -->
+        <section id="deepdive">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>广播剧类型差异与收听判断</h2>
+          </div>
+          <div class="deep-dive">
+            <h3>悬疑推理类广播剧的制作特点</h3>
+            <p>悬疑推理广播剧通常以案件或谜题为核心，单集结构围绕线索展开。以《雾港来信》为例，每集以一位证人的口述推进，听众需要从对话细节中拼凑时间线。这类作品对音效设计要求较高，环境声、脚步声、电话杂音都可能是提示。制作上多采用多人剧形式，配角声线需要与主角有明确区分度，否则容易在群戏中混淆。</p>
+            <p>判断一部悬疑广播剧是否值得投入时间，可以关注几个维度：</p>
+            <ul>
+              <li><strong>线索密度</strong>：单集有效线索是否在 3 条以上，且与后续剧情有呼应；</li>
+              <li><strong>声线区分度</strong>：主要角色说话时能否不依赖台词提示辨别身份；</li>
+              <li><strong>音效服务性</strong>：音效是辅助叙事还是喧宾夺主；</li>
+              <li><strong>更新节奏</strong>：周更或双周更的作品更适合追更，一次性放出全季的适合连听。</li>
+            </ul>
+
+            <h3>古风言情类与有声书的收听顺序</h3>
+            <p>古风言情广播剧多改编自小说，听众常面临「先看原著还是先听剧」的选择。如果原著已读过，广播剧的吸引力在于配音演员对角色关系的重新诠释和配乐营造的氛围；如果未读过原著，建议从单集评论中确认剧情是否紧凑，再决定是否补原著。以《山河故人》为例，最终季共 12 集，前两季各 10 集，完整收听约需 14 小时，适合按周追更或分三到四次集中收听。</p>
+            <p>有声书与广播剧的差异主要在演播形态。单人演播有声书由一位演播者完成全部角色与旁白，连贯性强但角色区分依赖演播者的声音控制；多人有声剧则接近广播剧的制作方式，加入配乐与音效。选择时可根据通勤时长决定：单程 30 分钟以内适合单集 20—30 分钟的现代都市轻喜剧，单程 60 分钟以上适合悬疑或古风长剧。</p>
+
+            <h3>配音访谈的参考价值</h3>
+            <p>配音演员访谈对判断作品风格有实际帮助。在「声之形」最新一期中，嘉宾提到悬疑题材录音时会在剧本上标注每句台词的「紧张层级」，从 1 到 5 逐级递进，帮助自己在不同场景中控制气息。这类信息可以帮助听众理解为什么同一部剧里某些段落的对话听起来更紧绷。访谈也常涉及录音棚工作方式、角色准备周期等内容，对想了解声音制作流程的听众有参考意义。</p>
+
+            <h3>同人广播剧与独立制作</h3>
+            <p>同人广播剧大赛的入围作品通常制作规模较小，但题材更自由，常见原著衍生、原创短篇和实验性声音企划。收听这类作品时可以关注制作组的往期作品列表，连续产出 3 部以上且评分稳定的组别通常有较成熟的制作流程。同人作品更新周期不固定，适合以「试听一集」的方式接触，再决定是否追更。</p>
+          </div>
+        </section>
+
+        <!-- 6. 体验指南 -->
+        <section id="guide">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>收听路径与判断依据</h2>
+          </div>
+          <div class="guide-steps">
+            <div class="guide-step">
+              <span class="step-num">1</span>
+              <h4>从单集时长选类型</h4>
+              <p>通勤或碎片时间优先选 20—30 分钟的现代都市或轻喜剧；整块时间再进入 35—45 分钟的悬疑或古风长篇。</p>
+            </div>
+            <div class="guide-step">
+              <span class="step-num">2</span>
+              <h4>看制作组往期作品</h4>
+              <p>连续产出 3 部以上且评分稳定的厂牌或制作组，通常有更成熟的录音与后期流程，试听风险较低。</p>
+            </div>
+            <div class="guide-step">
+              <span class="step-num">3</span>
+              <h4>试听第一集前 10 分钟</h4>
+              <p>悬疑类听线索是否清晰，古风类听配乐与声线是否贴合角色，都市类听对话是否自然。10 分钟内无法进入状态可考虑换一部。</p>
+            </div>
+            <div class="guide-step">
+              <span class="step-num">4</span>
+              <h4>比较同类型两部作品</h4>
+              <p>以悬疑为例，同时试听《雾港来信》与《长夜将明》各一集，对比音效密度、线索推进速度和旁白占比，再决定追更哪部。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. FAQ -->
+        <section id="faq">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>常见问答</h2>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>悬疑广播剧一般多久更新一集？</summary>
+              <div class="faq-body">周更和双周更最常见。周更作品如《雾港来信》固定在每周五更新，双周更作品每两周一集，单集时长通常 30—40 分钟。部分制作组会在完结后一次性放出全季，方便连听。</div>
+            </details>
+            <details>
+              <summary>第一次听广播剧，从哪个类型开始比较好？</summary>
+              <div class="faq-body">建议从单集 20—30 分钟的现代都市轻喜剧或全年龄短篇集开始，对话密度高、背景设定贴近日常，不需要大量记忆人物关系。适应后再进入悬疑或古风长篇。</div>
+            </details>
+            <details>
+              <summary>古风言情广播剧和原著小说有什么区别？</summary>
+              <div class="faq-body">广播剧会对原著进行场景删减和对话改编，突出声音表现力强的段落。配乐和配音演员的声线会为角色关系增加一层诠释。如果先听剧再看原著，可以关注两者在关键场景处理上的差异。</div>
+            </details>
+            <details>
+              <summary>有声书的单人演播和多人剧集怎么选？</summary>
+              <div class="faq-body">单人演播连贯性强，适合长时间连续收听，对演播者的声音控制要求高；多人剧集有角色分工和音效，沉浸感更强但制作周期长、更新慢。根据自己习惯的收听时长和对音效的偏好选择即可。</div>
+            </details>
+            <details>
+              <summary>同人广播剧的完成度和质量怎么判断？</summary>
+              <div class="faq-body">可以先看制作组是否有 3 部以上已完结作品、往期作品评分是否稳定，以及试听第一集的录音清晰度和角色声线区分度。大赛入围作品通常有制作说明，可参考其中的人员配置和制作周期。</div>
+            </details>
+            <details>
+              <summary>配音演员访谈对选剧有什么实际帮助？</summary>
+              <div class="faq-body">访谈中常会提到录音方式、角色准备过程和不同题材的声线要求。比如悬疑剧演员谈如何控制紧张感，古风剧演员谈如何把握文言对白的节奏。这些信息能帮你在试听前判断一部作品的表演风格是否符合自己的偏好。</div>
+            </details>
+          </div>
+        </section>
+
+        <!-- 8. 用户评论 -->
+        <section id="comments">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>听众评论</h2>
+          </div>
+          <div class="comment-grid">
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">林</span><span class="c-name">林间有风</span><span class="c-time">今天 11:20</span></div><div class="c-text">《山河故人》最终季第 12 集听完，<em>书信段落</em>的配乐收得很克制，没有过度煽情。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">陈</span><span class="c-name">陈叙_</span><span class="c-time">今天 10:45</span></div><div class="c-text">《雾港来信》第 8 集那个电话杂音应该是线索，但不确定指向哪个证人，等下周更新。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">赵</span><span class="c-name">赵小满</span><span class="c-time">今天 09:12</span></div><div class="c-text">《同寝日常》第 15 集冰箱辩论赛太真实了，四个人声音区分度很好，不用看台词表也能分清谁在说话。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">周</span><span class="c-name">周末不加班</span><span class="c-time">昨天 22:30</span></div><div class="c-text">《零号协议》第二季双线叙事有点绕，第 6 集才把两条线接上，前几集需要耐心。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">吴</span><span class="c-name">吴声有</span><span class="c-time">昨天 20:15</span></div><div class="c-text">「声之形」最新一期关于紧张层级的说法很实用，回去重听《雾港来信》确实能感觉到气息变化。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">郑</span><span class="c-name">郑在听</span><span class="c-time">昨天 18:40</span></div><div class="c-text">《长夜将明》首更三集一口气听完，古风悬疑的氛围做得不错，就是<em>旁白占比</em>稍高，希望后面调整。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">孙</span><span class="c-name">孙慢慢</span><span class="c-time">11月7日 21:00</span></div><div class="c-text">《眼睛想旅行》适合睡前听，作者本人的声音很松弛，有一集讲海边小城，背景音里有浪声。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">李</span><span class="c-name">李不白</span><span class="c-time">11月7日 15:20</span></div><div class="c-text">同人广播剧大赛入围的几部短篇质量参差，有一部改编自老电影的还不错，音效简单但对话写得好。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">王</span><span class="c-name">王五五</span><span class="c-time">11月6日 23:10</span></div><div class="c-text">《雾港来信》和《长夜将明》都听了，前者偏心理压迫，后者偏氛围营造，看个人偏好。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">张</span><span class="c-name">张拾叁</span><span class="c-time">11月6日 19:30</span></div><div class="c-text">《山河故人》前两季忘得差不多了，直接从最终季听居然也能接上，关键情节会通过对话交代。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">刘</span><span class="c-name">刘夏至</span><span class="c-time">11月5日 12:00</span></div><div class="c-text">有声书《眼睛想旅行》的章节顺序跟纸质书一样，按顺序听就行，不用跳。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">黄</span><span class="c-name">黄不困</span><span class="c-time">11月4日 09:40</span></div><div class="c-text">《零号协议》第二季音效确实丰富，但建议戴耳机听，外放会漏掉很多背景细节。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">杨</span><span class="c-name">杨知了</span><span class="c-time">11月3日 17:20</span></div><div class="c-text">「回声剧场」的 11 月排期出来了，除了《雾港来信》还有两部新悬疑，期待《长夜将明》后续。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">徐</span><span class="c-name">徐徐图之</span><span class="c-time">11月2日 14:00</span></div><div class="c-text">《同寝日常》每集结尾的小剧场挺好笑的，正片结束后别急着关。</div></div>
+            <div class="comment-item"><div class="c-head"><span class="c-avatar">何</span><span class="c-name">何夜无月</span><span class="c-time">11月1日 20:10</span></div><div class="c-text">同人广播剧里有些制作组用免费音效库，效果确实比不过厂牌，但剧本创意有亮点，可以宽容一点。</div></div>
+          </div>
+        </section>
+
+        <!-- 9. 相关资讯 -->
+        <section id="news">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>相关资讯</h2>
+          </div>
+          <ul class="news-list">
+            <li><span class="news-date">2026-11-07</span><div><span class="news-title">《山河故人》最终季完结，番外篇制作中</span><p class="news-summary">广播剧最终季第 12 集上线后，制作组宣布番外篇正在录制，预计 12 月放出。</p></div></li>
+            <li><span class="news-date">2026-11-06</span><div><span class="news-title">「回声剧场」公布 11 月悬疑广播剧排期</span><p class="news-summary">除正在更新的《雾港来信》外，另有《长夜将明》与一部未公布标题的新作。</p></div></li>
+            <li><span class="news-date">2026-11-05</span><div><span class="news-title">《长夜将明》首更三集，古风悬疑题材</span><p class="news-summary">新广播剧由「折光制作组」出品，首周连更三集，单集 38 分钟。</p></div></li>
+            <li><span class="news-date">2026-11-03</span><div><span class="news-title">「声之形」访谈最新一期上线，嘉宾谈悬疑录音</span><p class="news-summary">本期嘉宾为《雾港来信》主演，聊悬疑题材的声线控制与录音棚准备方式。</p></div></li>
+            <li><span class="news-date">2026-11-01</span><div><span class="news-title">同人广播剧大赛入围名单公布，24 部作品展播</span><p class="news-summary">入围作品涵盖古风、科幻、现代都市等题材，展播期持续至 11 月底。</p></div></li>
+            <li><span class="news-date">2026-10-28</span><div><span class="news-title">《零号协议》第二季更新至第 5 集，双线叙事展开</span><p class="news-summary">科幻有声剧进入第二季后引入双线结构，制作组在评论区收集听众反馈。</p></div></li>
+          </ul>
+        </section>
+
+        <!-- 10. 相关推荐 -->
+        <section id="related">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>延伸收听方向</h2>
+          </div>
+          <div class="related-tags">
+            <a href="#categories">悬疑短篇集</a>
+            <a href="#categories">古风群像剧</a>
+            <a href="#categories">现代职场广播剧</a>
+            <a href="#categories">科幻音效特辑</a>
+            <a href="#categories">配音演员幕后访谈</a>
+            <a href="#categories">同人广播剧大赛展播</a>
+            <a href="#categories">睡前有声书单</a>
+          </div>
+        </section>
+
+        <!-- 11. 热门榜单 -->
+        <section id="ranking">
+          <div class="section-header">
+            <h2><span class="accent-line"></span>本周热门收听榜单</h2>
+          </div>
+          <ul class="rank-list">
+            <li><span class="rank-name">山河故人 · 最终季</span><span class="rank-tag">古风言情</span></li>
+            <li><span class="rank-name">雾港来信</span><span class="rank-tag">悬疑推理</span></li>
+            <li><span class="rank-name">零号协议 · 第二季</span><span class="rank-tag">科幻有声剧</span></li>
+            <li><span class="rank-name">同寝日常</span><span class="rank-tag">现代都市</span></li>
+            <li><span class="rank-name">声之形 · 配音访谈</span><span class="rank-tag">访谈企划</span></li>
+            <li><span class="rank-name">长夜将明</span><span class="rank-tag">古风悬疑</span></li>
+            <li><span class="rank-name">眼睛想旅行</span><span class="rank-tag">旅行随笔</span></li>
+            <li><span class="rank-name">睡前故事短篇集</span><span class="rank-tag">全年龄</span></li>
+          </ul>
+        </section>
+
+      </main>
+
+      <!-- 右栏辅助 -->
+      <aside class="col-right">
+        <div class="right-panel">
+          <h3>热播速览</h3>
+          <ul class="hot-list">
+            <li><span class="hot-rank">1</span><span class="hot-name">山河故人 · 最终季</span><span class="hot-score">9.4</span></li>
+            <li><span class="hot-rank">2</span><span class="hot-name">雾港来信</span><span class="hot-score">9.1</span></li>
+            <li><span class="hot-rank">3</span><span class="hot-name">零号协议 第二季</span><span class="hot-score">8.9</span></li>
+            <li><span class="hot-rank">4</span><span class="hot-name">声之形 · 访谈</span><span class="hot-score">9.0</span></li>
+            <li><span class="hot-rank">5</span><span class="hot-name">同寝日常</span><span class="hot-score">8.6</span></li>
+            <li><span class="hot-rank">6</span><span class="hot-name">长夜将明</span><span class="hot-score">8.4</span></li>
+          </ul>
+        </div>
+        <div class="right-panel">
+          <h3>更新日历</h3>
+          <ul class="timeline">
+            <li><span class="tl-date">今天 10:00</span><span class="tl-title">山河故人 · 最终季 第12集</span></li>
+            <li><span class="tl-date">今天 09:30</span><span class="tl-title">雾港来信 第8集</span></li>
+            <li><span class="tl-date">昨天 21:10</span><span class="tl-title">零号协议 第二季 第6集</span></li>
+            <li><span class="tl-date">昨天 18:00</span><span class="tl-title">同寝日常 第15集</span></li>
+            <li><span class="tl-date">11月6日</span><span class="tl-title">声之形 · 访谈更新</span></li>
+            <li><span class="tl-date">11月5日</span><span class="tl-title">长夜将明 首更3集</span></li>
+          </ul>
+        </div>
+        <div class="right-panel">
+          <h3>本周新增</h3>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.7;">11 月 1 日至 7 日新增 8 部有声内容，其中悬疑 3 部、古风 2 部、现代都市 2 部、科幻 1 部。完整排期可查看更新日历。</p>
+        </div>
+      </aside>
+
+    </div><!-- /.layout-3col -->
+
+  </div><!-- /.container -->
+
+  <!-- 页尾 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-text">漫播<span>网页版</span></div>
+          <p>聚合广播剧、有声书、配音访谈与声音企划的分类索引与收听参考，按类型、更新节奏和制作特点组织条目。</p>
+        </div>
+        <div>
+          <h4>类型索引</h4>
+          <ul>
+            <li><a href="#categories">悬疑推理</a></li>
+            <li><a href="#categories">古风言情</a></li>
+            <li><a href="#categories">现代都市</a></li>
+            <li><a href="#categories">科幻奇幻</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>内容形态</h4>
+          <ul>
+            <li><a href="#featured">广播剧</a></li>
+            <li><a href="#featured">有声书</a></li>
+            <li><a href="#featured">配音访谈</a></li>
+            <li><a href="#featured">声音企划</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>更新与参考</h4>
+          <ul>
+            <li><a href="#updates">更新日历</a></li>
+            <li><a href="#ranking">热门榜单</a></li>
+            <li><a href="#faq">常见问答</a></li>
+            <li><a href="#deepdive">深度解析</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 漫播网页版 · 内容聚合示例</span>
+        <span class="disclaimer">部分内容为示例数据，仅用于展示页面结构</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      'use strict';
+      var searchInput = document.getElementById('siteSearch');
+      var searchBtn = document.getElementById('searchBtn');
+      var noResult = document.getElementById('searchNoResult');
+      var featuredGrid = document.getElementById('featuredGrid');
+      var allCards = featuredGrid ? Array.from(featuredGrid.querySelectorAll('.content-card')) : [];
+      var allSections = Array.from(document.querySelectorAll('.main-content section'));
+
+      function doSearch() {
+        var q = (searchInput.value || '').trim().toLowerCase();
+        if (!q) {
+          allCards.forEach(function(c) { c.classList.remove('hidden-by-search'); });
+          allSections.forEach(function(s) { s.classList.remove('hidden-by-search'); });
+          if (noResult) noResult.classList.remove('show');
+          return;
+        }
+        var found = 0;
+        allCards.forEach(function(card) {
+          var text = card.textContent.toLowerCase();
+          if (text.indexOf(q) > -1) {
+            card.classList.remove('hidden-by-search');
+            found++;
+          } else {
+            card.classList.add('hidden-by-search');
+          }
+        });
+        allSections.forEach(function(sec) {
+          if (sec.id === 'featured') return;
+          var text = sec.textContent.toLowerCase();
+          if (text.indexOf(q) > -1) {
+            sec.classList.remove('hidden-by-search');
+            found++;
+          } else {
+            sec.classList.add('hidden-by-search');
+          }
+        });
+        if (found === 0) {
+          if (noResult) noResult.classList.add('show');
+        } else {
+          if (noResult) noResult.classList.remove('show');
+        }
+      }
+
+      if (searchBtn) searchBtn.addEventListener('click', doSearch);
+      if (searchInput) {
+        searchInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
+        });
+        searchInput.addEventListener('input', function() {
+          if (searchInput.value.trim() === '') doSearch();
+        });
+      }
+
+      // 确保所有锚点目标存在
+      var anchors = document.querySelectorAll('a[href^="#"]');
+      anchors.forEach(function(a) {
+        var href = a.getAttribute('href');
+        if (href === '#') return;
+        var target = document.querySelector(href);
+        if (!target) {
+          console.warn('锚点目标不存在:', href);
+        }
+      });
+    })();
+  </script>
+
+</body>
+  </html>
